@@ -18,11 +18,20 @@ Original project: [Real-time OpenGL spectrogram by Alex Barnett](https://math.da
   - alsa-lib
   - alsa-lib-devel
 
-# Installation
+# Building
 
-Compile via [CMake](https://cmake.org/cmake-tutorial/) or by a simple re-use of the provided [CLion](https://www.jetbrains.com/clion/) .idea/ directory.
+Compile via [CMake](https://cmake.org/cmake-tutorial/) as follows:
+```bash
+mkdir build
+cd build
+cmake ..
+make
+./opengl_spectrogram
+```
 
-# Snapshot
+# Screenshot
+
+Here's a quick screenshot of [this song](https://www.youtube.com/watch?v=n70c3Dzw-ZM) around 1:45 on. Can you line it up?
 
 ![Visualization Screenshot](https://raw.githubusercontent.com/aagnone3/audio_visualization/master/res/img/screenshot.png)
 
@@ -32,8 +41,8 @@ See doc/ for Doxygen documentation of the source code.
 
 ## Contributors
 
-Currently me, myself, and I. I'm happy to enhance this project with others, don't hesitate to reach out!
-A special thanks goes out to Alex Barnett for the initial versions of this project.
+Currently myself and Alex Barnett. We are happy to enhance this project with others, don't hesitate to reach out!
+A special thanks goes out to Alex Barnett for the initial version of this project.
 
 ## License
 
