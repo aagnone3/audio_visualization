@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/ALSA.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SpectrogramVisualizer.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/AudioInput.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Display.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/AudioInput.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Log.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Display.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/shared.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Log.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/shared.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GraphicsItem.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ALSA.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SpectrogramVisualizer.cpp" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/llvm-3.8/lib/clang/3.8.0/include" />
+          <root url="file:///usr/local/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/llvm-3.8/lib/clang/3.8.0/include" />
+          <root url="file:///usr/local/include" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>

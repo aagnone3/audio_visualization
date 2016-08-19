@@ -1,0 +1,89 @@
+\hypertarget{classALSA}{}\section{A\+L\+SA Class Reference}
+\label{classALSA}\index{A\+L\+SA@{A\+L\+SA}}
+
+
+{\ttfamily \#include $<$A\+L\+S\+A.\+hpp$>$}
+
+Inheritance diagram for A\+L\+SA\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classALSA}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classALSA_a7523f4f0edec34cf75a3fa2197f70a03}{A\+L\+SA} ()
+\item 
+\hyperlink{classALSA_a80e4d6d916fd10a25e6c54da0f43af0d}{$\sim$\+A\+L\+SA} ()
+\item 
+int \hyperlink{classALSA_a875434b9aa77a5c72fa8bb5e6d7e6e82}{init\+Device} ()
+\item 
+virtual void \hyperlink{classALSA_a69dea83cc1785dd4c88bd1a9a02ac4b3}{quit\+Now} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classALSA_a3a3015c0dcdc2cdf1a9527fb6ffe5bc7}{audio\+Capture} (void $\ast$alsa\+Input\+Instance)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Generic interface to the Advanced Linux Sound Architecture (\hyperlink{classALSA}{A\+L\+SA}) software framework. Based off of the \hyperlink{classALSA}{A\+L\+SA} tutorial at \href{http://www.suse.de/~mana/alsa090_howto.html}{\tt http\+://www.\+suse.\+de/$\sim$mana/alsa090\+\_\+howto.\+html} \begin{DoxyAuthor}{Author}
+Anthony Agnone, Aug 2016 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classALSA_a7523f4f0edec34cf75a3fa2197f70a03}{}\label{classALSA_a7523f4f0edec34cf75a3fa2197f70a03} 
+\index{A\+L\+SA@{A\+L\+SA}!A\+L\+SA@{A\+L\+SA}}
+\index{A\+L\+SA@{A\+L\+SA}!A\+L\+SA@{A\+L\+SA}}
+\subsubsection{\texorpdfstring{A\+L\+S\+A()}{ALSA()}}
+{\ttfamily A\+L\+S\+A\+::\+A\+L\+SA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor \hypertarget{classALSA_a80e4d6d916fd10a25e6c54da0f43af0d}{}\label{classALSA_a80e4d6d916fd10a25e6c54da0f43af0d} 
+\index{A\+L\+SA@{A\+L\+SA}!````~A\+L\+SA@{$\sim$\+A\+L\+SA}}
+\index{````~A\+L\+SA@{$\sim$\+A\+L\+SA}!A\+L\+SA@{A\+L\+SA}}
+\subsubsection{\texorpdfstring{$\sim$\+A\+L\+S\+A()}{~ALSA()}}
+{\ttfamily A\+L\+S\+A\+::$\sim$\+A\+L\+SA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Closes the audio capture stream and de-\/allocates any dynamic memory. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classALSA_a3a3015c0dcdc2cdf1a9527fb6ffe5bc7}{}\label{classALSA_a3a3015c0dcdc2cdf1a9527fb6ffe5bc7} 
+\index{A\+L\+SA@{A\+L\+SA}!audio\+Capture@{audio\+Capture}}
+\index{audio\+Capture@{audio\+Capture}!A\+L\+SA@{A\+L\+SA}}
+\subsubsection{\texorpdfstring{audio\+Capture()}{audioCapture()}}
+{\ttfamily void A\+L\+S\+A\+::audio\+Capture (\begin{DoxyParamCaption}\item[{void $\ast$}]{alsa\+Input\+Instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Callable used by a thread to continuously populate audio\+Buffer from the audio stream. 
+\begin{DoxyParams}{Parameters}
+{\em alsa\+Input\+Instance} & instance of A\+L\+S\+A\+Input to share audio buffer data with. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classALSA_a875434b9aa77a5c72fa8bb5e6d7e6e82}{}\label{classALSA_a875434b9aa77a5c72fa8bb5e6d7e6e82} 
+\index{A\+L\+SA@{A\+L\+SA}!init\+Device@{init\+Device}}
+\index{init\+Device@{init\+Device}!A\+L\+SA@{A\+L\+SA}}
+\subsubsection{\texorpdfstring{init\+Device()}{initDevice()}}
+{\ttfamily int A\+L\+S\+A\+::init\+Device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Sets up the sound card for recording. \begin{DoxyReturn}{Returns}
+indication of setup success or failure. -\/1 -\/$>$ failed setup. 0 -\/$>$ successfull setup. 
+\end{DoxyReturn}
+\hypertarget{classALSA_a69dea83cc1785dd4c88bd1a9a02ac4b3}{}\label{classALSA_a69dea83cc1785dd4c88bd1a9a02ac4b3} 
+\index{A\+L\+SA@{A\+L\+SA}!quit\+Now@{quit\+Now}}
+\index{quit\+Now@{quit\+Now}!A\+L\+SA@{A\+L\+SA}}
+\subsubsection{\texorpdfstring{quit\+Now()}{quitNow()}}
+{\ttfamily void A\+L\+S\+A\+::quit\+Now (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Defines how the instance stops the audio stream. 
+
+Implements \hyperlink{classAudioInput_a4fce5476455b1df813f1cb6eebb08311}{Audio\+Input}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+A\+L\+S\+A.\+hpp\item 
+A\+L\+S\+A.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,83 @@
+\hypertarget{classLog}{}\section{Log Class Reference}
+\label{classLog}\index{Log@{Log}}
+
+
+{\ttfamily \#include $<$Log.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLog_a0fbfda88fbee5027c89f6eb121059360}{$\sim$\+Log} ()
+\item 
+void \hyperlink{classLog_ac4365b77dc0b64c77e577888dfab5099}{log} (std\+::string \&message)
+\item 
+void \hyperlink{classLog_a60929e600b7759e97ea623ea5b05971e}{log} (const char $\ast$const message)
+\item 
+std\+::ostream \& \hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classLog}{Log} $\ast$ \hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{get\+Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Singleton class to handle logging to standard output or a file. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classLog_a0fbfda88fbee5027c89f6eb121059360}{}\label{classLog_a0fbfda88fbee5027c89f6eb121059360} 
+\index{Log@{Log}!````~Log@{$\sim$\+Log}}
+\index{````~Log@{$\sim$\+Log}!Log@{Log}}
+\subsubsection{\texorpdfstring{$\sim$\+Log()}{~Log()}}
+{\ttfamily Log\+::$\sim$\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+De-\/allocates all dynamic memory. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classLog_a987f3ff401eea783d0e80daaea1d7aca}{}\label{classLog_a987f3ff401eea783d0e80daaea1d7aca} 
+\index{Log@{Log}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Log@{Log}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\ttfamily \hyperlink{classLog}{Log} $\ast$ Log\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Accessor method for the singleton instance of the class. If the instance does not exist, then (and only then) a new instance is created. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{classLog_ac4365b77dc0b64c77e577888dfab5099}{}\label{classLog_ac4365b77dc0b64c77e577888dfab5099} 
+\index{Log@{Log}!log@{log}}
+\index{log@{log}!Log@{Log}}
+\subsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\ttfamily void Log\+::log (\begin{DoxyParamCaption}\item[{std\+::string \&}]{message }\end{DoxyParamCaption})}
+
+Logging method for a string input. 
+\begin{DoxyParams}{Parameters}
+{\em message} & the message to log. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classLog_a60929e600b7759e97ea623ea5b05971e}{}\label{classLog_a60929e600b7759e97ea623ea5b05971e} 
+\index{Log@{Log}!log@{log}}
+\index{log@{log}!Log@{Log}}
+\subsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\ttfamily void Log\+::log (\begin{DoxyParamCaption}\item[{const char $\ast$const}]{message }\end{DoxyParamCaption})}
+
+Logging method for a const char$\ast$ const input. 
+\begin{DoxyParams}{Parameters}
+{\em message} & the message to log. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classLog_a32d048a4924c7851c4b7b16758675af6}{}\label{classLog_a32d048a4924c7851c4b7b16758675af6} 
+\index{Log@{Log}!logger@{logger}}
+\index{logger@{logger}!Log@{Log}}
+\subsubsection{\texorpdfstring{logger()}{logger()}}
+{\ttfamily std\+::ostream \& Log\+::logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the appropriate logger, according to Log\+::\+O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON. This is useful with the stream operator. \begin{DoxyReturn}{Returns}
+appropriate logger, according to Log\+::\+O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON. See its documentation for more details. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Log.\+hpp\item 
+Log.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,258 @@
+\hypertarget{structSpectrogramVisualizer}{}\section{Spectrogram\+Visualizer Class Reference}
+\label{structSpectrogramVisualizer}\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+
+
+{\ttfamily \#include $<$Spectrogram\+Visualizer.\+hpp$>$}
+
+Inheritance diagram for Spectrogram\+Visualizer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structSpectrogramVisualizer}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structSpectrogramVisualizer_1_1shortcuts}{shortcuts}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structSpectrogramVisualizer_a0b57309d58a075208d6c784718b3e6d7}{Spectrogram\+Visualizer} (int)
+\item 
+\hyperlink{structSpectrogramVisualizer_a2b55364382a4ee290918a05946505561}{$\sim$\+Spectrogram\+Visualizer} ()
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a529c64c733ffc564764593329c483ae2}{display} ()
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a9b9aa780d95f710b1c876ce49abac9a1}{display\+Text} ()
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a669c19fe9dc24dc89e1cc518edb24de6}{idle} ()
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a301989369e63d88cd6a59d12c23b4551}{pause} ()
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a2901f4ea1e35d4c7e6660f6c19ed468f}{keyboard} (unsigned char key, int x\+Pos, int y\+Pos)
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a631d3522ef8d8bdc6fd9ba9acf2f15ec}{special} (int key, int x\+Pos, int y\+Pos)
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a789c6b59ab3a6960056eaab014163b91}{reshape} (int w, int h)
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a949b2e0bfd260e6f8d63b5867f1b4edf}{mouse} (int button, int state, int x, int y)
+\item 
+virtual void \hyperlink{structSpectrogramVisualizer_a8ab333867c86cfa188ff026410e271aa}{motion} (int x, int y)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structSpectrogramVisualizer_add6b6c6e7a1768bd6fef3256f1cb26bc}{}\label{structSpectrogramVisualizer_add6b6c6e7a1768bd6fef3256f1cb26bc} 
+{\bfseries q}
+\item 
+\hypertarget{structSpectrogramVisualizer_a969c09495e18bec03ba7145b967b6cf7}{}\label{structSpectrogramVisualizer_a969c09495e18bec03ba7145b967b6cf7} 
+{\bfseries d}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$const \hyperlink{structSpectrogramVisualizer_ad833647df19d8ae0eb2e47efe989d1d9}{note\+Names} \mbox{[}$\,$\mbox{]}
+\item 
+static const \hyperlink{structSpectrogramVisualizer_1_1shortcuts}{shortcuts} \hyperlink{structSpectrogramVisualizer_a20eb03afddbbde072d82b1efe675b0f3}{K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS}
+\item 
+static const float \hyperlink{structSpectrogramVisualizer_adfe2ed143313d59d7c118cadec1460b9}{M\+I\+D\+D\+L\+E\+\_\+\+C\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+CY} = 261.\+626f
+\item 
+static const unsigned int \hyperlink{structSpectrogramVisualizer_affbdeff0d7b800feb17aab0a367222da}{N\+\_\+\+S\+E\+M\+I\+T\+O\+N\+E\+S\+\_\+\+P\+E\+R\+\_\+\+O\+C\+T\+A\+VE} = 12
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Obtains and draws a spectrogram from continuous audio input. Implements methods from the abstract class \hyperlink{classGraphicsItem}{Graphics\+Item}, which are called by a subject \hyperlink{classDisplay}{Display} instance as an implementation of the observer design pattern. \begin{DoxyAuthor}{Author}
+Anthony Agnone, Aug 2016 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structSpectrogramVisualizer_a0b57309d58a075208d6c784718b3e6d7}{}\label{structSpectrogramVisualizer_a0b57309d58a075208d6c784718b3e6d7} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{Spectrogram\+Visualizer()}{SpectrogramVisualizer()}}
+{\ttfamily Spectrogram\+Visualizer\+::\+Spectrogram\+Visualizer (\begin{DoxyParamCaption}\item[{int}]{scroll\+Factor }\end{DoxyParamCaption})}
+
+Overloaded constructor to initialize various member parameters. \hypertarget{structSpectrogramVisualizer_a2b55364382a4ee290918a05946505561}{}\label{structSpectrogramVisualizer_a2b55364382a4ee290918a05946505561} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!````~Spectrogram\+Visualizer@{$\sim$\+Spectrogram\+Visualizer}}
+\index{````~Spectrogram\+Visualizer@{$\sim$\+Spectrogram\+Visualizer}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{$\sim$\+Spectrogram\+Visualizer()}{~SpectrogramVisualizer()}}
+{\ttfamily Spectrogram\+Visualizer\+::$\sim$\+Spectrogram\+Visualizer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Empty destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{structSpectrogramVisualizer_a529c64c733ffc564764593329c483ae2}{}\label{structSpectrogramVisualizer_a529c64c733ffc564764593329c483ae2} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!display@{display}}
+\index{display@{display}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{display()}{display()}}
+{\ttfamily void Spectrogram\+Visualizer\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Displays all information and graphics on the screen. This function is routinely called by the \hyperlink{classDisplay}{Display} subject, and is one of many functions that the class defines as a \hyperlink{classGraphicsItem}{Graphics\+Item} observer in the observer design pattern. 
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a9b9aa780d95f710b1c876ce49abac9a1}{}\label{structSpectrogramVisualizer_a9b9aa780d95f710b1c876ce49abac9a1} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!display\+Text@{display\+Text}}
+\index{display\+Text@{display\+Text}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{display\+Text()}{displayText()}}
+{\ttfamily void Spectrogram\+Visualizer\+::display\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Displays all text on the canvas. 
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a669c19fe9dc24dc89e1cc518edb24de6}{}\label{structSpectrogramVisualizer_a669c19fe9dc24dc89e1cc518edb24de6} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!idle@{idle}}
+\index{idle@{idle}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{idle()}{idle()}}
+{\ttfamily void Spectrogram\+Visualizer\+::idle (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Called during an idling period. 
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a2901f4ea1e35d4c7e6660f6c19ed468f}{}\label{structSpectrogramVisualizer_a2901f4ea1e35d4c7e6660f6c19ed468f} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{keyboard()}{keyboard()}}
+{\ttfamily void Spectrogram\+Visualizer\+::keyboard (\begin{DoxyParamCaption}\item[{unsigned char}]{key,  }\item[{int}]{x\+Pos,  }\item[{int}]{y\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Responds to a pressed keyboard key to provide an appropriate change in display or functionality, according to \hyperlink{structSpectrogramVisualizer_a20eb03afddbbde072d82b1efe675b0f3}{Spectrogram\+Visualizer\+::\+K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS}. 
+\begin{DoxyParams}{Parameters}
+{\em key} & char representation of the key pressed. \\
+\hline
+{\em x\+Pos} & mouse x position when the key was pressed. \\
+\hline
+{\em y\+Pos} & mouse y position when the key was pressed. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a8ab333867c86cfa188ff026410e271aa}{}\label{structSpectrogramVisualizer_a8ab333867c86cfa188ff026410e271aa} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!motion@{motion}}
+\index{motion@{motion}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{motion()}{motion()}}
+{\ttfamily void Spectrogram\+Visualizer\+::motion (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Responds to mouse movement while one or more mouse buttons are pressed. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate x of the mouse cursor. \\
+\hline
+{\em y} & coordinate y of the mouse cursor. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a949b2e0bfd260e6f8d63b5867f1b4edf}{}\label{structSpectrogramVisualizer_a949b2e0bfd260e6f8d63b5867f1b4edf} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!mouse@{mouse}}
+\index{mouse@{mouse}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{mouse()}{mouse()}}
+{\ttfamily void Spectrogram\+Visualizer\+::mouse (\begin{DoxyParamCaption}\item[{int}]{button,  }\item[{int}]{state,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Responds to mouse input by the user. 
+\begin{DoxyParams}{Parameters}
+{\em button} & mouse button pressed by the user. \\
+\hline
+{\em state} & whether the mouse button was just pressed or released by the user. \\
+\hline
+{\em x} & coordinate x of the mouse cursor when the press happened. \\
+\hline
+{\em y} & coordinate y of the mouse cursor when the press happened. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a301989369e63d88cd6a59d12c23b4551}{}\label{structSpectrogramVisualizer_a301989369e63d88cd6a59d12c23b4551} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!pause@{pause}}
+\index{pause@{pause}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{pause()}{pause()}}
+{\ttfamily void Spectrogram\+Visualizer\+::pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Called during a pause period. 
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a789c6b59ab3a6960056eaab014163b91}{}\label{structSpectrogramVisualizer_a789c6b59ab3a6960056eaab014163b91} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!reshape@{reshape}}
+\index{reshape@{reshape}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{reshape()}{reshape()}}
+{\ttfamily void Spectrogram\+Visualizer\+::reshape (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Responds to a reshaping of the main window, reshaping all of its constituent plots and text. 
+\begin{DoxyParams}{Parameters}
+{\em w} & new width of the main window. \\
+\hline
+{\em h} & new height of the main window. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+\hypertarget{structSpectrogramVisualizer_a631d3522ef8d8bdc6fd9ba9acf2f15ec}{}\label{structSpectrogramVisualizer_a631d3522ef8d8bdc6fd9ba9acf2f15ec} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!special@{special}}
+\index{special@{special}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{special()}{special()}}
+{\ttfamily void Spectrogram\+Visualizer\+::special (\begin{DoxyParamCaption}\item[{int}]{key,  }\item[{int}]{x\+Pos,  }\item[{int}]{y\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Responds to a pressed special keyboard key to provide an appropriate change in display or functionality, according to \hyperlink{structSpectrogramVisualizer_a20eb03afddbbde072d82b1efe675b0f3}{Spectrogram\+Visualizer\+::\+K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS}. 
+\begin{DoxyParams}{Parameters}
+{\em key} & char representation of the special key pressed. \\
+\hline
+{\em x\+Pos} & mouse x position when the key was pressed. \\
+\hline
+{\em y\+Pos} & mouse y position when the key was pressed. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classGraphicsItem}{Graphics\+Item}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structSpectrogramVisualizer_a20eb03afddbbde072d82b1efe675b0f3}{}\label{structSpectrogramVisualizer_a20eb03afddbbde072d82b1efe675b0f3} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS@{K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS}}
+\index{K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS@{K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS}{KEYBOARD\_SHORTCUTS}}
+{\ttfamily const \hyperlink{structSpectrogramVisualizer_1_1shortcuts}{shortcuts} Spectrogram\+Visualizer\+::\+K\+E\+Y\+B\+O\+A\+R\+D\+\_\+\+S\+H\+O\+R\+T\+C\+U\+TS\hspace{0.3cm}{\ttfamily [static]}}
+
+Specific implementation of the shortcuts struct for this particular visualizer. \hypertarget{structSpectrogramVisualizer_adfe2ed143313d59d7c118cadec1460b9}{}\label{structSpectrogramVisualizer_adfe2ed143313d59d7c118cadec1460b9} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!M\+I\+D\+D\+L\+E\+\_\+\+C\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+CY@{M\+I\+D\+D\+L\+E\+\_\+\+C\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+CY}}
+\index{M\+I\+D\+D\+L\+E\+\_\+\+C\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+CY@{M\+I\+D\+D\+L\+E\+\_\+\+C\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+CY}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{M\+I\+D\+D\+L\+E\+\_\+\+C\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+CY}{MIDDLE\_C\_FREQUENCY}}
+{\ttfamily const float Spectrogram\+Visualizer\+::\+M\+I\+D\+D\+L\+E\+\_\+\+C\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+CY = 261.\+626f\hspace{0.3cm}{\ttfamily [static]}}
+
+Canonical middle C note frequency. \href{https://en.wikipedia.org/wiki/C_(musical_note)#Middle_C}{\tt https\+://en.\+wikipedia.\+org/wiki/\+C\+\_\+(musical\+\_\+note)\#\+Middle\+\_\+C} \hypertarget{structSpectrogramVisualizer_affbdeff0d7b800feb17aab0a367222da}{}\label{structSpectrogramVisualizer_affbdeff0d7b800feb17aab0a367222da} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!N\+\_\+\+S\+E\+M\+I\+T\+O\+N\+E\+S\+\_\+\+P\+E\+R\+\_\+\+O\+C\+T\+A\+VE@{N\+\_\+\+S\+E\+M\+I\+T\+O\+N\+E\+S\+\_\+\+P\+E\+R\+\_\+\+O\+C\+T\+A\+VE}}
+\index{N\+\_\+\+S\+E\+M\+I\+T\+O\+N\+E\+S\+\_\+\+P\+E\+R\+\_\+\+O\+C\+T\+A\+VE@{N\+\_\+\+S\+E\+M\+I\+T\+O\+N\+E\+S\+\_\+\+P\+E\+R\+\_\+\+O\+C\+T\+A\+VE}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{N\+\_\+\+S\+E\+M\+I\+T\+O\+N\+E\+S\+\_\+\+P\+E\+R\+\_\+\+O\+C\+T\+A\+VE}{N\_SEMITONES\_PER\_OCTAVE}}
+{\ttfamily const unsigned int Spectrogram\+Visualizer\+::\+N\+\_\+\+S\+E\+M\+I\+T\+O\+N\+E\+S\+\_\+\+P\+E\+R\+\_\+\+O\+C\+T\+A\+VE = 12\hspace{0.3cm}{\ttfamily [static]}}
+
+Canonical number of semitones per octave. \href{https://en.wikipedia.org/wiki/Equal_temperament}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Equal\+\_\+temperament} \hypertarget{structSpectrogramVisualizer_ad833647df19d8ae0eb2e47efe989d1d9}{}\label{structSpectrogramVisualizer_ad833647df19d8ae0eb2e47efe989d1d9} 
+\index{Spectrogram\+Visualizer@{Spectrogram\+Visualizer}!note\+Names@{note\+Names}}
+\index{note\+Names@{note\+Names}!Spectrogram\+Visualizer@{Spectrogram\+Visualizer}}
+\subsubsection{\texorpdfstring{note\+Names}{noteNames}}
+{\ttfamily const char $\ast$const Spectrogram\+Visualizer\+::note\+Names\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{\textcolor{stringliteral}{"C"}, \textcolor{stringliteral}{"C#"}, \textcolor{stringliteral}{"D"}, \textcolor{stringliteral}{"Eb"}, \textcolor{stringliteral}{"E"}, \textcolor{stringliteral}{"F"}, \textcolor{stringliteral}{"F#"}, \textcolor{stringliteral}{"G"}, \textcolor{stringliteral}{"G#"}, \textcolor{stringliteral}{"A"}, \textcolor{stringliteral}{"Bb"},
+                                                        \textcolor{stringliteral}{"B"}\}
+\end{DoxyCode}
+Simple array of canonical note names e.\+g. C\#, Cb, C, etc. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Spectrogram\+Visualizer.\+cpp\item 
+Spectrogram\+Visualizer.\+hpp\end{DoxyCompactItemize}
