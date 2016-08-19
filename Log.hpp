@@ -13,6 +13,14 @@
 class Log {
 public:
   /**
+   * Direction of output for logging/debugging.
+   *    0 -> std::cout
+   *    1 -> file with low verbosity
+   *    2 -> file with high verbosity
+   */
+  static unsigned int OUTPUT_DIRECTION;
+
+  /**
    * De-allocates all dynamic memory.
    */
   ~Log();
@@ -42,14 +50,6 @@ public:
    */
   static Log *getInstance();
 private:
-  /**
-   * Direction of output for logging/debugging.
-   *    0 -> std::cout
-   *    1 -> file with low verbosity
-   *    2 -> file with high verbosity
-   */
-  static unsigned int OUTPUT_DIRECTION;
-
   /**
    * File handle for output, if applicable.
    */
