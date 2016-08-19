@@ -33,7 +33,7 @@ make
 
 Here's a quick screenshot of [this song](https://www.youtube.com/watch?v=n70c3Dzw-ZM) around 1:45 on. Can you line it up?
 
-![Visualization Screenshot](https://raw.githubusercontent.com/aagnone3/audio_visualization/master/res/img/screenshot.png)
+![Visualization Screenshot](https://raw.githubusercontent.com/aagnone3/audio_visualization/master/res/img/screenshot_armin.png)
 
 # Documentation
 
