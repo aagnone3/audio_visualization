@@ -11,7 +11,7 @@ Original project: [Real-time OpenGL spectrogram by Alex Barnett](https://math.da
 # Dependencies
 
 - linux operating system with ALSA
-- linus programs
+- linux libraries
   - cmath
   - fftw
   - fftw-devel
