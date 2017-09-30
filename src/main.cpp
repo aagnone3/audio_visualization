@@ -31,7 +31,6 @@
  */
 
 #include <algorithm>
-#include <alsa/asoundlib.h>
 #include "AudioInput.hpp"
 #include "Display.hpp"
 #include "GraphicsItem.hpp"
@@ -51,8 +50,7 @@ unsigned int verbosity;
 int scrollFactor;
 
 const char* const helptext[] = {
-    " glSpect: real-time OpenGL spectrogram.  Anthony Agnone, Aug 2016\n",
-    "                                         (based on Luke Campagnola glScope)\n\n",
+    " glSpect: real-time OpenGL spectrogram.  Anthony Agnone\n",
     "Usage: glspect  [-f] [-v] [-sf <scroll_factor>] [-w <windowType>] [-t windowSizeExponent]\n\n",
     "Command line arguments:\n",
     "windowType = \t0 (no window)\n\t\t1 (Hann)\n\t\t2 (Gaussian trunc at +-4sigma) (default)\n",

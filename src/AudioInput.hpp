@@ -57,7 +57,7 @@ public:
    *    1: Hann window.
    *    2: truncated Gaussian window.
    */
-  void setupWindowFunc(float* window, int windowSize, unsigned int windowType);
+  void initializeWindow(float* window, int windowSize, unsigned int windowType);
 
   /**
    * Obtains a windowed spectrogram of the audio stream.
@@ -67,9 +67,14 @@ public:
   static void computeSpectrogramSlice(AudioInput* audioInput);
 
   /**
-   * Defines how the instance stops the audio stream.
+   * Defines how the instance stops capturing the audio stream.
    */
   virtual void quitNow() = 0;
+    
+    /**
+     * Defines how the instance starts capturing the audio stream.
+     */
+    virtual int startCapture() = 0;
 
 protected:
   /**
@@ -106,6 +111,11 @@ protected:
    * Window coefficients to be applied to each audio buffer frame.
    */
   float* windowingFunction;
+
+    /**
+     * TODO
+     */
+    float* fftFrame;
 
   /**
    * Resulting frame of audio data after applying the window coefficients in windowingFunction.
