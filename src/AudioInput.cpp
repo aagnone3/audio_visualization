@@ -71,6 +71,7 @@ void AudioInput::computeSpectrogramSlice(AudioInput *audioInput) {
     int ind;
 
     /* copy the nfft most recent samples & multiply by the window */
+    Log::getInstance()->logger() << "BufferSizeSamples: " << audioInput->bufferSizeSamples << std::endl;
     for (int i = 0; i < nfft; ++i) {
         ind = mod(audioInput->bufferIndex - nfft + i, audioInput->bufferSizeSamples);
         audioInput->windowedAudioFrame[i] = audioInput->windowingFunction[i] * audioInput->audioBuffer[ind];

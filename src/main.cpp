@@ -110,8 +110,13 @@ int main(int argc, char** argv)
   Display display(argc, argv, screenMode);
 
   /* create GraphicsItem observers and add them to the display's observer list */
-  SpectrogramVisualizer spectrogramVisualizer(scrollFactor);
-  display.addGraphicsItem(&spectrogramVisualizer);
+  try {
+      SpectrogramVisualizer spectrogramVisualizer(scrollFactor);
+      display.addGraphicsItem(&spectrogramVisualizer);
+  } catch (int e) {
+      std::cout << "Error starting the visualization. Exiting." << std::endl;
+      exit(1);
+  }
 
   display.loop();  /* main loop */
   return 0;

@@ -224,6 +224,8 @@ private:
      * Highest frequency that the spectrogram will display.
      */
     float highestFrequency;
+    // TODO
+    GLuint specId;
 
     /**
      * Displays the time domain representation of the signal.

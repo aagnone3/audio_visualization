@@ -42,23 +42,18 @@ SpectrogramVisualizer::SpectrogramVisualizer(int scrollFactor) {
 
     Log::getInstance()->logger() << "Highest Frequency: " << highestFrequency << std::endl;
 
-    glActiveTexture(GL_TEXTURE1);
-    GLuint id;
-    glGenTextures(1, &id);
-    glBindTexture(GL_TEXTURE_2D, id);
-    int width = AudioInput::N_TIME_WINDOWS, height = AudioInput::N_FREQUENCIES;
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_R3_G3_B2, width, height, 0,
-                 GL_RGB, GL_UNSIGNED_BYTE_3_3_2, spectrogramBytes);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    specId = 7;
+    glGenTextures(14, &specId);
+    glBindTexture(GL_TEXTURE_2D, specId);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
-    glActiveTexture(GL_TEXTURE0);
 
     /* notify the AudioInput instance that it should start capturing audio */
-    audioInput->startCapture();
+    if(audioInput->startCapture() != 0) {
+        throw 99;
+    }
 }
 
 SpectrogramVisualizer::~SpectrogramVisualizer() {
@@ -105,7 +100,7 @@ void SpectrogramVisualizer::plotTimeDomain() {
 void SpectrogramVisualizer::plotSpectralMagnitude() {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix(); // use modelview matrix to transform [-tshow,0]x[-1,1] somewhere
-    glTranslatef(0.15, 0.11, 0);   // decide the location of 0,0 of the plot
+    glTranslatef(0.15, 0.15, 0);   // decide the location of 0,0 of the plot
     glScalef(0.3f / highestFrequency, 0.0015, 1.0);  // x-scale for freq-units, y-scale for dB
     glLineWidth(1);
 
@@ -148,43 +143,33 @@ void SpectrogramVisualizer::plotSpectrogram() {
     glRasterPos2f(x0, y0);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_BLEND);
-    //glPixelZoom(1.f,1.f); // zoom: non-integers are quite a bit slower (ie twice), and seems to have permanently worsened the DrawPixels speed by factor 2!
-    //glPixelZoom(1.F,2.F);
-    //float z; glGetFloatv(GL_ZOOM_Y, &z); printf("%f\n",z); // read a zoom
+//    float z; glGetFloatv(GL_ZOOM_Y, &z); printf("%f\n",z); // read a zoom
     if (colorMode < 2) {
         /* plot B/W */
         glDrawPixels(AudioInput::N_TIME_WINDOWS, AudioInput::N_FREQUENCIES, GL_LUMINANCE, GL_UNSIGNED_BYTE,
                      spectrogramBytes);
     } else {
-        float w = 0.8, h = 0.6;
+        float w = 0.3, h = 0.3;
         glTranslatef(x0, y0, 0);
-        glActiveTexture(GL_TEXTURE1);
-        glEnable(GL_TEXTURE_2D);
-        glBegin(GL_QUADS);
-
-        // bottom left
-        glTexCoord2f(0, 0);
-        glVertex2f(0, 0);
-
-        // bottom right
-        glTexCoord2f(AudioInput::N_TIME_WINDOWS, 0);
-        glVertex2f(w, 0);
-
-        // top right
-        glTexCoord2f(AudioInput::N_TIME_WINDOWS, AudioInput::N_FREQUENCIES);
-        glVertex2f(w, h);
-
-        // top left
-        glTexCoord2f(0, AudioInput::N_FREQUENCIES);
-        glVertex2f(0, h);
-
-        // bottom left
-        glTexCoord2f(0, 0);
-        glVertex2f(0, 0);
-
+        glBegin(GL_LINES);
+            glVertex2d(0, 0);
+            glVertex2d(-0.1, -0.1);
         glEnd();
+        int width = AudioInput::N_TIME_WINDOWS, height = AudioInput::N_FREQUENCIES;
+        glEnable(GL_TEXTURE_2D);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_R3_G3_B2, width, height, 0,
+                     GL_RGB, GL_UNSIGNED_BYTE_3_3_2, spectrogramBytes);
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+//        glTexEnvf(GL_POINT_SPRITE, GL_TEXTURE_ENV_MODE, GL_TEXTURE);
+        glBindTexture(GL_TEXTURE_2D, specId);
+//        glBegin(GL_QUADS);
+//            glTexCoord2f(0, 0); glVertex2f(0, 0);  // bottom left
+//            glTexCoord2f(AudioInput::N_TIME_WINDOWS, 0); glVertex2f(w, 0);  // bottom right
+//            glTexCoord2f(AudioInput::N_TIME_WINDOWS, AudioInput::N_FREQUENCIES); glVertex2f(w, h);  // top right
+//            glTexCoord2f(0, AudioInput::N_FREQUENCIES); glVertex2f(0, h);  // top left
+//        glEnd();
+        glFlush();
         glDisable(GL_TEXTURE_2D);
-        glActiveTexture(GL_TEXTURE0);
 
         /* plot RGB */
 //        glDrawPixels(AudioInput::N_TIME_WINDOWS, AudioInput::N_FREQUENCIES, GL_RGB, GL_UNSIGNED_BYTE_3_3_2,
@@ -253,12 +238,12 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
 
     /* draw axis lines */
     glColor4f(0.7, 1.0, 1.0, 1);
-    glDisable(GL_LINE_SMOOTH);
     glLineWidth(1);
+    glDisable(GL_LINE_SMOOTH);
     glBegin(GL_LINE_STRIP);
-    glVertex2f(xStart, yEnd);
-    glVertex2f(xStart, yStart);
-    glVertex2f(xEnd, yStart);
+        glVertex2f(xStart, yEnd);
+        glVertex2f(xStart, yStart);
+        glVertex2f(xEnd, yStart);
     glEnd();
 
     /* draw axis labels */
@@ -266,10 +251,10 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
     Display::smallText(xStart - 8 * xPixelSize, yEnd + 8 * yPixelSize, yLabel);
 
     /* draw x axis ticks */
-    nTicks = chooseTics(xStart, xEnd - xStart, xFudgeFactor, ticks);
     float topTickX = yStart;
     float bottomTickX = topTickX - 0.02f * (yEnd - yStart) / yFudgeFactor;
     glBegin(GL_LINES);
+    nTicks = chooseTics(xStart, xEnd - xStart, xFudgeFactor, ticks);
     for (i = 0; i < nTicks; ++i) {
         glVertex2d(ticks[i], bottomTickX);
         glVertex2d(ticks[i], topTickX);
@@ -338,14 +323,14 @@ int SpectrogramVisualizer::chooseTics(float lowValue, float range, float fudgeFa
 
     /* adjust the range multiplier here to give good tic density... */
     logr = (float) log10(range * 0.4 / fudgeFactor);
-    exponent = (float) floor(logr);
+    exponent = floor(logr);
     spacing = (float) pow(10.0, exponent);
     if (logr - exponent > log10(5.0))
         spacing *= 5.0;
     else if (logr - exponent > log10(2.0))
         spacing *= 2.0;
 
-    /* (int) and copysign trick is to convert the floor val to an int */
+    /* (int) and copy-sign trick is to convert the floor val to an int */
     startTick = (int) (copysign(0.5, lowValue) + 1.0 + floor(lowValue / spacing));
 
     nTics = (int) (1.0 + (lowValue + range - startTick * spacing) / spacing);

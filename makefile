@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -std=c++14
+CFLAGS=-g -c -Wall -std=c++14
 LDFLAGS=-framework OpenGL -framework GLUT
 SOURCES=src/main.cpp src/SpectrogramVisualizer.cpp src/PortAudio.cpp src/shared.cpp src/Log.cpp src/Display.cpp src/AudioInput.cpp
 OBJECTS=$(SOURCES:.cpp=.o)

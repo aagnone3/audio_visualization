@@ -73,7 +73,7 @@ void Display::display()
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   std::for_each(graphicsItems.begin(), graphicsItems.end(), [&](auto item) { item->display(); });
-  // glFinish();   // wait for all gl commands to complete
+   glFinish();   // wait for all gl commands to complete
 
   glutSwapBuffers(); // for this to WAIT for vSync, need enable in NVIDIA OpenGL
 }
