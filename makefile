@@ -5,13 +5,16 @@ SOURCES=src/main.cpp src/SpectrogramVisualizer.cpp src/PortAudio.cpp src/shared.
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=opengl_spectrogram
 
+CFLAGS+=-I/usr/include/GLUT
+CFLAGS+=-I/usr/lib/fftw/include
+
 # portaudio
 CFLAGS+=-I/Users/aagnone/github/brew/brew/Cellar/portaudio/19.6.0/include
-LDFLAGS+=-L/Users/aagnone/github/brew/brew/Cellar/portaudio/19.6.0/lib -lportaudio
+LDFLAGS+=-L/usr/lib/x86_64-linux-gnu -lportaudio
 
 # fftw
 CFLAGS+=-I/Users/aagnone/github/brew/brew/Cellar/fftw/3.3.6-pl2/include
-LDFLAGS+=-L/Users/aagnone/github/brew/brew/Cellar/fftw/3.3.6-pl2/lib -lfftw3f
+LDFLAGS+=-L/usr/lib/x86_64-linux-gnu -lfftw3
 
 # custom vars
 SRC_DIR=src
@@ -25,4 +28,3 @@ $(EXECUTABLE): $(OBJECTS)
 
 clean:
 	rm -f src/*.o $(EXECUTABLE)
-

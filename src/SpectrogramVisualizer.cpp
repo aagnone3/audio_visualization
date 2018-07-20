@@ -120,6 +120,7 @@ void SpectrogramVisualizer::plotSpectralMagnitude() {
     glBegin(GL_LINE_STRIP);
     float *spectrogramSlice = audioInput->getSpectrogramSlice();
     for (int i = 0; i < AudioInput::N_FREQUENCIES >> 1; i++) {
+        Log::getInstance()->logger() << i << std::endl;
         glVertex2f(i * hzPerPixelX, 20 * (float) log10((double) spectrogramSlice[i]));
     }
     glEnd();
@@ -361,10 +362,12 @@ void SpectrogramVisualizer::scrollSpectrogram() {
 }
 
 void SpectrogramVisualizer::display() {
+    /*
     plotTimeDomain();
     plotSpectralMagnitude();
     plotSpectrogram();
     displayText();
+    */
 }
 
 void SpectrogramVisualizer::displayText() {

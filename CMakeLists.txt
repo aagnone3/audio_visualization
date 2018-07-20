@@ -24,6 +24,7 @@ set(BREW_DIR /Users/aagnone/github/brew/brew/Cellar)
 
 # OpenGL/GLUT
 find_package(OpenGL REQUIRED)
+#find_package(GL REQUIRED)
 find_package(GLUT REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS})
 target_link_libraries(opengl_spectrogram ${OPENGL_LIBRARIES})
