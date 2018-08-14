@@ -1,10 +1,11 @@
+#include "common.h"
 #include "SpectrogramVisualizer.hpp"
 
-#define EPSILON -1e-7f
 
 /* static member declarations and initializations */
-const char *const SpectrogramVisualizer::noteNames[] = {"C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb",
-                                                        "B"};
+const char *const SpectrogramVisualizer::noteNames[] = {
+    "C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"
+};
 const struct SpectrogramVisualizer::shortcuts SpectrogramVisualizer::KEYBOARD_SHORTCUTS = {
         27,   /* ESCAPE */
         'q',  /* QUIT */
@@ -17,15 +18,20 @@ const struct SpectrogramVisualizer::shortcuts SpectrogramVisualizer::KEYBOARD_SH
 const float SpectrogramVisualizer::MIDDLE_C_FREQUENCY = 261.626f;
 const unsigned int SpectrogramVisualizer::N_SEMITONES_PER_OCTAVE = 12;
 
-SpectrogramVisualizer::SpectrogramVisualizer(int scrollFactor) {
+SpectrogramVisualizer::SpectrogramVisualizer(int scrollFactor, int requestedInputDeviceId) {
     isPaused = false;
     colorScale[0] = 100.0f;     // 8-bit intensity offset
     colorScale[1] = 255 / 120.0f;     // 8-bit intensity slope (per dB units)
-    audioInput = new PortAudio();
+    audioInput = new PortAudio(requestedInputDeviceId);
     unsigned int spectrogramSize = audioInput->getSpectrogramSize();
+
     spectrogramBytes = new char[spectrogramSize];
+    zeros(spectrogramBytes, spectrogramSize);
+
     spectrogramFloat = new float[spectrogramSize];
-    highestFrequency = audioInput->getSamplingRate() / ((float) 2.0);
+    zeros(spectrogramFloat, spectrogramSize);
+
+    highestFrequency = audioInput->getSamplingRate() / 2.0f;
     hzPerPixelY = (float) highestFrequency / viewportSize[1];
     hzPerPixelX = (float) highestFrequency / viewportSize[0];
     fpsTick = time(nullptr);
@@ -40,7 +46,7 @@ SpectrogramVisualizer::SpectrogramVisualizer(int scrollFactor) {
     diagnose = false;
     strcpy(diagnosis, "no diagnosis ...");
 
-    Log::getInstance()->logger() << "Highest Frequency: " << highestFrequency << std::endl;
+    OUT("Highest Frequency: " << highestFrequency);
 
     specId = 7;
     glGenTextures(14, &specId);
@@ -52,45 +58,109 @@ SpectrogramVisualizer::SpectrogramVisualizer(int scrollFactor) {
 
     /* notify the AudioInput instance that it should start capturing audio */
     if(audioInput->startCapture() != 0) {
+        OUT("Failed to start capturing audio.");
         throw 99;
     }
 }
 
+SpectrogramVisualizer::SpectrogramVisualizer(const SpectrogramVisualizer& other)
+{
+    this->diagnose = other.diagnose;
+    strcpy(this->diagnosis, other.diagnosis);
+    this->runTime = other.runTime;
+    this->frameCount = other.frameCount;
+    this->fps = other.fps;
+    this->fpsTick = other.fpsTick;
+    this->startTime = other.startTime;
+    this->frequencyReadOff = other.frequencyReadOff;
+    this->scrollFactor = other.scrollFactor;
+    this->scrollCount = other.scrollCount;
+    this->colorMode = other.colorMode;
+    *this->audioInput = *other.audioInput;
+    this->hzPerPixelX = other.hzPerPixelX;
+    this->hzPerPixelY = other.hzPerPixelY;
+    this->highestFrequency = other.highestFrequency;
+    this->specId = other.specId;
+    for (int i = 0; i < 2; i++) this->viewportSize[i] = other.viewportSize[i];
+    for (int i = 0; i < 2; i++) this->colorScale[i] = other.colorScale[i];
+    for (int i = 0; i < 3; i++) this->mouseHandle[i] = other.mouseHandle[i];
+
+    int spectrogramSize = this->audioInput->getSpectrogramSize();
+    for (int i = 0; i < spectrogramSize; i++) this->spectrogramBytes[i] = other.spectrogramBytes[i];
+    for (int i = 0; i < spectrogramSize; i++) this->spectrogramFloat[i] = other.spectrogramFloat[i];
+}
+
+SpectrogramVisualizer& SpectrogramVisualizer::operator=(const SpectrogramVisualizer& other)
+{
+    this->diagnose = other.diagnose;
+    strcpy(this->diagnosis, other.diagnosis);
+    this->runTime = other.runTime;
+    this->frameCount = other.frameCount;
+    this->fps = other.fps;
+    this->fpsTick = other.fpsTick;
+    this->startTime = other.startTime;
+    this->frequencyReadOff = other.frequencyReadOff;
+    this->scrollFactor = other.scrollFactor;
+    this->scrollCount = other.scrollCount;
+    this->colorMode = other.colorMode;
+    *this->audioInput = *other.audioInput;
+    this->hzPerPixelX = other.hzPerPixelX;
+    this->hzPerPixelY = other.hzPerPixelY;
+    this->highestFrequency = other.highestFrequency;
+    this->specId = other.specId;
+    for (int i = 0; i < 2; i++) this->viewportSize[i] = other.viewportSize[i];
+    for (int i = 0; i < 2; i++) this->colorScale[i] = other.colorScale[i];
+    for (int i = 0; i < 3; i++) this->mouseHandle[i] = other.mouseHandle[i];
+
+    int spectrogramSize = this->audioInput->getSpectrogramSize();
+    for (int i = 0; i < spectrogramSize; i++) this->spectrogramBytes[i] = other.spectrogramBytes[i];
+    for (int i = 0; i < spectrogramSize; i++) this->spectrogramFloat[i] = other.spectrogramFloat[i];
+
+    return *this;
+}
+
 SpectrogramVisualizer::~SpectrogramVisualizer() {
-    delete audioInput;
+    // this causes a seg fault?
+    //if (audioInput != nullptr) delete audioInput;
+
     delete[] spectrogramBytes;
     delete[] spectrogramFloat;
 }
 
 void SpectrogramVisualizer::plotTimeDomain() {
-    float tshow = 0.1;    // only show the most recent tshow secs of samples
+    float lookbackSeconds = 0.1;    // only show the most recent number of seconds
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_BLEND);
     glDisable(GL_LINE_SMOOTH);
-    glLineWidth(2);
+    glLineWidth(1);
     glMatrixMode(GL_MODELVIEW);
-    glPushMatrix(); // use modelview matrix to transform [-tshow,0]x[-1,1] somewhere
-    glTranslatef(0.97, 0.1, 0);
-    glScalef(4.0, 1.0, 1.0);  // x-scale for time-units, y-scale is 1
+    glPushMatrix(); // use modelview matrix to transform [-lookbackSeconds,0]x[-1,1] somewhere
+    glTranslatef(0.98, 0.1, 0);
+    glScalef(2.0, 0.1, 1.0);  // x-scale for time-units, y-scale is 1
 
     /* draw axes */
     char xLabel[] = "t(s)", yLabel[] = "";
-    drawAxes(-tshow, 0, -0.1, 0.1, 1, 1, xLabel, yLabel);
+    drawAxes(-lookbackSeconds, 0, -1.0, 1.0, 1, 1, xLabel, yLabel);
 
     /* draw time domain signal */
     glColor4f(0.4, 1.0, 0.6, 1);
     glBegin(GL_LINE_STRIP);
-    float x = -tshow;
     int bufferIndex = audioInput->getBufferIndex();
-    auto numPrevSamples = (int) (tshow * audioInput->getSamplingRate());
-    int ilo = bufferIndex - numPrevSamples;
-    int ihi = bufferIndex; // NB get now since capture thread may change it!
+    auto lookbackSamples = (int) (lookbackSeconds * audioInput->getSamplingRate());
 
     /* plot the most recent piece of buffer */
     float *audioBuffer = audioInput->getAudioBuffer();
     float samplingPeriod = audioInput->getSamplingPeriod();
-    for (int i = ilo; i < ihi; i++) {
-        glVertex2f(x, audioBuffer[mod(i, audioInput->getBufferSizeSamples())]);
+    int bufferSizeSamples = audioInput->getBufferSizeSamples();
+    float x = -lookbackSeconds;
+    float maxSample = -1e6, curSample;
+    for (int i = bufferIndex - lookbackSamples; i < bufferIndex; i++) {
+        curSample = audioBuffer[mod(i, bufferSizeSamples)];
+        glVertex2f(
+            x,
+            curSample
+        );
+        if (curSample > maxSample) maxSample = curSample;
         x += samplingPeriod;  /* time increment */
     }
     glEnd();
@@ -99,30 +169,32 @@ void SpectrogramVisualizer::plotTimeDomain() {
 
 void SpectrogramVisualizer::plotSpectralMagnitude() {
     glMatrixMode(GL_MODELVIEW);
-    glPushMatrix(); // use modelview matrix to transform [-tshow,0]x[-1,1] somewhere
-    glTranslatef(0.15, 0.15, 0);   // decide the location of 0,0 of the plot
-    glScalef(0.3f / highestFrequency, 0.0015, 1.0);  // x-scale for freq-units, y-scale for dB
-    glLineWidth(1);
+    glPushMatrix();
+    glTranslatef(0.05, 0.1, 0);
+    glScalef(0.7f / highestFrequency, 0.0015, 1.0);  // x-scale for freq-units, y-scale for dB
 
     /* lines showing spectrogram color range */
-    glColor4f(0.5, 0.4, 0.2, 1);
-    glBegin(GL_LINES);
-    float dB_min = -colorScale[0] / colorScale[1];
-    float dB_max = (255.0f - colorScale[0]) / colorScale[1];
-    glVertex2f(0, dB_min);
-    glVertex2f(highestFrequency, dB_min);
-    glVertex2f(0, dB_max);
-    glVertex2f(highestFrequency, dB_max);
-    glEnd();
+    // glColor4f(0.5, 0.4, 0.2, 1);
+    // glLineWidth(1);
+    // float dB_min = -colorScale[0] / colorScale[1];
+    // float dB_max = (255.0f - colorScale[0]) / colorScale[1];
+    // glBegin(GL_LINES);
+    //     glVertex2f(0, dB_min);
+    //     glVertex2f(highestFrequency, dB_min);
+    //     glVertex2f(0, dB_max);
+    //     glVertex2f(highestFrequency, dB_max);
+    // glEnd();
 
     /* plot all of the values */
     glColor4f(1.0, 0.8, 0.3, 1);
-    glBegin(GL_LINE_STRIP);
     float *spectrogramSlice = audioInput->getSpectrogramSlice();
-    for (int i = 0; i < AudioInput::N_FREQUENCIES >> 1; i++) {
-        Log::getInstance()->logger() << i << std::endl;
-        glVertex2f(i * hzPerPixelX, 20 * (float) log10((double) spectrogramSlice[i]));
-    }
+    glBegin(GL_LINE_STRIP);
+        for (int i = 0; i < AudioInput::N_FREQUENCIES; i++) {
+            glVertex2f(
+                i * hzPerPixelX * 0.7f,
+                20 * (float) log10((double) spectrogramSlice[i])
+            );
+        }
     glEnd();
 
     /* axis labels */
@@ -135,55 +207,47 @@ void SpectrogramVisualizer::plotSpectrogram() {
     /* bottom-left location in viewport (as unit square) */
     float x0 = 0.05, y0 = 0.22;
     float curFrequency, lineFrequency;
-    float secondsPerPixel = scrollFactor / 60.0f; // (float)fps, or longer FPS mean?
+    float secondsPerPixel = scrollFactor / FPS; // (float)fps, or longer FPS mean?
     float endTime = secondsPerPixel * AudioInput::N_TIME_WINDOWS;
     char buffer[50];  /* for frequencyReadOff */
     int nHarmonics, i, j, noteNum, octave;   // for frequencyReadOff
 
     /* plot the spectrogram values */
-    glRasterPos2f(x0, y0);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_BLEND);
-//    float z; glGetFloatv(GL_ZOOM_Y, &z); printf("%f\n",z); // read a zoom
     if (colorMode < 2) {
         /* plot B/W */
         glDrawPixels(AudioInput::N_TIME_WINDOWS, AudioInput::N_FREQUENCIES, GL_LUMINANCE, GL_UNSIGNED_BYTE,
                      spectrogramBytes);
     } else {
-        float w = 0.3, h = 0.3;
         glTranslatef(x0, y0, 0);
-        glBegin(GL_LINES);
-            glVertex2d(0, 0);
-            glVertex2d(-0.1, -0.1);
-        glEnd();
         int width = AudioInput::N_TIME_WINDOWS, height = AudioInput::N_FREQUENCIES;
-        glEnable(GL_TEXTURE_2D);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_R3_G3_B2, width, height, 0,
                      GL_RGB, GL_UNSIGNED_BYTE_3_3_2, spectrogramBytes);
-        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-//        glTexEnvf(GL_POINT_SPRITE, GL_TEXTURE_ENV_MODE, GL_TEXTURE);
-        glBindTexture(GL_TEXTURE_2D, specId);
-//        glBegin(GL_QUADS);
-//            glTexCoord2f(0, 0); glVertex2f(0, 0);  // bottom left
-//            glTexCoord2f(AudioInput::N_TIME_WINDOWS, 0); glVertex2f(w, 0);  // bottom right
-//            glTexCoord2f(AudioInput::N_TIME_WINDOWS, AudioInput::N_FREQUENCIES); glVertex2f(w, h);  // top right
-//            glTexCoord2f(0, AudioInput::N_FREQUENCIES); glVertex2f(0, h);  // top left
-//        glEnd();
-        glFlush();
+        glEnable(GL_TEXTURE_2D);
+            glTexEnvf(GL_POINT_SPRITE, GL_TEXTURE_ENV_MODE, GL_TEXTURE);
+            glBindTexture(GL_TEXTURE_2D, specId);
+            glBegin(GL_QUADS);
+                glTexCoord2f(0, 0); glVertex2f(0, 0);  // bottom left
+                glTexCoord2f(1, 0); glVertex2f(0.9, 0);  // bottom right
+                glTexCoord2f(1, 1); glVertex2f(0.9, 0.75);  // top right
+                glTexCoord2f(0, 1); glVertex2f(0, 0.75);  // top left
+            glEnd();
+            glFlush();
         glDisable(GL_TEXTURE_2D);
-
-        /* plot RGB */
-//        glDrawPixels(AudioInput::N_TIME_WINDOWS, AudioInput::N_FREQUENCIES, GL_RGB, GL_UNSIGNED_BYTE_3_3_2,
-//                     spectrogramBytes);
     }
 
     /* align spectrogram with the time and frequency axes */
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef((AudioInput::N_TIME_WINDOWS - runTime / secondsPerPixel) / viewportSize[0], 0, 0);
-    // TODO verify x axis
-//    glScalef(1.0F / (viewportSize[0] * secondsPerPixel), 1, 1);
-    glScalef(1.0F / (viewportSize[0] * secondsPerPixel), 0.7f / highestFrequency, 1);
+    glTranslatef(
+            (AudioInput::N_TIME_WINDOWS - runTime / secondsPerPixel) / viewportSize[0],
+            0, 0);
+    glScalef(
+            1.0f / (viewportSize[0] * secondsPerPixel),
+            0.7f / highestFrequency,
+            1
+    );
 
     /* plot axes */
     char xLabel[] = "t(s)", yLabel[] = "f(Hz)";
@@ -230,12 +294,15 @@ void SpectrogramVisualizer::plotSpectrogram() {
 }
 
 void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, float yEnd,
-                                     float xFudgeFactor, float yFudgeFactor, char *xLabel, char *yLabel) {
+                                     float xFudgeFactor, float yFudgeFactor,
+                                     char *xLabel, char *yLabel) {
     int nTicks, i;
     char label[20];
     float ticks[100];
     float xPixelSize = 2.0f * (xEnd - xStart) / (viewportSize[0] * xFudgeFactor);
     float yPixelSize = 2.0f * (yEnd - yStart) / (viewportSize[1] * yFudgeFactor);
+    
+    //OUT("x: [" << xStart << "," << xEnd << "], y: [" << yStart << "," << yEnd << "]");
 
     /* draw axis lines */
     glColor4f(0.7, 1.0, 1.0, 1);
@@ -247,25 +314,38 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
         glVertex2f(xEnd, yStart);
     glEnd();
 
+    /* for sanity checking, draw boundary lines for the plot area in red */
+    glColor4f(1.0, 0.0, 0.0, 1);
+    glLineWidth(1);
+    glDisable(GL_LINE_SMOOTH);
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(xStart, yEnd);
+        glVertex2f(xStart, yStart);
+        glVertex2f(xEnd, yStart);
+        glVertex2f(xEnd, yEnd);
+        glVertex2f(xStart, yEnd);
+    glEnd();
+    glColor4f(0.7, 1.0, 1.0, 1);
+
     /* draw axis labels */
     Display::smallText(xEnd + 8 * xPixelSize, yStart - 8 * yPixelSize, xLabel);
     Display::smallText(xStart - 8 * xPixelSize, yEnd + 8 * yPixelSize, yLabel);
 
     /* draw x axis ticks */
-    float topTickX = yStart;
-    float bottomTickX = topTickX - 0.02f * (yEnd - yStart) / yFudgeFactor;
+    float xTickY2 = yStart;
+    float xTickY1 = xTickY2 - 0.02f * (yEnd - yStart) / yFudgeFactor;
     glBegin(GL_LINES);
-    nTicks = chooseTics(xStart, xEnd - xStart, xFudgeFactor, ticks);
-    for (i = 0; i < nTicks; ++i) {
-        glVertex2d(ticks[i], bottomTickX);
-        glVertex2d(ticks[i], topTickX);
-    }
+        nTicks = chooseTics(xStart, xEnd - xStart, xFudgeFactor, ticks);
+        for (i = 0; i < nTicks; ++i) {
+            glVertex2d(ticks[i], xTickY1);
+            glVertex2d(ticks[i], xTickY2);
+        }
     glEnd();
 
     /* draw x axis values */
     for (i = 0; i < nTicks; ++i) {
         sprintf(label, "%.6g", ticks[i]);
-        Display::smallText((ticks[i] - 4 * strlen(label) * xPixelSize), (bottomTickX - 12 * yPixelSize), label);
+        Display::smallText((ticks[i] - 4 * strlen(label) * xPixelSize), (xTickY1 - 12 * yPixelSize), label);
     }
 
     /* draw y axis ticks */
@@ -322,8 +402,8 @@ int SpectrogramVisualizer::chooseTics(float lowValue, float range, float fudgeFa
     float exponent, logr, spacing;
     if (fudgeFactor == 0.0) fudgeFactor = 1.0;
 
-    /* adjust the range multiplier here to give good tic density... */
-    logr = (float) log10(range * 0.4 / fudgeFactor);
+    /* adjust the range multiplier here to give good tick density */
+    logr = (float) log10(range * 0.2 / fudgeFactor); // 0.4
     exponent = floor(logr);
     spacing = (float) pow(10.0, exponent);
     if (logr - exponent > log10(5.0))
@@ -362,13 +442,35 @@ void SpectrogramVisualizer::scrollSpectrogram() {
 }
 
 void SpectrogramVisualizer::display() {
-    /*
+#ifdef DEBUG
+    /* for sanity checking, draw boundary lines for the plot area in green */
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix(); // use modelview matrix to transform [-lookbackSeconds,0]x[-1,1] somewhere
+    glTranslatef(0.001, 0.001, 0);   // decide the location of 0,0 of the plot
+    glScalef(0.999, 0.995, 1.0);  // x-scale for freq-units, y-scale for dB
+    glColor4f(0.0, 1.0, 0.0, 1);
+    int xStart = 0.0, xEnd = 1.0;
+    int yStart = 0.0, yEnd = 1.0;
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(xStart, yStart);
+        glVertex2f(xEnd, yStart);
+        glVertex2f(xEnd, yEnd);
+        glVertex2f(xStart, yEnd);
+        glVertex2f(xStart, yStart);
+    glEnd();
+    glPopMatrix();
+    glColor4f(0.7, 1.0, 1.0, 1);
+#endif
     plotTimeDomain();
     plotSpectralMagnitude();
     plotSpectrogram();
     displayText();
-    */
-}
+
+    scrollSpectrogram();
+    ++scrollCount;
+    if (scrollCount == SpectrogramVisualizer::scrollFactor) {
+        scrollCount = 0;
+    }}
 
 void SpectrogramVisualizer::displayText() {
     glEnable(GL_BLEND); // glBlendFunc (GL_ONE,GL_ZERO); // overwrite entirely
@@ -416,14 +518,14 @@ void SpectrogramVisualizer::idle() {
     if (!audioInput->isPause()) {
         timeval nowe;  // update runtime
         gettimeofday(&nowe, nullptr);
-        runTime += 1 / 60.0;        // is less jittery, approx true
+        runTime += 1 / FPS;        // is less jittery, approx true
         runTime = (float) fmod(runTime, 100.0);    // wrap time label after 100 secs
 
-        ++scrollCount;
-        if (scrollCount == SpectrogramVisualizer::scrollFactor) {
-            scrollSpectrogram();
-            scrollCount = 0;
-        }
+        //++scrollCount;
+        //if (scrollCount == SpectrogramVisualizer::scrollFactor) {
+        //    scrollSpectrogram();
+        //    scrollCount = 0;
+        //}
     }
 }
 
@@ -443,10 +545,15 @@ void SpectrogramVisualizer::keyboard(unsigned char key, int xPos, int yPos) {
     } else if (key == KEYBOARD_SHORTCUTS.SAMPLE_RATE_UP) {               // speed up scroll samplingRate
         if (SpectrogramVisualizer::scrollFactor > 1) {
             SpectrogramVisualizer::scrollFactor--;
+            OUT("scrollFactor: " << scrollFactor);
             scrollCount = 0;
         }
     } else if (key == KEYBOARD_SHORTCUTS.SAMPLE_RATE_DOWN) {
-        if (SpectrogramVisualizer::scrollFactor < 50) SpectrogramVisualizer::scrollFactor++;
+        if (SpectrogramVisualizer::scrollFactor < 50)
+        {
+            SpectrogramVisualizer::scrollFactor++;
+            OUT("scrollFactor: " << scrollFactor);
+        }
     } else if (key == KEYBOARD_SHORTCUTS.CHANGE_COLOR_SCHEME) {
         colorMode = (colorMode + 1) % 3;     // spectrogram color scheme
         recomputeSpectrogramBytes();
@@ -487,7 +594,6 @@ void SpectrogramVisualizer::mouse(int button, int state, int x, int y) {
     mouseHandle[2] = button;
 
     if (button == GLUT_LEFT_BUTTON) {
-//        Log::getInstance()->logger() << state << std::endl;
         frequencyReadOff = state == GLUT_DOWN ? 1 : 0;  /* toggle */
     } else if (button == GLUT_RIGHT_BUTTON) {
         frequencyReadOff = state == GLUT_DOWN ? 2 : 0;  /* toggle with harmonics shown */

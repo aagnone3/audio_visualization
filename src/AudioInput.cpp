@@ -4,7 +4,7 @@
 const unsigned int AudioInput::VERBOSITY = 2;
 // TODO needs to be dynamically set to fftLength / 2 once class organization is cleaned up.
 const unsigned int AudioInput::N_FREQUENCIES = 2048; // 560
-const unsigned int AudioInput::N_TIME_WINDOWS = 1024; // 940
+const unsigned int AudioInput::N_TIME_WINDOWS = 940; // default: 940windows @2048samples (46ms) => 43.65s
 
 AudioInput::AudioInput() {
     quit = false;
@@ -25,11 +25,72 @@ AudioInput::AudioInput() {
     fftPlan = fftwf_plan_r2r_1d(fftLength, windowedAudioFrame, fftFrame, FFTW_R2HC, FFTW_MEASURE);
     spectrogramSlice = new float[N_FREQUENCIES];
     spectrogramSize = N_FREQUENCIES * N_TIME_WINDOWS;
+    Log::getInstance()->logger() << "Finished creating AudioInput" << std::endl;
+}
+
+AudioInput::AudioInput(const AudioInput& other)
+{
+    this->bufferSizeFrames = other.bufferSizeFrames;
+    this->bufferSizeSamples = other.bufferSizeSamples;
+    this->bufferIndex = other.bufferIndex;
+    this->spectrogramSize = other.spectrogramSize;
+    this->fftLength = other.fftLength;
+    this->bufferMemorySeconds = other.bufferMemorySeconds;
+    this->nChannels = other.nChannels;
+    this->samplingRate = other.samplingRate;
+    this->samplingPeriod = other.samplingPeriod;
+    this->quit = other.quit;
+    this->pause = other.pause;
+    this->fftPlan = other.fftPlan;
+    //*captureThread = *other.captureThread;
+    windowedAudioFrame = new float[fftLength];
+
+    spectrogramSlice = new float[N_FREQUENCIES];
+    for (int i = 0; i < bufferSizeSamples; i++) this->audioBuffer[i] = other.audioBuffer[i];
+
+    for (int i = 0; i < N_FREQUENCIES; i++) this->spectrogramSlice[i] = other.spectrogramSlice[i];
+
+    windowingFunction = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->windowingFunction[i] = other.windowingFunction[i];
+
+    fftFrame = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->fftFrame[i] = other.fftFrame[i];
+}
+
+AudioInput& AudioInput::operator=(const AudioInput& other)
+{
+    this->bufferSizeFrames = other.bufferSizeFrames;
+    this->bufferSizeSamples = other.bufferSizeSamples;
+    this->bufferIndex = other.bufferIndex;
+    this->spectrogramSize = other.spectrogramSize;
+    this->fftLength = other.fftLength;
+    this->bufferMemorySeconds = other.bufferMemorySeconds;
+    this->nChannels = other.nChannels;
+    this->samplingRate = other.samplingRate;
+    this->samplingPeriod = other.samplingPeriod;
+    this->quit = other.quit;
+    this->pause = other.pause;
+    this->fftPlan = other.fftPlan;
+    //*captureThread = *other.captureThread;
+    windowedAudioFrame = new float[fftLength];
+
+    spectrogramSlice = new float[N_FREQUENCIES];
+    for (int i = 0; i < bufferSizeSamples; i++) this->audioBuffer[i] = other.audioBuffer[i];
+
+    for (int i = 0; i < N_FREQUENCIES; i++) this->spectrogramSlice[i] = other.spectrogramSlice[i];
+
+    windowingFunction = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->windowingFunction[i] = other.windowingFunction[i];
+
+    fftFrame = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->fftFrame[i] = other.fftFrame[i];
+
+    return *this;
 }
 
 AudioInput::~AudioInput() {
     fftwf_destroy_plan(fftPlan);
-    delete[] audioBufferChunk;
+    //delete[] audioBufferChunk;
     delete[] audioBuffer;
     delete[] spectrogramSlice;
     delete[] windowedAudioFrame;
@@ -71,13 +132,13 @@ void AudioInput::computeSpectrogramSlice(AudioInput *audioInput) {
     int ind;
 
     /* copy the nfft most recent samples & multiply by the window */
-    Log::getInstance()->logger() << "BufferSizeSamples: " << audioInput->bufferSizeSamples << std::endl;
+    //Log::getInstance()->logger() << "BufferSizeSamples: " << audioInput->bufferSizeSamples << std::endl;
     for (int i = 0; i < nfft; ++i) {
         ind = mod(audioInput->bufferIndex - nfft + i, audioInput->bufferSizeSamples);
         audioInput->windowedAudioFrame[i] = audioInput->windowingFunction[i] * audioInput->audioBuffer[ind];
     }
 
-    /* execute the planned FFT */
+    /* execute the configured FFT */
     fftwf_execute(audioInput->fftPlan);
 
     if (nf > nfft / 2) {
@@ -196,13 +257,13 @@ void AudioInput::setSamplingRate(unsigned int samplingRate) {
     AudioInput::samplingRate = samplingRate;
 }
 
-char *AudioInput::getAudioBufferChunk() const {
-    return audioBufferChunk;
-}
-
-void AudioInput::setAudioBufferChunk(char *audioBufferChunk) {
-    AudioInput::audioBufferChunk = audioBufferChunk;
-}
+//char *AudioInput::getAudioBufferChunk() const {
+//    return audioBufferChunk;
+//}
+//
+//void AudioInput::setAudioBufferChunk(char *audioBufferChunk) {
+//    AudioInput::audioBufferChunk = audioBufferChunk;
+//}
 
 int AudioInput::getBufferIndex() const {
     return bufferIndex;

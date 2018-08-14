@@ -28,7 +28,14 @@ public:
   /**
    * Constructor
    */
-  PortAudio();
+  PortAudio(int);
+
+  /**
+   * Cony constructor
+   */
+  PortAudio(const PortAudio&);
+
+  PortAudio& operator=(const PortAudio&);
 
   /**
    * Closes the audio capture stream and de-allocates any dynamic memory.
@@ -53,6 +60,8 @@ private:
      * Audio stream pointer.
      */
     PaStream *stream;
+
+    int requestedInputDeviceId;
 
 };
 #endif /* OPENGL_SPECTROGRAM_PORTAUDIOINTERFACE_HPP */

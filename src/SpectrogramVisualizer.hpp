@@ -61,7 +61,10 @@ public:
     /**
      * Overloaded constructor to initialize various member parameters.
      */
-    SpectrogramVisualizer(int);
+    SpectrogramVisualizer(int, int);
+
+    SpectrogramVisualizer(const SpectrogramVisualizer&);
+    SpectrogramVisualizer& operator=(const SpectrogramVisualizer&);
 
     /**
      * Empty destructor.

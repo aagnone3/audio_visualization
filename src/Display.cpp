@@ -17,9 +17,10 @@ Display::Display(int argc, char** argv, int screenMode)
     glutEnterGameMode();  /* starts fullscreen game mode */
   }
   else {
-    glutInitWindowSize(1024, 768);  // window same bufferSizeFrames as XGA
+    glutInitWindowSize(1280, 768);
+    //glutInitWindowSize(1024, 768);  // window same bufferSizeFrames as XGA
     int mainWindow = glutCreateWindow(TITLE);
-    //  glutFullScreen();    // maximizes window, but is not game mode
+    //glutFullScreen();    // maximizes window, but is not game mode
   }
 
   glutDisplayFunc(Display::display);
@@ -73,8 +74,7 @@ void Display::display()
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   std::for_each(graphicsItems.begin(), graphicsItems.end(), [&](auto item) { item->display(); });
-   glFinish();   // wait for all gl commands to complete
-
+  glFinish();   // wait for all gl commands to complete
   glutSwapBuffers(); // for this to WAIT for vSync, need enable in NVIDIA OpenGL
 }
 

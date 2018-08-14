@@ -4,11 +4,13 @@
 
 #include "PortAudio.hpp"
 
-PortAudio::PortAudio()
+PortAudio::PortAudio(int requestedInputDeviceId)
   : AudioInput()
 {
+    this->requestedInputDeviceId = requestedInputDeviceId;
     samplingRate = 44100;
     samplingPeriod = 1.0f/samplingRate;
+    //stream = nullptr;
     bufferMemorySeconds = 5;
     bufferSizeSamples = bufferMemorySeconds * samplingRate;
     
@@ -22,14 +24,28 @@ PortAudio::PortAudio()
     }
 }
 
+PortAudio::PortAudio(const PortAudio& other) {
+    this->stream = other.stream;
+    this->requestedInputDeviceId = other.requestedInputDeviceId;
+}
+
+PortAudio& PortAudio::operator=(const PortAudio& other)
+{
+    this->stream = other.stream;
+    this->requestedInputDeviceId = other.requestedInputDeviceId;
+
+    return *this;
+}
+
 PortAudio::~PortAudio() {
-    delete stream;
+    //delete stream;
 }
 
 int PortAudio::audioIn(const void* inputBuffer, void* outputBuffer, unsigned long numSamples,
                        const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags,
                        void* customData)
 {
+    //Log::getInstance()->logger() << "audioIn()" << std::endl;
     PortAudio *instance = (PortAudio*)customData;
     const SAMPLE *in = (SAMPLE*)inputBuffer;
     int index;
@@ -52,7 +68,7 @@ int PortAudio::audioIn(const void* inputBuffer, void* outputBuffer, unsigned lon
     else
     {
         /* non-silence */
-//        Log::getInstance()->logger() << in[numSamples - 1] << std::endl;
+        //Log::getInstance()->logger() << in[numSamples - 1] << std::endl;
         for (int i = 0; i < numSamples; ++i)
         {
             index = mod(instance->bufferIndex + i, instance->bufferSizeSamples);
@@ -63,30 +79,29 @@ int PortAudio::audioIn(const void* inputBuffer, void* outputBuffer, unsigned lon
     instance->bufferIndex = mod(instance->bufferIndex + numSamples, instance->bufferSizeSamples);
     computeSpectrogramSlice(instance);
     
-//    Log::getInstance()->logger() << "Buffer Index: " << instance->bufferIndex << std::endl;
-//    Log::getInstance()->logger() << "# Samples: " << numSamples << ", Size: " << instance->bufferSizeSamples << std::endl;
+    //Log::getInstance()->logger() << "Buffer Index: " << instance->bufferIndex << std::endl;
+    //Log::getInstance()->logger() << "# Samples: " << numSamples << ", Size: " << instance->bufferSizeSamples << std::endl;
     
-    return paContinue;
+    return instance->quit ? paComplete : paContinue;
 }
 
 void PortAudio::quitNow()
 {
-    Log::getInstance()->logger() << "Hay2" << std::endl;
+    Log::getInstance()->logger() << "Quitting." << std::endl;
     /* raise the quit flag to signal to the audio capture thread to stop polling for audio */
     quit = true;
 
     /* close the stream */
+    Log::getInstance()->logger() << "Closing stream." << std::endl;
     PaError err;
     err = Pa_CloseStream(stream);
-    Log::getInstance()->logger() << "Closing stream." << std::endl;
-    // TODO this is throwing Invalid stream pointer?
-//    if (err != paNoError) {
-//        Log::getInstance()->logger() << "PortAudio stream closing error: " << Pa_GetErrorText(err) << std::endl;
-//    }
+    if (err != paNoError) {
+        Log::getInstance()->logger() << "PortAudio stream close error: " << Pa_GetErrorText(err) << std::endl;
+    }
     
     /* terminate portaudio */
-    err = Pa_Terminate();
     Log::getInstance()->logger() << "Terminating PortAudio." << std::endl;
+    err = Pa_Terminate();
     if (err != paNoError) {
         Log::getInstance()->logger() << "PortAudio termination error: " << Pa_GetErrorText(err) << std::endl;
     }
@@ -99,35 +114,37 @@ int PortAudio::startCapture()
     err = Pa_Initialize();
     if (err != paNoError) {
         Log::getInstance()->logger() << "PortAudio initialization error: " << Pa_GetErrorText(err) << std::endl;
+        return 1;
     }
+
+    Log::getInstance()->logger() << "Opening input stream for device #" << requestedInputDeviceId << std::endl;
+
+    /* initialize and populate desired input stream parameters */
+    PaStreamParameters inputParams;
+    const PaDeviceInfo *deviceInfo;
+    bzero(&inputParams, sizeof(inputParams));
+    deviceInfo = Pa_GetDeviceInfo(requestedInputDeviceId);
+    inputParams.channelCount = 1;//deviceInfo->maxInputChannels;
+    inputParams.sampleFormat = paFloat32;
+    inputParams.suggestedLatency = deviceInfo->defaultLowInputLatency;
+    inputParams.hostApiSpecificStreamInfo = NULL;
+
+    err = Pa_OpenStream(
+            &stream,
+            &inputParams,
+            NULL,
+            44100,
+            paFramesPerBufferUnspecified,
+            paNoFlag,
+            audioIn,
+            (void*)this
+    );
     
-    /* get number of devices available */
-    int numDevices = Pa_GetDeviceCount();
-    Log::getInstance()->logger() << "Number of audio devices discovered: " << numDevices << std::endl;
-
-
-    /* try to open the default audio stream */
-    err = Pa_OpenDefaultStream(&stream,
-                               2, /* stereo input */
-                               0, /* no output channels (otherwise 1 or 2) */
-                               paFloat32,
-                               samplingRate,
-                               paFramesPerBufferUnspecified,
-                               audioIn,
-                               (void*)this);
-    /* if opening the default stream fails, give the user device info */
+    /* TODO if opening the default stream fails, give the user device info */
     if (err != paNoError) {
         Log::getInstance()->logger() << "PortAudio error opening default stream: " << Pa_GetErrorText(err) << std::endl;
 
-        const PaDeviceInfo *deviceInfo;
-        for (int i = 0; i < numDevices; ++i) {
-            deviceInfo = Pa_GetDeviceInfo(i);
-            Log::getInstance()->logger() << "Device: " << deviceInfo->name
-                                         << std::endl << "Max Input: " << deviceInfo->maxInputChannels
-                                         << std::endl << "Max Output: " << deviceInfo->maxOutputChannels << std::endl;
-
-        }
-
+        /* TODO */
         return 1;
     }
 
@@ -141,4 +158,3 @@ int PortAudio::startCapture()
     Log::getInstance()->logger() << "Successfully starting sampling audio." << std::endl;
     return 0;
 }
-

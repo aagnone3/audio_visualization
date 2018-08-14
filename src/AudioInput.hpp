@@ -41,6 +41,9 @@ public:
    */
   AudioInput();
 
+  AudioInput(const AudioInput&);
+  AudioInput& operator=(const AudioInput&);
+
   /**
    * Destructor de-allocates all dynamic memory and joins the audio retrieval thread.
    */
@@ -90,7 +93,7 @@ protected:
   /**
    * Raw data from the audio buffer for a PCM read of 1 period.
    */
-  char* audioBufferChunk;
+  //char* audioBufferChunk;
 
   /**
    * Float representation of raw data from the audio buffer for a PCM read of 1 period.
@@ -172,7 +175,7 @@ protected:
   /**
    * Thread used to asynchronously capture audio data into audioBuffer.
    */
-  std::unique_ptr<std::thread> captureThread;
+  //std::unique_ptr<std::thread> captureThread;
 
 /* accessors (TODO are these necessary?) */
 public:
@@ -234,9 +237,9 @@ public:
 
   void setSamplingRate(unsigned int samplingRate);
 
-  char* getAudioBufferChunk() const;
+  //char* getAudioBufferChunk() const;
 
-  void setAudioBufferChunk(char* audioBufferChunk);
+  //void setAudioBufferChunk(char* audioBufferChunk);
 
   int getBufferIndex() const;
 
