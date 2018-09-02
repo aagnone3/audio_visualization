@@ -49,12 +49,14 @@ SpectrogramVisualizer::SpectrogramVisualizer(int scrollFactor, int requestedInpu
     OUT("Highest Frequency: " << highestFrequency);
 
     specId = 7;
+#ifdef DISPLAY_SPECTROGRAM
     glGenTextures(14, &specId);
     glBindTexture(GL_TEXTURE_2D, specId);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+#endif
 
     /* notify the AudioInput instance that it should start capturing audio */
     if(audioInput->startCapture() != 0) {
@@ -128,6 +130,7 @@ SpectrogramVisualizer::~SpectrogramVisualizer() {
 }
 
 void SpectrogramVisualizer::plotTimeDomain() {
+    float maxAmplitude = 0.3;  // TODO instance variable
     float lookbackSeconds = 0.1;    // only show the most recent number of seconds
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_BLEND);
@@ -136,11 +139,11 @@ void SpectrogramVisualizer::plotTimeDomain() {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix(); // use modelview matrix to transform [-lookbackSeconds,0]x[-1,1] somewhere
     glTranslatef(0.98, 0.1, 0);
-    glScalef(2.0, 0.1, 1.0);  // x-scale for time-units, y-scale is 1
+    glScalef(2.0, maxAmplitude, 1.0);  // x-scale for time-units, y-scale is 1
 
     /* draw axes */
     char xLabel[] = "t(s)", yLabel[] = "";
-    drawAxes(-lookbackSeconds, 0, -1.0, 1.0, 1, 1, xLabel, yLabel);
+    drawAxes(-lookbackSeconds, 0, -maxAmplitude, maxAmplitude, 1, 1, xLabel, yLabel);
 
     /* draw time domain signal */
     glColor4f(0.4, 1.0, 0.6, 1);
@@ -155,7 +158,7 @@ void SpectrogramVisualizer::plotTimeDomain() {
     float x = -lookbackSeconds;
     float maxSample = -1e6, curSample;
     for (int i = bufferIndex - lookbackSamples; i < bufferIndex; i++) {
-        curSample = audioBuffer[mod(i, bufferSizeSamples)];
+        curSample = std::min(maxAmplitude, audioBuffer[mod(i, bufferSizeSamples)]);
         glVertex2f(
             x,
             curSample
@@ -168,10 +171,9 @@ void SpectrogramVisualizer::plotTimeDomain() {
 }
 
 void SpectrogramVisualizer::plotSpectralMagnitude() {
-    glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0.05, 0.1, 0);
-    glScalef(0.7f / highestFrequency, 0.0015, 1.0);  // x-scale for freq-units, y-scale for dB
+    glScalef(0.7f / AudioInput::N_FREQUENCIES, 0.0015, 1.0);
 
     /* lines showing spectrogram color range */
     // glColor4f(0.5, 0.4, 0.2, 1);
@@ -188,18 +190,25 @@ void SpectrogramVisualizer::plotSpectralMagnitude() {
     /* plot all of the values */
     glColor4f(1.0, 0.8, 0.3, 1);
     float *spectrogramSlice = audioInput->getSpectrogramSlice();
+    //OUT("hzPerPixelX: " << hzPerPixelX);
     glBegin(GL_LINE_STRIP);
         for (int i = 0; i < AudioInput::N_FREQUENCIES; i++) {
             glVertex2f(
-                i * hzPerPixelX * 0.7f,
+                //i * hzPerPixelX,
+                i,
                 20 * (float) log10((double) spectrogramSlice[i])
             );
         }
     glEnd();
+    glPopMatrix();
 
     /* axis labels */
+    glPushMatrix();
+    glTranslatef(0.05, 0.1, 0);
     char xLabel[] = "f(Hz)", yLabel[] = "I(dB)";
-    drawAxes(EPSILON, highestFrequency, -50, 50, 1.0, 1.0, xLabel, yLabel);
+    //glScalef(AudioInput::N_FREQUENCIES / 0.7f, 1.0, 1.0);
+    glScalef(0.7f / highestFrequency, 0.0015, 1.0);
+    //drawAxes(EPSILON, highestFrequency, -50, 50, 1.0, 1.0, xLabel, yLabel);
     glPopMatrix();
 }
 
@@ -325,15 +334,16 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
         glVertex2f(xEnd, yEnd);
         glVertex2f(xStart, yEnd);
     glEnd();
-    glColor4f(0.7, 1.0, 1.0, 1);
 
     /* draw axis labels */
     Display::smallText(xEnd + 8 * xPixelSize, yStart - 8 * yPixelSize, xLabel);
     Display::smallText(xStart - 8 * xPixelSize, yEnd + 8 * yPixelSize, yLabel);
 
     /* draw x axis ticks */
+    float deltaY = 0.02f * (yEnd - yStart) / yFudgeFactor;
     float xTickY2 = yStart;
-    float xTickY1 = xTickY2 - 0.02f * (yEnd - yStart) / yFudgeFactor;
+    float xTickY1 = yStart - deltaY;
+    glColor4f(0.7, 1.0, 1.0, 1);
     glBegin(GL_LINES);
         nTicks = chooseTics(xStart, xEnd - xStart, xFudgeFactor, ticks);
         for (i = 0; i < nTicks; ++i) {
@@ -345,7 +355,11 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
     /* draw x axis values */
     for (i = 0; i < nTicks; ++i) {
         sprintf(label, "%.6g", ticks[i]);
-        Display::smallText((ticks[i] - 4 * strlen(label) * xPixelSize), (xTickY1 - 12 * yPixelSize), label);
+        Display::smallText(
+                (ticks[i] - 3 * strlen(label) * xPixelSize),
+                (xTickY1 - 12 * yPixelSize),
+                label
+        );
     }
 
     /* draw y axis ticks */
@@ -461,16 +475,29 @@ void SpectrogramVisualizer::display() {
     glPopMatrix();
     glColor4f(0.7, 1.0, 1.0, 1);
 #endif
-    plotTimeDomain();
-    plotSpectralMagnitude();
-    plotSpectrogram();
-    displayText();
 
+#ifdef DISPLAY_TIME
+    plotTimeDomain();
+#endif
+
+#ifdef DISPLAY_SPECMAG
+    plotSpectralMagnitude();
+#endif
+
+#ifdef DISPLAY_SPECTROGRAM
+    plotSpectrogram();
     scrollSpectrogram();
     ++scrollCount;
     if (scrollCount == SpectrogramVisualizer::scrollFactor) {
         scrollCount = 0;
-    }}
+    }
+#endif
+
+#ifdef DISPLAY_TEXT
+    displayText();
+#endif
+
+}
 
 void SpectrogramVisualizer::displayText() {
     glEnable(GL_BLEND); // glBlendFunc (GL_ONE,GL_ZERO); // overwrite entirely
@@ -584,7 +611,9 @@ void SpectrogramVisualizer::reshape(int w, int h) {
     viewportSize[0] = w;
     viewportSize[1] = h;
 
-    hzPerPixelX = highestFrequency / w;
+    //OUT("Reshaping to width " << w << ", highestFrequency: " << highestFrequency);
+    hzPerPixelX = 1.0f / AudioInput::N_FREQUENCIES;
+    //hzPerPixelX = highestFrequency / w;
     hzPerPixelY = highestFrequency / h;
 }
 

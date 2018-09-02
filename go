@@ -1,4 +1,5 @@
 #!/bin/bash
+[[ ! -d build ]] && mkdir build
 pushd build
 cmake ..
 make
