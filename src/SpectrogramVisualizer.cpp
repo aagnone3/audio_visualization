@@ -208,7 +208,7 @@ void SpectrogramVisualizer::plotSpectralMagnitude() {
     char xLabel[] = "f(Hz)", yLabel[] = "I(dB)";
     //glScalef(AudioInput::N_FREQUENCIES / 0.7f, 1.0, 1.0);
     glScalef(0.7f / highestFrequency, 0.0015, 1.0);
-    //drawAxes(EPSILON, highestFrequency, -50, 50, 1.0, 1.0, xLabel, yLabel);
+    drawAxes(EPSILON, highestFrequency, -50, 50, 1.0, 1.0, xLabel, yLabel);
     glPopMatrix();
 }
 
@@ -323,6 +323,7 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
         glVertex2f(xEnd, yStart);
     glEnd();
 
+#ifdef DEBUG
     /* for sanity checking, draw boundary lines for the plot area in red */
     glColor4f(1.0, 0.0, 0.0, 1);
     glLineWidth(1);
@@ -334,6 +335,8 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
         glVertex2f(xEnd, yEnd);
         glVertex2f(xStart, yEnd);
     glEnd();
+    glColor4f(0.7, 1.0, 1.0, 1);
+#endif
 
     /* draw axis labels */
     Display::smallText(xEnd + 8 * xPixelSize, yStart - 8 * yPixelSize, xLabel);
@@ -343,7 +346,6 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
     float deltaY = 0.02f * (yEnd - yStart) / yFudgeFactor;
     float xTickY2 = yStart;
     float xTickY1 = yStart - deltaY;
-    glColor4f(0.7, 1.0, 1.0, 1);
     glBegin(GL_LINES);
         nTicks = chooseTics(xStart, xEnd - xStart, xFudgeFactor, ticks);
         for (i = 0; i < nTicks; ++i) {
@@ -365,7 +367,7 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
     /* draw y axis ticks */
     nTicks = chooseTics(yStart, yEnd - yStart, yFudgeFactor, ticks);
     float topTickY = xStart;
-    float bottomTickY = topTickY - 0.02f * (xEnd - xStart) / xFudgeFactor;
+    float bottomTickY = topTickY - 0.01f * (xEnd - xStart) / xFudgeFactor;
     glBegin(GL_LINES);
     for (i = 0; i < nTicks; ++i) {
         glVertex2d(bottomTickY, ticks[i]);
@@ -376,7 +378,11 @@ void SpectrogramVisualizer::drawAxes(float xStart, float xEnd, float yStart, flo
     /* draw y axis values */
     for (i = 0; i < nTicks; ++i) {
         sprintf(label, "%.6g", ticks[i]);
-        Display::smallText((bottomTickY - 8 * strlen(label) * xPixelSize), (ticks[i] - 4 * yPixelSize), label);
+        Display::smallText(
+            (bottomTickY - 4 * strlen(label) * xPixelSize),
+            (ticks[i] - 1 * yPixelSize),
+            label
+        );
     }
 }
 

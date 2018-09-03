@@ -6,7 +6,7 @@
 #define FPS 60.0f
 
 /* binary flags */
-#define DEBUG 1
+//#define DEBUG 1
 //#define DISPLAY_TIME 1
 #define DISPLAY_SPECMAG 1
 #define DISPLAY_SPECTROGRAM 1
