@@ -1,5 +1,5 @@
 # etc
-# .idea/*
+.idea/*
 
 # Prerequisites
 *.d
