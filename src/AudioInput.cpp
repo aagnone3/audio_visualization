@@ -90,7 +90,6 @@ AudioInput& AudioInput::operator=(const AudioInput& other)
 
 AudioInput::~AudioInput() {
     fftwf_destroy_plan(fftPlan);
-    //delete[] audioBufferChunk;
     delete[] audioBuffer;
     delete[] spectrogramSlice;
     delete[] windowedAudioFrame;
@@ -256,14 +255,6 @@ unsigned int AudioInput::getSamplingRate() const {
 void AudioInput::setSamplingRate(unsigned int samplingRate) {
     AudioInput::samplingRate = samplingRate;
 }
-
-//char *AudioInput::getAudioBufferChunk() const {
-//    return audioBufferChunk;
-//}
-//
-//void AudioInput::setAudioBufferChunk(char *audioBufferChunk) {
-//    AudioInput::audioBufferChunk = audioBufferChunk;
-//}
 
 int AudioInput::getBufferIndex() const {
     return bufferIndex;

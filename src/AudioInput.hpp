@@ -91,11 +91,6 @@ protected:
   int bufferSizeSamples;
 
   /**
-   * Raw data from the audio buffer for a PCM read of 1 period.
-   */
-  //char* audioBufferChunk;
-
-  /**
    * Float representation of raw data from the audio buffer for a PCM read of 1 period.
    */
   float* audioBuffer;
@@ -236,10 +231,6 @@ public:
   unsigned int getSamplingRate() const;
 
   void setSamplingRate(unsigned int samplingRate);
-
-  //char* getAudioBufferChunk() const;
-
-  //void setAudioBufferChunk(char* audioBufferChunk);
 
   int getBufferIndex() const;
 
