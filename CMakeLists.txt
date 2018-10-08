@@ -23,11 +23,12 @@ set(PORTAUDIO "/Users/aagnone/github/brew/brew/Cellar/portaudio/19.6.0")
 set(FFTW "/Users/aagnone/github/brew/brew/Cellar/fftw/3.3.6-pl2")
 set(YAML "/Users/aagnone/github/brew/brew/Cellar/yaml-cpp/0.6.2")
 
-# ================= Dependencies =================
+# ================= Executables =================
 add_executable(opengl_spectrogram ${SOURCE_FILES})
 add_executable(get_devices_info ${DIR_UTIL}/showAllDeviceInfo.cpp)
 add_executable(test_device ${DIR_UTIL}/testInput.cpp)
 
+# ================= Dependencies =================
 # OpenGL/GLUT
 find_package(OpenGL REQUIRED)
 #find_package(GL REQUIRED)  # linux
