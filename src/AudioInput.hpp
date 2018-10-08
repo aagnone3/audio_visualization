@@ -41,6 +41,9 @@ public:
    */
   AudioInput();
 
+  AudioInput(const AudioInput&);
+  AudioInput& operator=(const AudioInput&);
+
   /**
    * Destructor de-allocates all dynamic memory and joins the audio retrieval thread.
    */
@@ -57,7 +60,7 @@ public:
    *    1: Hann window.
    *    2: truncated Gaussian window.
    */
-  void setupWindowFunc(float* window, int windowSize, unsigned int windowType);
+  void initializeWindow(float* window, int windowSize, unsigned int windowType);
 
   /**
    * Obtains a windowed spectrogram of the audio stream.
@@ -67,9 +70,14 @@ public:
   static void computeSpectrogramSlice(AudioInput* audioInput);
 
   /**
-   * Defines how the instance stops the audio stream.
+   * Defines how the instance stops capturing the audio stream.
    */
   virtual void quitNow() = 0;
+    
+    /**
+     * Defines how the instance starts capturing the audio stream.
+     */
+    virtual int startCapture() = 0;
 
 protected:
   /**
@@ -81,11 +89,6 @@ protected:
    * Size of the audio buffer that ALSA reports during device intiialization, in number of samples.
    */
   int bufferSizeSamples;
-
-  /**
-   * Raw data from the audio buffer for a PCM read of 1 period.
-   */
-  char* audioBufferChunk;
 
   /**
    * Float representation of raw data from the audio buffer for a PCM read of 1 period.
@@ -106,6 +109,11 @@ protected:
    * Window coefficients to be applied to each audio buffer frame.
    */
   float* windowingFunction;
+
+    /**
+     * TODO
+     */
+    float* fftFrame;
 
   /**
    * Resulting frame of audio data after applying the window coefficients in windowingFunction.
@@ -162,7 +170,7 @@ protected:
   /**
    * Thread used to asynchronously capture audio data into audioBuffer.
    */
-  std::unique_ptr<std::thread> captureThread;
+  //std::unique_ptr<std::thread> captureThread;
 
 /* accessors (TODO are these necessary?) */
 public:
@@ -223,10 +231,6 @@ public:
   unsigned int getSamplingRate() const;
 
   void setSamplingRate(unsigned int samplingRate);
-
-  char* getAudioBufferChunk() const;
-
-  void setAudioBufferChunk(char* audioBufferChunk);
 
   int getBufferIndex() const;
 

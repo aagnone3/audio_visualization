@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <algorithm>
-#include <GL/glut.h>
+#include <GLUT/glut.h>
 #include "AudioInput.hpp"
 #include "GraphicsItem.hpp"
 

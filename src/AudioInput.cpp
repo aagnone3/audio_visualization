@@ -1,224 +1,289 @@
 #include "AudioInput.hpp"
-#include "ALSA.hpp"
-#include <boost/log/trivial.hpp>
 
 /* static member declarations and initializations */
 const unsigned int AudioInput::VERBOSITY = 2;
-const unsigned int AudioInput::N_FREQUENCIES = 560;
-const unsigned int AudioInput::N_TIME_WINDOWS = 940;
+// TODO needs to be dynamically set to fftLength / 2 once class organization is cleaned up.
+const unsigned int AudioInput::N_FREQUENCIES = 2048; // 560
+const unsigned int AudioInput::N_TIME_WINDOWS = 940; // default: 940windows @2048samples (46ms) => 43.65s
 
-AudioInput::AudioInput()
-{
-  quit = false;
-  pause = false;
+AudioInput::AudioInput() {
+    quit = false;
+    pause = false;
 
-  // TODO change how class receives value for windowSizeExponent
-  unsigned int twowinsize = 13; // 8192 samples (around 0.19 sec). Remains fixed
-  fftLength = (unsigned int) 1 << twowinsize;
-  windowedAudioFrame = new float[fftLength];
+    bufferIndex = -2;
 
-  windowingFunction = new float[fftLength];
-  setupWindowFunc(windowingFunction, fftLength, 2);
-  /* set up in-place single-precision real-to-half-complex FFT */
-  fftPlan = fftwf_plan_r2r_1d(fftLength, windowedAudioFrame, windowedAudioFrame, FFTW_R2HC, FFTW_MEASURE);
-  spectrogramSlice = new float[N_FREQUENCIES];
-  spectrogramSize = N_FREQUENCIES*N_TIME_WINDOWS;
+    // TODO change how class receives value for windowSizeExponent
+    unsigned int twowinsize = 12;
+    fftLength = (unsigned int) 1 << twowinsize;
+    Log::getInstance()->logger() << "FFT Length: " << fftLength << std::endl;
+    windowedAudioFrame = new float[fftLength];
+    fftFrame = new float[fftLength];
+    windowingFunction = new float[fftLength];
+    initializeWindow(windowingFunction, fftLength, 2);
+
+    /* set up in-place single-precision real-to-half-complex FFT */
+    fftPlan = fftwf_plan_r2r_1d(fftLength, windowedAudioFrame, fftFrame, FFTW_R2HC, FFTW_MEASURE);
+    spectrogramSlice = new float[N_FREQUENCIES];
+    spectrogramSize = N_FREQUENCIES * N_TIME_WINDOWS;
+    Log::getInstance()->logger() << "Finished creating AudioInput" << std::endl;
 }
 
-AudioInput::~AudioInput() {}
-
-void AudioInput::setupWindowFunc(float* window, int windowSize, unsigned int windowType)
+AudioInput::AudioInput(const AudioInput& other)
 {
-  float W;
-  int i;
+    this->bufferSizeFrames = other.bufferSizeFrames;
+    this->bufferSizeSamples = other.bufferSizeSamples;
+    this->bufferIndex = other.bufferIndex;
+    this->spectrogramSize = other.spectrogramSize;
+    this->fftLength = other.fftLength;
+    this->bufferMemorySeconds = other.bufferMemorySeconds;
+    this->nChannels = other.nChannels;
+    this->samplingRate = other.samplingRate;
+    this->samplingPeriod = other.samplingPeriod;
+    this->quit = other.quit;
+    this->pause = other.pause;
+    this->fftPlan = other.fftPlan;
+    //*captureThread = *other.captureThread;
+    windowedAudioFrame = new float[fftLength];
 
-  switch (windowType) {
-  case 0:
-    /* no window (crappy frequency spillover) */
-    for (i = 0; i<windowSize; ++i)
-      window[i] = 1.0F;
-    break;
-  case 1:
-    /* Hann window (C^1 cont, so third-order tails) */
-    W = windowSize/2.0F;
-    for (i = 0; i<windowSize; ++i)
-      window[i] = (float) (1.0f+cos(M_PI*(i-W)/W))/2;
-    break;
-  case 2:
-    /* truncated Gaussian window (Gaussian tails + exp small error) */
-    /* width: keep small truncation but wide to not waste FFT */
-    W = windowSize/5.0F;
-    for (i = 0; i<windowSize; ++i) {
-      window[i] = (float) exp(-(i-windowSize/2)*(i-windowSize/2)/(2*W*W));
+    spectrogramSlice = new float[N_FREQUENCIES];
+    for (int i = 0; i < bufferSizeSamples; i++) this->audioBuffer[i] = other.audioBuffer[i];
+
+    for (int i = 0; i < N_FREQUENCIES; i++) this->spectrogramSlice[i] = other.spectrogramSlice[i];
+
+    windowingFunction = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->windowingFunction[i] = other.windowingFunction[i];
+
+    fftFrame = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->fftFrame[i] = other.fftFrame[i];
+}
+
+AudioInput& AudioInput::operator=(const AudioInput& other)
+{
+    this->bufferSizeFrames = other.bufferSizeFrames;
+    this->bufferSizeSamples = other.bufferSizeSamples;
+    this->bufferIndex = other.bufferIndex;
+    this->spectrogramSize = other.spectrogramSize;
+    this->fftLength = other.fftLength;
+    this->bufferMemorySeconds = other.bufferMemorySeconds;
+    this->nChannels = other.nChannels;
+    this->samplingRate = other.samplingRate;
+    this->samplingPeriod = other.samplingPeriod;
+    this->quit = other.quit;
+    this->pause = other.pause;
+    this->fftPlan = other.fftPlan;
+    //*captureThread = *other.captureThread;
+    windowedAudioFrame = new float[fftLength];
+
+    spectrogramSlice = new float[N_FREQUENCIES];
+    for (int i = 0; i < bufferSizeSamples; i++) this->audioBuffer[i] = other.audioBuffer[i];
+
+    for (int i = 0; i < N_FREQUENCIES; i++) this->spectrogramSlice[i] = other.spectrogramSlice[i];
+
+    windowingFunction = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->windowingFunction[i] = other.windowingFunction[i];
+
+    fftFrame = new float[fftLength];
+    for (int i = 0; i < fftLength; i++) this->fftFrame[i] = other.fftFrame[i];
+
+    return *this;
+}
+
+AudioInput::~AudioInput() {
+    fftwf_destroy_plan(fftPlan);
+    delete[] audioBuffer;
+    delete[] spectrogramSlice;
+    delete[] windowedAudioFrame;
+    delete[] windowingFunction;
+}
+
+void AudioInput::initializeWindow(float *window, int windowSize, unsigned int windowType) {
+    float W;
+    int i;
+
+    switch (windowType) {
+        case 0:
+            /* no window (crappy frequency spillover) */
+            for (i = 0; i < windowSize; ++i)
+                window[i] = 1.0F;
+            break;
+        case 1:
+            /* Hann window (C^1 cont, so third-order tails) */
+            W = windowSize / 2.0F;
+            for (i = 0; i < windowSize; ++i)
+                window[i] = (float) (1.0f + cos(M_PI * (i - W) / W)) / 2;
+            break;
+        case 2:
+            /* truncated Gaussian window (Gaussian tails + exp small error) */
+            /* width: keep small truncation but wide to not waste FFT */
+            W = windowSize / 5.0F;
+            for (i = 0; i < windowSize; ++i) {
+                window[i] = (float) exp(-(i - windowSize / 2) * (i - windowSize / 2) / (2 * W * W));
+            }
+            break;
+        default:
+            fprintf(stderr, "unknown windowType!\n");
     }
-    std::cout << W << std::endl;
-    break;
-  default:
-    fprintf(stderr, "unknown windowType!\n");
-  }
 }
 
-void AudioInput::computeSpectrogramSlice(AudioInput* audioInput)
-{
-  int N = audioInput->fftLength;             // transform length
-  int nf = audioInput->N_FREQUENCIES;              // # freqs to fill in powerspec
+void AudioInput::computeSpectrogramSlice(AudioInput *audioInput) {
+    int nfft = audioInput->fftLength;             // transform length
+    int nf = audioInput->N_FREQUENCIES;              // # freqs to fill in powerspec
+    int ind;
 
-  /* copy last N samples & multiply by the window */
-  for (int i = 0; i<N; ++i) {
-    audioInput->windowedAudioFrame[i] = audioInput->windowingFunction[i]*audioInput->audioBuffer[mod(audioInput->bufferIndex-N+i, audioInput->bufferSizeSamples)];
-  }
-  /* execute the planned FFT */
-  fftwf_execute(audioInput->fftPlan);
+    /* copy the nfft most recent samples & multiply by the window */
+    //Log::getInstance()->logger() << "BufferSizeSamples: " << audioInput->bufferSizeSamples << std::endl;
+    for (int i = 0; i < nfft; ++i) {
+        ind = mod(audioInput->bufferIndex - nfft + i, audioInput->bufferSizeSamples);
+        audioInput->windowedAudioFrame[i] = audioInput->windowingFunction[i] * audioInput->audioBuffer[ind];
+    }
 
-  if (nf>N/2) {
-    fprintf(stderr, "window too short cf n_f!\n");
-    return;
-  }
-  /* zero-frequency has no imaginary part */
-  audioInput->spectrogramSlice[0] = audioInput->windowedAudioFrame[0]*audioInput->windowedAudioFrame[0];
-  /* compute power spectrum from hc dft */
-  for (int i = 1; i<nf; ++i) {
-    audioInput->spectrogramSlice[i] =
-        audioInput->windowedAudioFrame[i]*audioInput->windowedAudioFrame[i]+audioInput->windowedAudioFrame[N-i]*audioInput->windowedAudioFrame[N-i];
-  }
+    /* execute the configured FFT */
+    fftwf_execute(audioInput->fftPlan);
+
+    if (nf > nfft / 2) {
+        fprintf(stderr, "window too short cf n_f!\n");
+        return;
+    }
+
+    /* zero-frequency has no imaginary part */
+    audioInput->spectrogramSlice[0] = audioInput->fftFrame[0] * audioInput->fftFrame[0];
+
+    /* compute power spectrum from hc dft */
+    for (int i = 1; i < nf; ++i) {
+        audioInput->spectrogramSlice[i] =
+                audioInput->fftFrame[i] * audioInput->fftFrame[i] +
+                audioInput->fftFrame[nfft - i] * audioInput->fftFrame[nfft - i];
+    }
 }
 
 const unsigned int AudioInput::getVERBOSITY() {
-  return VERBOSITY;
+    return VERBOSITY;
 }
 
 const unsigned int AudioInput::getN_FREQUENCIES() {
-  return N_FREQUENCIES;
+    return N_FREQUENCIES;
 }
 
 const unsigned int AudioInput::getN_TIME_WINDOWS() {
-  return N_TIME_WINDOWS;
+    return N_TIME_WINDOWS;
 }
 
-float* AudioInput::getAudioBuffer() const {
-  return audioBuffer;
+float *AudioInput::getAudioBuffer() const {
+    return audioBuffer;
 }
 
-void AudioInput::setAudioBuffer(float* audioBuffer) {
-  AudioInput::audioBuffer = audioBuffer;
+void AudioInput::setAudioBuffer(float *audioBuffer) {
+    AudioInput::audioBuffer = audioBuffer;
 }
 
-float* AudioInput::getSpectrogramSlice() const {
-  return spectrogramSlice;
+float *AudioInput::getSpectrogramSlice() const {
+    return spectrogramSlice;
 }
 
-void AudioInput::setSpectrogramSlice(float* spectrogramSlice) {
-  AudioInput::spectrogramSlice = spectrogramSlice;
+void AudioInput::setSpectrogramSlice(float *spectrogramSlice) {
+    AudioInput::spectrogramSlice = spectrogramSlice;
 }
 
-float* AudioInput::getWindowingFunction() const {
-  return windowingFunction;
+float *AudioInput::getWindowingFunction() const {
+    return windowingFunction;
 }
 
-void AudioInput::setWindowingFunction(float* windowingFunction) {
-  AudioInput::windowingFunction = windowingFunction;
+void AudioInput::setWindowingFunction(float *windowingFunction) {
+    AudioInput::windowingFunction = windowingFunction;
 }
 
 unsigned int AudioInput::getSpectrogramSize() const {
-  return spectrogramSize;
+    return spectrogramSize;
 }
 
 void AudioInput::setSpectrogramSize(unsigned int spectrogramSize) {
-  AudioInput::spectrogramSize = spectrogramSize;
+    AudioInput::spectrogramSize = spectrogramSize;
 }
 
 unsigned int AudioInput::getFftLength() const {
-  return fftLength;
+    return fftLength;
 }
 
 void AudioInput::setFftLength(unsigned int fftLength) {
-  AudioInput::fftLength = fftLength;
+    AudioInput::fftLength = fftLength;
 }
 
 float AudioInput::getBufferMemorySeconds() const {
-  return bufferMemorySeconds;
+    return bufferMemorySeconds;
 }
 
 void AudioInput::setBufferMemorySeconds(float bufferMemorySeconds) {
-  AudioInput::bufferMemorySeconds = bufferMemorySeconds;
+    AudioInput::bufferMemorySeconds = bufferMemorySeconds;
 }
 
 unsigned int AudioInput::getNChannels() const {
-  return nChannels;
+    return nChannels;
 }
 
 void AudioInput::setNChannels(unsigned int nChannels) {
-  AudioInput::nChannels = nChannels;
+    AudioInput::nChannels = nChannels;
 }
 
 float AudioInput::getSamplingPeriod() const {
-  return samplingPeriod;
+    return samplingPeriod;
 }
 
 void AudioInput::setSamplingPeriod(float samplingPeriod) {
-  AudioInput::samplingPeriod = samplingPeriod;
+    AudioInput::samplingPeriod = samplingPeriod;
 }
 
 bool AudioInput::isQuit() const {
-  return quit;
+    return quit;
 }
 
 void AudioInput::setQuit(bool quit) {
-  AudioInput::quit = quit;
+    AudioInput::quit = quit;
 }
 
 bool AudioInput::isPause() const {
-  return pause;
+    return pause;
 }
 
 void AudioInput::setPause(bool pause) {
-  AudioInput::pause = pause;
+    AudioInput::pause = pause;
 }
 
 unsigned int AudioInput::getSamplingRate() const {
-  return samplingRate;
+    return samplingRate;
 }
 
 void AudioInput::setSamplingRate(unsigned int samplingRate) {
-  AudioInput::samplingRate = samplingRate;
-}
-
-char* AudioInput::getAudioBufferChunk() const {
-  return audioBufferChunk;
-}
-
-void AudioInput::setAudioBufferChunk(char* audioBufferChunk) {
-  AudioInput::audioBufferChunk = audioBufferChunk;
+    AudioInput::samplingRate = samplingRate;
 }
 
 int AudioInput::getBufferIndex() const {
-  return bufferIndex;
+    return bufferIndex;
 }
 
 void AudioInput::setBufferIndex(int bufferIndex) {
-  AudioInput::bufferIndex = bufferIndex;
+    AudioInput::bufferIndex = bufferIndex;
 }
 
-float* AudioInput::getWindowedAudioFrame() const {
-  return windowedAudioFrame;
+float *AudioInput::getWindowedAudioFrame() const {
+    return windowedAudioFrame;
 }
 
-void AudioInput::setWindowedAudioFrame(float* windowedAudioFrame) {
-  AudioInput::windowedAudioFrame = windowedAudioFrame;
+void AudioInput::setWindowedAudioFrame(float *windowedAudioFrame) {
+    AudioInput::windowedAudioFrame = windowedAudioFrame;
 }
 
 unsigned long AudioInput::getBufferSizeFrames() const {
-  return bufferSizeFrames;
+    return bufferSizeFrames;
 }
 
 void AudioInput::setBufferSizeFrames(unsigned long bufferSizeFrames) {
-  AudioInput::bufferSizeFrames = bufferSizeFrames;
+    AudioInput::bufferSizeFrames = bufferSizeFrames;
 }
 
 int AudioInput::getBufferSizeSamples() const {
-  return bufferSizeSamples;
+    return bufferSizeSamples;
 }
 
 void AudioInput::setBufferSizeSamples(int bufferSizeSamples) {
-  AudioInput::bufferSizeSamples = bufferSizeSamples;
+    AudioInput::bufferSizeSamples = bufferSizeSamples;
 }
