@@ -1,5 +1,6 @@
 # etc
 .idea/*
+build/*
 
 # Prerequisites
 *.d
