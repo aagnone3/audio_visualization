@@ -1,11 +1,10 @@
 # configure.ac
-AC_INIT([audio_visualizazation], [0.1], [anthonyagnone@gmail.com])
+AC_INIT([audio_visualization], [0.1], [anthonyagnone@gmail.com])
 AM_INIT_AUTOMAKE
 
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-
 
 # tell `autoconf` about any depdencies the configure script itself has.
 # ex: C compiler --> AC_PROG_CC
