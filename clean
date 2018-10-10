@@ -1,0 +1,29 @@
+#!/bin/bash
+
+dirt=(
+    autom4te.cache
+	.deps/
+	Makefile
+	Makefile.in
+	aclocal.m4
+	audio_visualizazation-0.1.tar.gz
+	autom4te.cache/
+	compile
+	config.log
+	config.status
+	configure
+	depcomp
+	install-sh
+	missing
+	autoscan.log
+	bin/
+	clean.sh
+	src/.deps/
+	configure.scan
+	src/Makefile
+	src/Makefile.in
+)
+
+for fn in ${dirt[@]}; do
+    rm -rf $fn
+done
