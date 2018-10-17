@@ -3,9 +3,9 @@ BUILD_DIR ?= ${PWD}/build
 
 .PHONY: build
 build:
-	@if [[ -d ${BUILD_DIR} ]]; then rm -rf ${BUILD_DIR}; fi
+	@if [ -d ${BUILD_DIR} ]; then rm -rf ${BUILD_DIR}; fi
 	@mkdir ${BUILD_DIR}
-	@cd ${BUILD_DIR}; cmake ..; make; ctest
+	@cd ${BUILD_DIR}; cmake ..; make;
 
 .PHONY: install
 install: build
