@@ -1,5 +1,4 @@
 #include <iostream>
-#include <yaml.h>
 #include <portaudio.h>
 
 

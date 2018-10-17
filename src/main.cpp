@@ -1,20 +1,10 @@
-// glSpect - OpenGL real-time spectrogram
-// Alex Barnett 12/21/10, based on Luke Campagnola's nice 2005 glScope.
-// ahb@math.dartmouth.edu
-// Tweaked 10/13/11 for inverse video, etc.
-// 1/25/14 fix -EPIPE snd_pcm_readi() error. nchannels=2, windowingFunction=0 case, etc
-//        added colorByteMap to clean up color mapping; color map.
-// 1/17/16: freq indicator line via left-button
-
-/* Notes: be sure to set vSync wait in graphics card (eg NVIDIA) OpenGL settings
- */
-
 #include <algorithm>
-#include <yaml.h>
+#include "common.h"
 #include "AudioInput.hpp"
 #include "Display.hpp"
 #include "GraphicsItem.hpp"
 #include "SpectrogramVisualizer.hpp"
+#include "AudioVisualizationConfig.h"
 #include "Log.hpp"
 
 int screenMode;
@@ -22,24 +12,32 @@ unsigned int verbosity;
 int scrollFactor;
 
 const char* const helptext[] = {
-    "glSpect: real-time OpenGL spectrogram.  Anthony Agnone\n",
-    "Usage: glspect  [-f] [-v] [-sf <scroll_factor>] [-w <windowType>]\n\n",
-    "Command line arguments:\n",
-    "windowType = \t0 (no window)\n\t\t1 (Hann)\n\t\t2 (Gaussian trunc at +-4sigma) (default)\n",
-    "scroll_factor = 1,2,... # vSyncs (60Hz) to wait per scroll pixel (default 1)\n",
-    "Keys & mouseHandle: \tarrows or middle button drag - brightness/contrast\n",
+    "Real Time Audio Visualization\n",
+    "Author: Anthony Agnone\n\n",
+    "Usage: audio_visualization [-f] [-v] [-V] [-sf <scroll_factor>] [-w <windowType>]\n\n",
+    "\t[-f] enables full-screen-mode\n",
+    "\t[-v] print version and exit\n",
+    "\t[-V] set verbosity int\n",
+    "\t[-w] short-time window function type, default: 2\n",
+              "\t\t0: no window (or equivalently a rectangular window\n",
+              "\t\t1: Hann window\n",
+              "\t\t2: Gaussian truncated at +-4sigma)\n",
+    "\t\t[-sf] scroll_factor = 1,2,... # vSyncs (60Hz) to wait per scroll pixel (default 1)\n\n",
+    "Keys & Mouse Controls\n",
+    "\t\tarrows or middle button drag - brightness/contrast\n",
     "\t\tleft button shows horizontal frequency readoff line\n",
     "\t\tright button shows horizontal frequency readoff with multiples\n",
     "\t\ti - cycles through color maps (B/W, inverse B/W, color)\n",
     "\t\tq or Esc - quit\n",
-    "\t\t[ and ] - control horizontal scroll factor (samplingRate)\n",
-    NULL};
+    "\t\t[ and ] - control horizontal scroll factor (samplingRate)\n"
+};
 
 
 int getInputDeviceId(const char *fn)
 {
-    YAML::Node config = YAML::LoadFile(fn);
-    return config["device_id"].as<int>();
+    //YAML::Node config = YAML::LoadFile(fn);
+    //return config["device_id"].as<int>();
+    return 2;
 } 
 
 int main(int argc, char** argv)
@@ -54,8 +52,12 @@ int main(int argc, char** argv)
     if (!strcmp(argv[i], "-f")) {
       screenMode = 1;
     }
-    else if (!strcmp(argv[i], "-v")) {
+    else if (!strcmp(argv[i], "-V")) {
       verbosity = 1;
+    }
+    else if (!strcmp(argv[i], "-v")) {
+      fprintf(stdout, "Version: %d.%d\n\n", AudioVisualization_VERSION_MAJOR, AudioVisualization_VERSION_MINOR);
+      exit(1);
     }
     else if (!strcmp(argv[i], "-sf")) {
       sscanf(argv[++i], "%d", &scrollFactor);

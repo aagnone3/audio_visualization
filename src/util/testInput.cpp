@@ -1,5 +1,4 @@
 #include <iostream>
-#include <yaml.h>
 #include <portaudio.h>
 
 
@@ -13,8 +12,9 @@ int audioIn(const void* inputBuffer, void* outputBuffer, unsigned long numSample
 
 int get_device_id(const char *fn)
 {
-    YAML::Node config = YAML::LoadFile(fn);
-    return config["device_id"].as<int>();
+    //YAML::Node config = YAML::LoadFile(fn);
+    //return config["device_id"].as<int>();
+    return 2;
 } 
 
 void showDeviceInfo() {
