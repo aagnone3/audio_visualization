@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include <portaudio.h>
 
 
@@ -37,7 +38,7 @@ int stream_device_id(int device_id) {
     /* initialize and zero out the input parameters struct */
     PaStreamParameters inputParams;
     const PaDeviceInfo *deviceInfo;
-    bzero(&inputParams, sizeof(inputParams));
+    std::memset(&inputParams, 0, sizeof(inputParams));
 
     /* populate the input params */
     deviceInfo = Pa_GetDeviceInfo(device_id);

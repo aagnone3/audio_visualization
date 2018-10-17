@@ -8,7 +8,6 @@
 #ifndef OPENGL_SPECTROGRAM_SCENE_H
 #define OPENGL_SPECTROGRAM_SCENE_H
 
-#include <GLUT/glut.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -16,6 +15,7 @@
 #include <sys/time.h>
 #include <math.h>
 #include <fftw3.h>
+#include "common.h"
 #include "AudioInput.hpp"
 #include "PortAudio.hpp"
 #include "Display.hpp"
