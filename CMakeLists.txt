@@ -80,7 +80,6 @@ install(
 # testing
 # ============================
 include(CTest)
-#add_test(TestMain opengl_spectrogram)
 add_test(TestTestInput test_input)
 add_test(TestDeviceInfo device_info)
 
@@ -89,7 +88,7 @@ add_test(TestDeviceInfo device_info)
 # packaging
 # ============================
 include(InstallRequiredSystemLibraries)
-#set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/License.txt)
+set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
 set(CPACK_PACKAGE_VERSION_MAJOR ${AudioVisualization_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${AudioVisualization_VERSION_MINOR})
 include(CPack)
