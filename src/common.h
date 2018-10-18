@@ -15,7 +15,7 @@
 // OpenGL include paths by OS
 #ifdef __linux__
     #include "GL/glut.h"
-#elif defined(__unix__)
+#elif defined(__APPLE__)
     #include <GLUT/glut.h>
 #else
     #error "Not tested for Windows compatibility."
