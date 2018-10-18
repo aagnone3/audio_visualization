@@ -65,6 +65,8 @@ endforeach()
 install(
     TARGETS
         opengl_spectrogram
+        test_input
+        device_info
     DESTINATION
         bin
 )

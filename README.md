@@ -20,13 +20,21 @@ Original project: [Real-time OpenGL spectrogram by Alex Barnett](https://math.da
 
 # Building
 
-Compile via [CMake](https://cmake.org/cmake-tutorial/) as follows:
 ```bash
-mkdir build
-cd build
-cmake ..
-make
-./opengl_spectrogram
+make build
+build/opengl_spectrogram
+```
+
+# Installing
+```bash
+make install
+opengl_spectrogram
+```
+
+# Helpers
+```bash
+# show info regarding audio devices recognized by the OS
+device_info
 ```
 
 # Screenshot
