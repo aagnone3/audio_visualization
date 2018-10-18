@@ -3,6 +3,7 @@
 //
 
 #include "PortAudio.hpp"
+#include <cstring>
 
 PortAudio::PortAudio(int requestedInputDeviceId)
   : AudioInput()
@@ -122,7 +123,7 @@ int PortAudio::startCapture()
     /* initialize and populate desired input stream parameters */
     PaStreamParameters inputParams;
     const PaDeviceInfo *deviceInfo;
-    bzero(&inputParams, sizeof(inputParams));
+    memset(&inputParams, 0, sizeof(inputParams));
     deviceInfo = Pa_GetDeviceInfo(requestedInputDeviceId);
     inputParams.channelCount = 1;//deviceInfo->maxInputChannels;
     inputParams.sampleFormat = paFloat32;

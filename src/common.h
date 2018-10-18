@@ -12,6 +12,15 @@
 #define DISPLAY_SPECTROGRAM 1
 #define DISPLAY_TEXT 1
 
+// OpenGL include paths by OS
+#ifdef __linux__
+    #include "GL/glut.h"
+#elif defined(__APPLE__)
+    #include <GLUT/glut.h>
+#else
+    #error "Not tested for Windows compatibility."
+#endif
+
 using namespace std;
 template <typename T>
 void zeros(T* arr, int size) {

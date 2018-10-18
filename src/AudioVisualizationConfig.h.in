@@ -1,0 +1,3 @@
+// versioning
+#define AudioVisualization_VERSION_MAJOR @AudioVisualization_VERSION_MAJOR@
+#define AudioVisualization_VERSION_MINOR @AudioVisualization_VERSION_MINOR@

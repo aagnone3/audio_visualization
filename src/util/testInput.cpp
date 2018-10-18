@@ -1,5 +1,5 @@
 #include <iostream>
-#include <yaml.h>
+#include <cstring>
 #include <portaudio.h>
 
 
@@ -13,8 +13,9 @@ int audioIn(const void* inputBuffer, void* outputBuffer, unsigned long numSample
 
 int get_device_id(const char *fn)
 {
-    YAML::Node config = YAML::LoadFile(fn);
-    return config["device_id"].as<int>();
+    //YAML::Node config = YAML::LoadFile(fn);
+    //return config["device_id"].as<int>();
+    return 2;
 } 
 
 void showDeviceInfo() {
@@ -37,7 +38,7 @@ int stream_device_id(int device_id) {
     /* initialize and zero out the input parameters struct */
     PaStreamParameters inputParams;
     const PaDeviceInfo *deviceInfo;
-    bzero(&inputParams, sizeof(inputParams));
+    std::memset(&inputParams, 0, sizeof(inputParams));
 
     /* populate the input params */
     deviceInfo = Pa_GetDeviceInfo(device_id);
