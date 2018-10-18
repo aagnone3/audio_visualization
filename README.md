@@ -51,7 +51,3 @@ See doc/ for Doxygen documentation of the source code.
 
 Currently myself and Alex Barnett. We are happy to enhance this project with others, don't hesitate to reach out!
 A special thanks goes out to Alex Barnett for the initial version of this project.
-
-## License
-
-This software is released with the Apache License. Download it, use it, change it, share it. Just keep the license!
