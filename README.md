@@ -1,22 +1,16 @@
 # Audio Visualization with OpenGL in C++
 
-This is a rework-in-progress of a real-time spectrogram based upon OpenGL, GLUT, and ALSA. Here's a few examples of what you can tweak with it:
-- Color range
-- Contrast
-- Sampling rate
-- Frequency range
-
+This is a rework of a real-time spectrogram based upon OpenGL, GLUT, and PortAudio.
 Original project: [Real-time OpenGL spectrogram by Alex Barnett](https://math.dartmouth.edu/~ahb/software/#glspect)
 
 # Dependencies
 
-- linux operating system with ALSA
-- linux libraries
-  - cmath
-  - fftw
-  - fftw-devel
-  - alsa-lib
-  - alsa-lib-devel
+- \*nix operating system with
+- libraries
+  - portaudio
+  - fftw2
+  - opengl
+  - glut
 
 # Building
 
