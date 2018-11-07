@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['quit',['quit',['../classAudioInput.html#aceef1c12e4f78624ed695371adf495df',1,'AudioInput']]],
-  ['quitnow',['quitNow',['../classALSA.html#a69dea83cc1785dd4c88bd1a9a02ac4b3',1,'ALSA::quitNow()'],['../classAudioInput.html#a4fce5476455b1df813f1cb6eebb08311',1,'AudioInput::quitNow()']]]
+  ['pause',['pause',['../classAudioInput.html#a3ff41f73529f77872f6ab585d7cf706a',1,'AudioInput::pause()'],['../structSpectrogramVisualizer.html#a301989369e63d88cd6a59d12c23b4551',1,'SpectrogramVisualizer::pause()']]],
+  ['portaudio',['PortAudio',['../classPortAudio.html',1,'PortAudio'],['../classPortAudio.html#ae2b322ab89b7412a1bc61a4b02a20bf0',1,'PortAudio::PortAudio(int)'],['../classPortAudio.html#a5f84a7247f216657c54993180fc18c6c',1,'PortAudio::PortAudio(const PortAudio &amp;)']]]
 ];

@@ -3,81 +3,168 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classDisplay_a14f0b3465a13c09d9de5b5ed03ca824d}{Display} (int, char $\ast$$\ast$, int)
+\mbox{\hyperlink{classDisplay_a14f0b3465a13c09d9de5b5ed03ca824d}{Display}} (int, char $\ast$$\ast$, int)
 \item 
-\hyperlink{classDisplay_ac2607a6bb236c55547a4223d40d85d1f}{$\sim$\+Display} ()
+\mbox{\hyperlink{classDisplay_ac2607a6bb236c55547a4223d40d85d1f}{$\sim$\+Display}} ()
 \item 
-void \hyperlink{classDisplay_ab4010e1cfbab001623fb90460102e3ad}{loop} ()
+void \mbox{\hyperlink{classDisplay_ab4010e1cfbab001623fb90460102e3ad}{loop}} ()
 \item 
-void \hyperlink{classDisplay_a2374289dfe325db9f908499f7907528a}{add\+Graphics\+Item} (\hyperlink{classGraphicsItem}{Graphics\+Item} $\ast$const new\+Item)
+void \mbox{\hyperlink{classDisplay_a2374289dfe325db9f908499f7907528a}{add\+Graphics\+Item}} (\mbox{\hyperlink{classGraphicsItem}{Graphics\+Item}} $\ast$const new\+Item)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \hyperlink{classDisplay_ae6e3bc9a8a261958251d1c3d6e6f791b}{large\+Text} (float x, float y, char $\ast$string)
+static void \mbox{\hyperlink{classDisplay_ae6e3bc9a8a261958251d1c3d6e6f791b}{large\+Text}} (float x, float y, char $\ast$string)
 \item 
-static void \hyperlink{classDisplay_ac62e7e33c27d8c012c3efb8c07f3fc11}{small\+Text} (float x, float y, char $\ast$string)
+static void \mbox{\hyperlink{classDisplay_ac62e7e33c27d8c012c3efb8c07f3fc11}{small\+Text}} (float x, float y, char $\ast$string)
 \item 
-static void \hyperlink{classDisplay_aa3ab70ec7b76fa3ed139d19e53e72283}{display} ()
+static void \mbox{\hyperlink{classDisplay_aa3ab70ec7b76fa3ed139d19e53e72283}{display}} ()
 \item 
-static void \hyperlink{classDisplay_aee4bd8d62d2911a938523339630a4357}{idle} (void)
+static void \mbox{\hyperlink{classDisplay_aee4bd8d62d2911a938523339630a4357}{idle}} (void)
 \item 
-static void \hyperlink{classDisplay_a534c28d5e7287ad3e98106a6d8105e68}{keyboard} (unsigned char key, int x\+Pos, int y\+Pos)
+static void \mbox{\hyperlink{classDisplay_a534c28d5e7287ad3e98106a6d8105e68}{keyboard}} (unsigned char key, int x\+Pos, int y\+Pos)
 \item 
-static void \hyperlink{classDisplay_ad973a37817adac76ae9373dc4f5ba22b}{special} (int key, int x\+Pos, int y\+Pos)
+static void \mbox{\hyperlink{classDisplay_ad973a37817adac76ae9373dc4f5ba22b}{special}} (int key, int x\+Pos, int y\+Pos)
 \item 
-static void \hyperlink{classDisplay_a655b5e6c69cae3a1b45388448e9064e4}{reshape} (int w, int h)
+static void \mbox{\hyperlink{classDisplay_a655b5e6c69cae3a1b45388448e9064e4}{reshape}} (int w, int h)
 \item 
-static void \hyperlink{classDisplay_a711fdd8ee2c30e8e54d2883ae3e1bbf8}{mouse} (int button, int state, int x, int y)
+static void \mbox{\hyperlink{classDisplay_a711fdd8ee2c30e8e54d2883ae3e1bbf8}{mouse}} (int button, int state, int x, int y)
 \item 
-static void \hyperlink{classDisplay_a56b5e2138938b063f81e83ad9ed4dae3}{motion} (int x, int y)
+static void \mbox{\hyperlink{classDisplay_a56b5e2138938b063f81e83ad9ed4dae3}{motion}} (int x, int y)
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file Display.\+hpp.
+
+
+
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classDisplay_a14f0b3465a13c09d9de5b5ed03ca824d}{}\label{classDisplay_a14f0b3465a13c09d9de5b5ed03ca824d} 
+\mbox{\Hypertarget{classDisplay_a14f0b3465a13c09d9de5b5ed03ca824d}\label{classDisplay_a14f0b3465a13c09d9de5b5ed03ca824d}} 
 \index{Display@{Display}!Display@{Display}}
 \index{Display@{Display}!Display@{Display}}
 \subsubsection{\texorpdfstring{Display()}{Display()}}
-{\ttfamily Display\+::\+Display (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{int}]{screen\+Mode }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Display\+::\+Display (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{int}]{screen\+Mode }\end{DoxyParamCaption})}
 
-Overloaded constructor to initialize various member parameters. \hypertarget{classDisplay_ac2607a6bb236c55547a4223d40d85d1f}{}\label{classDisplay_ac2607a6bb236c55547a4223d40d85d1f} 
+Overloaded constructor to initialize various member parameters. 
+
+Definition at line 11 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+12 \{
+13   glutInit(&argc, argv);
+14   glutInitDisplayMode(GLUT\_DOUBLE | GLUT\_RGBA);
+15   \textcolor{keywordflow}{if} (screenMode==1) \{  \textcolor{comment}{// implement desired screen mode}
+16     glutGameModeString(\textcolor{stringliteral}{"1024x768:24@60"});  \textcolor{comment}{/* res, pixel depth, refresh */}
+17     glutEnterGameMode();  \textcolor{comment}{/* starts fullscreen game mode */}
+18   \}
+19   \textcolor{keywordflow}{else} \{
+20     glutInitWindowSize(1280, 768);
+21     \textcolor{comment}{//glutInitWindowSize(1024, 768);  // window same bufferSizeFrames as XGA}
+22     \textcolor{keywordtype}{int} mainWindow = glutCreateWindow(TITLE);
+23     \textcolor{comment}{//glutFullScreen();    // maximizes window, but is not game mode}
+24   \}
+25 
+26   glutDisplayFunc(\mbox{\hyperlink{classDisplay_aa3ab70ec7b76fa3ed139d19e53e72283}{Display::display}});
+27   glutReshapeFunc(\mbox{\hyperlink{classDisplay_a655b5e6c69cae3a1b45388448e9064e4}{Display::reshape}});
+28   glutKeyboardFunc(\mbox{\hyperlink{classDisplay_a534c28d5e7287ad3e98106a6d8105e68}{Display::keyboard}});
+29   glutSpecialFunc(\mbox{\hyperlink{classDisplay_ad973a37817adac76ae9373dc4f5ba22b}{Display::special}});
+30   glutMouseFunc(\mbox{\hyperlink{classDisplay_a711fdd8ee2c30e8e54d2883ae3e1bbf8}{Display::mouse}});
+31   glutMotionFunc(\mbox{\hyperlink{classDisplay_a56b5e2138938b063f81e83ad9ed4dae3}{Display::motion}});
+32   glutIdleFunc(\mbox{\hyperlink{classDisplay_aee4bd8d62d2911a938523339630a4357}{Display::idle}});
+33 
+34   this->screenMode = screenMode;
+35 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_ac2607a6bb236c55547a4223d40d85d1f}\label{classDisplay_ac2607a6bb236c55547a4223d40d85d1f}} 
 \index{Display@{Display}!````~Display@{$\sim$\+Display}}
 \index{````~Display@{$\sim$\+Display}!Display@{Display}}
 \subsubsection{\texorpdfstring{$\sim$\+Display()}{~Display()}}
-{\ttfamily Display\+::$\sim$\+Display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Display\+::$\sim$\+Display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 De-\/allocates all dynamic memory. 
 
+Definition at line 37 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+38 \{
+39   \textcolor{keyword}{delete} TITLE;
+40 \}
+\end{DoxyCode}
+
+
 \subsection{Member Function Documentation}
-\hypertarget{classDisplay_a2374289dfe325db9f908499f7907528a}{}\label{classDisplay_a2374289dfe325db9f908499f7907528a} 
+\mbox{\Hypertarget{classDisplay_a2374289dfe325db9f908499f7907528a}\label{classDisplay_a2374289dfe325db9f908499f7907528a}} 
 \index{Display@{Display}!add\+Graphics\+Item@{add\+Graphics\+Item}}
 \index{add\+Graphics\+Item@{add\+Graphics\+Item}!Display@{Display}}
 \subsubsection{\texorpdfstring{add\+Graphics\+Item()}{addGraphicsItem()}}
-{\ttfamily void Display\+::add\+Graphics\+Item (\begin{DoxyParamCaption}\item[{\hyperlink{classGraphicsItem}{Graphics\+Item} $\ast$const}]{new\+Item }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Display\+::add\+Graphics\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraphicsItem}{Graphics\+Item}} $\ast$const}]{new\+Item }\end{DoxyParamCaption})}
 
-Adds a new \hyperlink{classGraphicsItem}{Graphics\+Item} instance to the list of observers. Follows the observer design pattern. 
+Adds a new \mbox{\hyperlink{classGraphicsItem}{Graphics\+Item}} instance to the list of observers. Follows the observer design pattern. 
 \begin{DoxyParams}{Parameters}
-{\em new\+Item} & new instance of \hyperlink{classGraphicsItem}{Graphics\+Item} to act as an observer. \\
+{\em new\+Item} & new instance of \mbox{\hyperlink{classGraphicsItem}{Graphics\+Item}} to act as an observer. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classDisplay_aa3ab70ec7b76fa3ed139d19e53e72283}{}\label{classDisplay_aa3ab70ec7b76fa3ed139d19e53e72283} 
+
+
+Definition at line 114 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+115 \{
+116   graphicsItems.push\_back(newItem);
+117 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_aa3ab70ec7b76fa3ed139d19e53e72283}\label{classDisplay_aa3ab70ec7b76fa3ed139d19e53e72283}} 
 \index{Display@{Display}!display@{display}}
 \index{display@{display}!Display@{Display}}
 \subsubsection{\texorpdfstring{display()}{display()}}
-{\ttfamily void Display\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-Loops through all observers and instructs them to display their content. Follows the observer design pattern. \hypertarget{classDisplay_aee4bd8d62d2911a938523339630a4357}{}\label{classDisplay_aee4bd8d62d2911a938523339630a4357} 
+Loops through all observers and instructs them to display their content. Follows the observer design pattern. 
+
+Definition at line 68 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+69 \{
+70   glClear(GL\_COLOR\_BUFFER\_BIT); \textcolor{comment}{// no depth buffer}
+71   glMatrixMode(GL\_PROJECTION);
+72   glLoadIdentity();
+73   glOrtho(0, 1, 0, 1, -1, 1);  \textcolor{comment}{// l r b t n f}
+74   glMatrixMode(GL\_MODELVIEW);
+75   glLoadIdentity();
+76   std::for\_each(graphicsItems.begin(), graphicsItems.end(), [&](\textcolor{keyword}{auto} item) \{ item->display(); \});
+77   glFinish();   \textcolor{comment}{// wait for all gl commands to complete}
+78   glutSwapBuffers(); \textcolor{comment}{// for this to WAIT for vSync, need enable in NVIDIA OpenGL}
+79 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_aee4bd8d62d2911a938523339630a4357}\label{classDisplay_aee4bd8d62d2911a938523339630a4357}} 
 \index{Display@{Display}!idle@{idle}}
 \index{idle@{idle}!Display@{Display}}
 \subsubsection{\texorpdfstring{idle()}{idle()}}
-{\ttfamily void Display\+::idle (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::idle (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-Called by Open\+GL during an idling period, and calls \hyperlink{classDisplay_aee4bd8d62d2911a938523339630a4357}{idle()} on all of its observers. Follows the observer design pattern. \hypertarget{classDisplay_a534c28d5e7287ad3e98106a6d8105e68}{}\label{classDisplay_a534c28d5e7287ad3e98106a6d8105e68} 
+Called by Open\+GL during an idling period, and calls \mbox{\hyperlink{classDisplay_aee4bd8d62d2911a938523339630a4357}{idle()}} on all of its observers. Follows the observer design pattern. 
+
+Definition at line 81 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+82 \{
+83   std::for\_each(graphicsItems.begin(), graphicsItems.end(), [&](\textcolor{keyword}{auto} item) \{ item->idle(); \});
+84   glutPostRedisplay();  \textcolor{comment}{/* trigger GLUT display function */}
+85 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_a534c28d5e7287ad3e98106a6d8105e68}\label{classDisplay_a534c28d5e7287ad3e98106a6d8105e68}} 
 \index{Display@{Display}!keyboard@{keyboard}}
 \index{keyboard@{keyboard}!Display@{Display}}
 \subsubsection{\texorpdfstring{keyboard()}{keyboard()}}
-{\ttfamily void Display\+::keyboard (\begin{DoxyParamCaption}\item[{unsigned char}]{key,  }\item[{int}]{x\+Pos,  }\item[{int}]{y\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::keyboard (\begin{DoxyParamCaption}\item[{unsigned char}]{key,  }\item[{int}]{x\+Pos,  }\item[{int}]{y\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Handles keyboard input from the user. 
 \begin{DoxyParams}{Parameters}
@@ -88,11 +175,22 @@ Handles keyboard input from the user.
 {\em y\+Pos} & coordinate y of the mouse when the key was pressed. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classDisplay_ae6e3bc9a8a261958251d1c3d6e6f791b}{}\label{classDisplay_ae6e3bc9a8a261958251d1c3d6e6f791b} 
+
+
+Definition at line 87 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+88 \{
+89   std::for\_each(graphicsItems.begin(), graphicsItems.end(), [&](\textcolor{keyword}{auto} item) \{ item->keyboard(key, xPos, yPos
+      ); \});
+90 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_ae6e3bc9a8a261958251d1c3d6e6f791b}\label{classDisplay_ae6e3bc9a8a261958251d1c3d6e6f791b}} 
 \index{Display@{Display}!large\+Text@{large\+Text}}
 \index{large\+Text@{large\+Text}!Display@{Display}}
 \subsubsection{\texorpdfstring{large\+Text()}{largeText()}}
-{\ttfamily void Display\+::large\+Text (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::large\+Text (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Convenience function to draw larger text. 
 \begin{DoxyParams}{Parameters}
@@ -103,17 +201,43 @@ Convenience function to draw larger text.
 {\em string} & text to draw. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classDisplay_ab4010e1cfbab001623fb90460102e3ad}{}\label{classDisplay_ab4010e1cfbab001623fb90460102e3ad} 
+
+
+Definition at line 48 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+49 \{
+50   \textcolor{keywordtype}{int} len, i;
+51   glRasterPos2f(x, y);
+52   len = (int) strlen(\textcolor{keywordtype}{string});
+53   \textcolor{keywordflow}{for} (i = 0; i<len; i++) \{
+54     glutBitmapCharacter(GLUT\_BITMAP\_HELVETICA\_18, \textcolor{keywordtype}{string}[i]);
+55   \}
+56 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_ab4010e1cfbab001623fb90460102e3ad}\label{classDisplay_ab4010e1cfbab001623fb90460102e3ad}} 
 \index{Display@{Display}!loop@{loop}}
 \index{loop@{loop}!Display@{Display}}
 \subsubsection{\texorpdfstring{loop()}{loop()}}
-{\ttfamily void Display\+::loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Display\+::loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Main G\+UI loop. \hypertarget{classDisplay_a56b5e2138938b063f81e83ad9ed4dae3}{}\label{classDisplay_a56b5e2138938b063f81e83ad9ed4dae3} 
+Main G\+UI loop. 
+
+Definition at line 42 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+43 \{
+44   \textcolor{comment}{/* pass control to GLUT */}
+45   glutMainLoop();
+46 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_a56b5e2138938b063f81e83ad9ed4dae3}\label{classDisplay_a56b5e2138938b063f81e83ad9ed4dae3}} 
 \index{Display@{Display}!motion@{motion}}
 \index{motion@{motion}!Display@{Display}}
 \subsubsection{\texorpdfstring{motion()}{motion()}}
-{\ttfamily void Display\+::motion (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::motion (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Responds to mouse movement while one or more mouse buttons are pressed. 
 \begin{DoxyParams}{Parameters}
@@ -122,11 +246,21 @@ Responds to mouse movement while one or more mouse buttons are pressed.
 {\em y} & coordinate y of the mouse cursor. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classDisplay_a711fdd8ee2c30e8e54d2883ae3e1bbf8}{}\label{classDisplay_a711fdd8ee2c30e8e54d2883ae3e1bbf8} 
+
+
+Definition at line 109 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+110 \{
+111   std::for\_each(graphicsItems.begin(), graphicsItems.end(), [&](\textcolor{keyword}{auto} item) \{ item->motion(x, y); \});
+112 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_a711fdd8ee2c30e8e54d2883ae3e1bbf8}\label{classDisplay_a711fdd8ee2c30e8e54d2883ae3e1bbf8}} 
 \index{Display@{Display}!mouse@{mouse}}
 \index{mouse@{mouse}!Display@{Display}}
 \subsubsection{\texorpdfstring{mouse()}{mouse()}}
-{\ttfamily void Display\+::mouse (\begin{DoxyParamCaption}\item[{int}]{button,  }\item[{int}]{state,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::mouse (\begin{DoxyParamCaption}\item[{int}]{button,  }\item[{int}]{state,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Responds to mouse input by the user. 
 \begin{DoxyParams}{Parameters}
@@ -139,11 +273,22 @@ Responds to mouse input by the user.
 {\em y} & coordinate y of the mouse cursor when the press happened. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classDisplay_a655b5e6c69cae3a1b45388448e9064e4}{}\label{classDisplay_a655b5e6c69cae3a1b45388448e9064e4} 
+
+
+Definition at line 104 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+105 \{
+106   std::for\_each(graphicsItems.begin(), graphicsItems.end(), [&](\textcolor{keyword}{auto} item) \{ item->mouse(button, state, x, 
+      y); \});
+107 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_a655b5e6c69cae3a1b45388448e9064e4}\label{classDisplay_a655b5e6c69cae3a1b45388448e9064e4}} 
 \index{Display@{Display}!reshape@{reshape}}
 \index{reshape@{reshape}!Display@{Display}}
 \subsubsection{\texorpdfstring{reshape()}{reshape()}}
-{\ttfamily void Display\+::reshape (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::reshape (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Responds to a reshaping of the main window, reshaping all of its constituent plots and text. 
 \begin{DoxyParams}{Parameters}
@@ -152,11 +297,23 @@ Responds to a reshaping of the main window, reshaping all of its constituent plo
 {\em h} & new height of the main window. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classDisplay_ac62e7e33c27d8c012c3efb8c07f3fc11}{}\label{classDisplay_ac62e7e33c27d8c012c3efb8c07f3fc11} 
+
+
+Definition at line 97 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+98 \{
+99   \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Setting w="} << w << \textcolor{stringliteral}{", h="} << h << std::endl;
+100   std::for\_each(graphicsItems.begin(), graphicsItems.end(), [&](\textcolor{keyword}{auto} item) \{ item->reshape(w, h); \});
+101   glViewport(0, 0, w, h);
+102 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_ac62e7e33c27d8c012c3efb8c07f3fc11}\label{classDisplay_ac62e7e33c27d8c012c3efb8c07f3fc11}} 
 \index{Display@{Display}!small\+Text@{small\+Text}}
 \index{small\+Text@{small\+Text}!Display@{Display}}
 \subsubsection{\texorpdfstring{small\+Text()}{smallText()}}
-{\ttfamily void Display\+::small\+Text (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::small\+Text (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Convenience function to draw smaller text. 
 \begin{DoxyParams}{Parameters}
@@ -167,11 +324,26 @@ Convenience function to draw smaller text.
 {\em string} & text to draw. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classDisplay_ad973a37817adac76ae9373dc4f5ba22b}{}\label{classDisplay_ad973a37817adac76ae9373dc4f5ba22b} 
+
+
+Definition at line 58 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+59 \{
+60   \textcolor{keywordtype}{int} len, i;
+61   glRasterPos2f(x, y);
+62   len = (int) strlen(\textcolor{keywordtype}{string});
+63   \textcolor{keywordflow}{for} (i = 0; i<len; i++) \{
+64     glutBitmapCharacter(GLUT\_BITMAP\_HELVETICA\_10, \textcolor{keywordtype}{string}[i]);
+65   \}
+66 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classDisplay_ad973a37817adac76ae9373dc4f5ba22b}\label{classDisplay_ad973a37817adac76ae9373dc4f5ba22b}} 
 \index{Display@{Display}!special@{special}}
 \index{special@{special}!Display@{Display}}
 \subsubsection{\texorpdfstring{special()}{special()}}
-{\ttfamily void Display\+::special (\begin{DoxyParamCaption}\item[{int}]{key,  }\item[{int}]{x\+Pos,  }\item[{int}]{y\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Display\+::special (\begin{DoxyParamCaption}\item[{int}]{key,  }\item[{int}]{x\+Pos,  }\item[{int}]{y\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Handles special keyboard input from the user. 
 \begin{DoxyParams}{Parameters}
@@ -184,7 +356,18 @@ Handles special keyboard input from the user.
 \end{DoxyParams}
 
 
+Definition at line 92 of file Display.\+cpp.
+
+
+\begin{DoxyCode}
+93 \{
+94   std::for\_each(graphicsItems.begin(), graphicsItems.end(), [&](\textcolor{keyword}{auto} item) \{ item->special(key, xPos, yPos)
+      ; \});
+95 \}
+\end{DoxyCode}
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Display.\+hpp\item 
-Display.\+cpp\end{DoxyCompactItemize}
+src/Display.\+hpp\item 
+src/Display.\+cpp\end{DoxyCompactItemize}

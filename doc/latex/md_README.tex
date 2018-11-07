@@ -1,0 +1,52 @@
+This is a rework of a real-\/time spectrogram based upon Open\+GL, G\+L\+UT, and Port\+Audio. Original project\+: \href{https://math.dartmouth.edu/~ahb/software/#glspect}{\tt Real-\/time Open\+GL spectrogram by Alex Barnett}
+
+\section*{Dependencies}
+
+
+\begin{DoxyItemize}
+\item $\ast$nix operating system with
+\item libraries
+\begin{DoxyItemize}
+\item portaudio
+\item fftw2
+\item opengl
+\item glut
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\section*{Building}
+
+
+\begin{DoxyCode}
+make build
+build/opengl\_spectrogram
+\end{DoxyCode}
+
+
+\# Installing 
+\begin{DoxyCode}
+make install
+opengl\_spectrogram
+\end{DoxyCode}
+
+
+\# Helpers 
+\begin{DoxyCode}
+# show info regarding audio devices recognized by the OS
+device\_info
+\end{DoxyCode}
+
+
+\section*{Screenshot}
+
+Here\textquotesingle{}s a quick screenshot of \href{https://www.youtube.com/watch?v=n70c3Dzw-ZM}{\tt this song} around 1\+:45 on. Can you line it up?
+
+
+
+\section*{Documentation}
+
+See doc/ for Doxygen documentation of the source code.
+
+\subsection*{Contributors}
+
+Currently myself and Alex Barnett. We are happy to enhance this project with others, don\textquotesingle{}t hesitate to reach out! A special thanks goes out to Alex Barnett for the initial version of this project. 

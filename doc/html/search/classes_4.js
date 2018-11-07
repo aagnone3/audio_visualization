@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['param',['Param',['../structParam.html',1,'']]]
+  ['portaudio',['PortAudio',['../classPortAudio.html',1,'']]]
 ];

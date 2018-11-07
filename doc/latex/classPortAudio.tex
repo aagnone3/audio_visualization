@@ -1,0 +1,286 @@
+\hypertarget{classPortAudio}{}\section{Port\+Audio Class Reference}
+\label{classPortAudio}\index{Port\+Audio@{Port\+Audio}}
+Inheritance diagram for Port\+Audio\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPortAudio}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPortAudio_ae2b322ab89b7412a1bc61a4b02a20bf0}{Port\+Audio}} (int)
+\item 
+\mbox{\hyperlink{classPortAudio_a5f84a7247f216657c54993180fc18c6c}{Port\+Audio}} (const \mbox{\hyperlink{classPortAudio}{Port\+Audio}} \&)
+\item 
+\mbox{\Hypertarget{classPortAudio_aacb93627b1b3aa427cd3f357b7e20eb7}\label{classPortAudio_aacb93627b1b3aa427cd3f357b7e20eb7}} 
+\mbox{\hyperlink{classPortAudio}{Port\+Audio}} \& {\bfseries operator=} (const \mbox{\hyperlink{classPortAudio}{Port\+Audio}} \&)
+\item 
+\mbox{\hyperlink{classPortAudio_a5f80fdff2377981fcd42fae42d4b65c3}{$\sim$\+Port\+Audio}} ()
+\item 
+int \mbox{\hyperlink{classPortAudio_a2685650c8e1568f8089babd3af5f6bc1}{start\+Capture}} ()
+\item 
+virtual void \mbox{\hyperlink{classPortAudio_a88fc85aad0b14014b0775ec0a769ea0a}{quit\+Now}} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classPortAudio_a006e388f2b3e886377390e1a97580d53}{audio\+In}} (const void $\ast$input\+Buffer, void $\ast$output\+Buffer, unsigned long num\+Samples, const Pa\+Stream\+Callback\+Time\+Info $\ast$time\+Info, Pa\+Stream\+Callback\+Flags status\+Flags, void $\ast$user\+Data)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file Port\+Audio.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPortAudio_ae2b322ab89b7412a1bc61a4b02a20bf0}\label{classPortAudio_ae2b322ab89b7412a1bc61a4b02a20bf0}} 
+\index{Port\+Audio@{Port\+Audio}!Port\+Audio@{Port\+Audio}}
+\index{Port\+Audio@{Port\+Audio}!Port\+Audio@{Port\+Audio}}
+\subsubsection{\texorpdfstring{Port\+Audio()}{PortAudio()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Port\+Audio\+::\+Port\+Audio (\begin{DoxyParamCaption}\item[{int}]{requested\+Input\+Device\+Id }\end{DoxyParamCaption})}
+
+Constructor 
+
+Definition at line 8 of file Port\+Audio.\+cpp.
+
+
+\begin{DoxyCode}
+9   : \mbox{\hyperlink{classAudioInput_a51903411fbfb29b77f30a0ee3fbaa50e}{AudioInput}}()
+10 \{
+11     this->requestedInputDeviceId = requestedInputDeviceId;
+12     \mbox{\hyperlink{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{samplingRate}} = 44100;
+13     \mbox{\hyperlink{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}{samplingPeriod}} = 1.0f/\mbox{\hyperlink{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{samplingRate}};
+14     \textcolor{comment}{//stream = nullptr;}
+15     \mbox{\hyperlink{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}{bufferMemorySeconds}} = 5;
+16     \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}} = \mbox{\hyperlink{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}{bufferMemorySeconds}} * 
+      \mbox{\hyperlink{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{samplingRate}};
+17     
+18     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Buffer Size: "} << 
+      \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}} << \textcolor{stringliteral}{" samples."} << std::endl;
+19     
+20     \textcolor{comment}{/* initialize the audio buffer */}
+21     \mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audioBuffer}} = \textcolor{keyword}{new} \textcolor{keywordtype}{float}[\mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}}];
+22     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}}; ++i)
+23     \{
+24         \mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audioBuffer}}[i] = 0.0f;
+25     \}
+26 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classPortAudio_a5f84a7247f216657c54993180fc18c6c}\label{classPortAudio_a5f84a7247f216657c54993180fc18c6c}} 
+\index{Port\+Audio@{Port\+Audio}!Port\+Audio@{Port\+Audio}}
+\index{Port\+Audio@{Port\+Audio}!Port\+Audio@{Port\+Audio}}
+\subsubsection{\texorpdfstring{Port\+Audio()}{PortAudio()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Port\+Audio\+::\+Port\+Audio (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classPortAudio}{Port\+Audio}} \&}]{other }\end{DoxyParamCaption})}
+
+Cony constructor 
+
+Definition at line 28 of file Port\+Audio.\+cpp.
+
+
+\begin{DoxyCode}
+28                                            \{
+29     this->stream = other.stream;
+30     this->requestedInputDeviceId = other.requestedInputDeviceId;
+31 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classPortAudio_a5f80fdff2377981fcd42fae42d4b65c3}\label{classPortAudio_a5f80fdff2377981fcd42fae42d4b65c3}} 
+\index{Port\+Audio@{Port\+Audio}!````~Port\+Audio@{$\sim$\+Port\+Audio}}
+\index{````~Port\+Audio@{$\sim$\+Port\+Audio}!Port\+Audio@{Port\+Audio}}
+\subsubsection{\texorpdfstring{$\sim$\+Port\+Audio()}{~PortAudio()}}
+{\footnotesize\ttfamily Port\+Audio\+::$\sim$\+Port\+Audio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Closes the audio capture stream and de-\/allocates any dynamic memory. 
+
+Definition at line 41 of file Port\+Audio.\+cpp.
+
+
+\begin{DoxyCode}
+41                       \{
+42     \textcolor{comment}{//delete stream;}
+43 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classPortAudio_a006e388f2b3e886377390e1a97580d53}\label{classPortAudio_a006e388f2b3e886377390e1a97580d53}} 
+\index{Port\+Audio@{Port\+Audio}!audio\+In@{audio\+In}}
+\index{audio\+In@{audio\+In}!Port\+Audio@{Port\+Audio}}
+\subsubsection{\texorpdfstring{audio\+In()}{audioIn()}}
+{\footnotesize\ttfamily int Port\+Audio\+::audio\+In (\begin{DoxyParamCaption}\item[{const void $\ast$}]{input\+Buffer,  }\item[{void $\ast$}]{output\+Buffer,  }\item[{unsigned long}]{num\+Samples,  }\item[{const Pa\+Stream\+Callback\+Time\+Info $\ast$}]{time\+Info,  }\item[{Pa\+Stream\+Callback\+Flags}]{status\+Flags,  }\item[{void $\ast$}]{user\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Callable used by a thread to continuously populate audio\+Buffer from the audio stream. 
+
+Definition at line 45 of file Port\+Audio.\+cpp.
+
+
+\begin{DoxyCode}
+48 \{
+49     \textcolor{comment}{//Log::getInstance()->logger() << "audioIn()" << std::endl;}
+50     \mbox{\hyperlink{classPortAudio}{PortAudio}} *instance = (\mbox{\hyperlink{classPortAudio}{PortAudio}}*)customData;
+51     \textcolor{keyword}{const} SAMPLE *in = (SAMPLE*)inputBuffer;
+52     \textcolor{keywordtype}{int} index;
+53     
+54     \textcolor{comment}{/* prevent unused variable warnings */}
+55     (void) outputBuffer;
+56     (void) timeInfo;
+57     (void) statusFlags;
+58     
+59     \textcolor{keywordflow}{if} (inputBuffer == NULL)
+60     \{
+61         \textcolor{comment}{/* silence */}
+62         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numSamples; ++i)
+63         \{
+64             index = mod(instance->\mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{bufferIndex}} + i, instance->
+      \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}});
+65             instance->\mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audioBuffer}}[index] = SAMPLE\_SILENCE; \textcolor{comment}{/* left channel */}
+66             \textcolor{comment}{//if (NUM\_CHANNELS == 2) audioBuffer[i] = SAMPLE\_SILENCE; /* right channel */}
+67         \}
+68     \}
+69     \textcolor{keywordflow}{else}
+70     \{
+71         \textcolor{comment}{/* non-silence */}
+72         \textcolor{comment}{//Log::getInstance()->logger() << in[numSamples - 1] << std::endl;}
+73         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numSamples; ++i)
+74         \{
+75             index = mod(instance->\mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{bufferIndex}} + i, instance->
+      \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}});
+76             instance->\mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audioBuffer}}[index] = in[i]; \textcolor{comment}{/* left channel */}
+77             \textcolor{comment}{//if (NUM\_CHANNELS == 2) audioBuffer[i] = *in++; /* right channel */}
+78         \}
+79     \}
+80     instance->\mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{bufferIndex}} = mod(instance->\mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{bufferIndex}} + numSamples, instance->
+      \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}});
+81     \mbox{\hyperlink{classAudioInput_a77614769e39be88bbf5d78adf84d9260}{computeSpectrogramSlice}}(instance);
+82     
+83     \textcolor{comment}{//Log::getInstance()->logger() << "Buffer Index: " << instance->bufferIndex << std::endl;}
+84     \textcolor{comment}{//Log::getInstance()->logger() << "# Samples: " << numSamples << ", Size: " <<
+       instance->bufferSizeSamples << std::endl;}
+85     
+86     \textcolor{keywordflow}{return} instance->\mbox{\hyperlink{classAudioInput_aceef1c12e4f78624ed695371adf495df}{quit}} ? paComplete : paContinue;
+87 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classPortAudio_a88fc85aad0b14014b0775ec0a769ea0a}\label{classPortAudio_a88fc85aad0b14014b0775ec0a769ea0a}} 
+\index{Port\+Audio@{Port\+Audio}!quit\+Now@{quit\+Now}}
+\index{quit\+Now@{quit\+Now}!Port\+Audio@{Port\+Audio}}
+\subsubsection{\texorpdfstring{quit\+Now()}{quitNow()}}
+{\footnotesize\ttfamily void Port\+Audio\+::quit\+Now (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Defines how the instance stops the audio stream. 
+
+Implements \mbox{\hyperlink{classAudioInput_a4fce5476455b1df813f1cb6eebb08311}{Audio\+Input}}.
+
+
+
+Definition at line 89 of file Port\+Audio.\+cpp.
+
+
+\begin{DoxyCode}
+90 \{
+91     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Quitting."} << std::endl;
+92     \textcolor{comment}{/* raise the quit flag to signal to the audio capture thread to stop polling for audio */}
+93     \mbox{\hyperlink{classAudioInput_aceef1c12e4f78624ed695371adf495df}{quit}} = \textcolor{keyword}{true};
+94 
+95     \textcolor{comment}{/* close the stream */}
+96     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Closing stream."} << std::endl;
+97     PaError err;
+98     err = Pa\_CloseStream(stream);
+99     \textcolor{keywordflow}{if} (err != paNoError) \{
+100         \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"PortAudio stream close error: "} << 
+      Pa\_GetErrorText(err) << std::endl;
+101     \}
+102     
+103     \textcolor{comment}{/* terminate portaudio */}
+104     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Terminating PortAudio."} << std::endl;
+105     err = Pa\_Terminate();
+106     \textcolor{keywordflow}{if} (err != paNoError) \{
+107         \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"PortAudio termination error: "} << 
+      Pa\_GetErrorText(err) << std::endl;
+108     \}
+109 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classPortAudio_a2685650c8e1568f8089babd3af5f6bc1}\label{classPortAudio_a2685650c8e1568f8089babd3af5f6bc1}} 
+\index{Port\+Audio@{Port\+Audio}!start\+Capture@{start\+Capture}}
+\index{start\+Capture@{start\+Capture}!Port\+Audio@{Port\+Audio}}
+\subsubsection{\texorpdfstring{start\+Capture()}{startCapture()}}
+{\footnotesize\ttfamily int Port\+Audio\+::start\+Capture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Begins capturing the audio stream. \begin{DoxyReturn}{Returns}
+indication of capture success or failure. 0 -\/$>$ successfull setup. else -\/$>$ failed setup. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classAudioInput_afa753742035f7069f5ef0c2ece6a62fe}{Audio\+Input}}.
+
+
+
+Definition at line 111 of file Port\+Audio.\+cpp.
+
+
+\begin{DoxyCode}
+112 \{
+113     PaError err;
+114     
+115     err = Pa\_Initialize();
+116     \textcolor{keywordflow}{if} (err != paNoError) \{
+117         \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"PortAudio initialization error: "} << 
+      Pa\_GetErrorText(err) << std::endl;
+118         \textcolor{keywordflow}{return} 1;
+119     \}
+120 
+121     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Opening input stream for device #"} << 
+      requestedInputDeviceId << std::endl;
+122 
+123     \textcolor{comment}{/* initialize and populate desired input stream parameters */}
+124     PaStreamParameters inputParams;
+125     \textcolor{keyword}{const} PaDeviceInfo *deviceInfo;
+126     memset(&inputParams, 0, \textcolor{keyword}{sizeof}(inputParams));
+127     deviceInfo = Pa\_GetDeviceInfo(requestedInputDeviceId);
+128     inputParams.channelCount = 1;\textcolor{comment}{//deviceInfo->maxInputChannels;}
+129     inputParams.sampleFormat = paFloat32;
+130     inputParams.suggestedLatency = deviceInfo->defaultLowInputLatency;
+131     inputParams.hostApiSpecificStreamInfo = NULL;
+132 
+133     err = Pa\_OpenStream(
+134             &stream,
+135             &inputParams,
+136             NULL,
+137             44100,
+138             paFramesPerBufferUnspecified,
+139             paNoFlag,
+140             \mbox{\hyperlink{classPortAudio_a006e388f2b3e886377390e1a97580d53}{audioIn}},
+141             (\textcolor{keywordtype}{void}*)\textcolor{keyword}{this}
+142     );
+143     
+144     \textcolor{comment}{/* TODO if opening the default stream fails, give the user device info */}
+145     \textcolor{keywordflow}{if} (err != paNoError) \{
+146         \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"PortAudio error opening default stream: "} <<
+       Pa\_GetErrorText(err) << std::endl;
+147 
+148         \textcolor{comment}{/* TODO */}
+149         \textcolor{keywordflow}{return} 1;
+150     \}
+151 
+152     \textcolor{comment}{/* start the audio stream */}
+153     err = Pa\_StartStream(stream);
+154     \textcolor{keywordflow}{if} (err != paNoError) \{
+155         \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"PortAudio starting stream: "} << 
+      Pa\_GetErrorText(err) << std::endl;
+156         \textcolor{keywordflow}{return} 1;
+157     \}
+158     
+159     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Successfully starting sampling audio."} << 
+      std::endl;
+160     \textcolor{keywordflow}{return} 0;
+161 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Port\+Audio.\+hpp\item 
+src/Port\+Audio.\+cpp\end{DoxyCompactItemize}

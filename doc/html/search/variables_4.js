@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyboard_5fshortcuts',['KEYBOARD_SHORTCUTS',['../structSpectrogramVisualizer.html#a20eb03afddbbde072d82b1efe675b0f3',1,'SpectrogramVisualizer']]]
+  ['middle_5fc_5ffrequency',['MIDDLE_C_FREQUENCY',['../structSpectrogramVisualizer.html#adfe2ed143313d59d7c118cadec1460b9',1,'SpectrogramVisualizer']]]
 ];

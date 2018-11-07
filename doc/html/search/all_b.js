@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['param',['Param',['../structParam.html',1,'']]],
-  ['pause',['pause',['../classAudioInput.html#a3ff41f73529f77872f6ab585d7cf706a',1,'AudioInput::pause()'],['../structSpectrogramVisualizer.html#a301989369e63d88cd6a59d12c23b4551',1,'SpectrogramVisualizer::pause()']]]
+  ['output_5fdirection',['OUTPUT_DIRECTION',['../classLog.html#a8928d01e0edbf98838c642e04e12458e',1,'Log']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['reshape',['reshape',['../classDisplay.html#a655b5e6c69cae3a1b45388448e9064e4',1,'Display::reshape()'],['../structSpectrogramVisualizer.html#a789c6b59ab3a6960056eaab014163b91',1,'SpectrogramVisualizer::reshape()']]]
+  ['quit',['quit',['../classAudioInput.html#aceef1c12e4f78624ed695371adf495df',1,'AudioInput']]],
+  ['quitnow',['quitNow',['../classAudioInput.html#a4fce5476455b1df813f1cb6eebb08311',1,'AudioInput::quitNow()'],['../classPortAudio.html#a88fc85aad0b14014b0775ec0a769ea0a',1,'PortAudio::quitNow()']]]
 ];

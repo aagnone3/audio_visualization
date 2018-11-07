@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quitnow',['quitNow',['../classALSA.html#a69dea83cc1785dd4c88bd1a9a02ac4b3',1,'ALSA::quitNow()'],['../classAudioInput.html#a4fce5476455b1df813f1cb6eebb08311',1,'AudioInput::quitNow()']]]
+  ['quitnow',['quitNow',['../classAudioInput.html#a4fce5476455b1df813f1cb6eebb08311',1,'AudioInput::quitNow()'],['../classPortAudio.html#a88fc85aad0b14014b0775ec0a769ea0a',1,'PortAudio::quitNow()']]]
 ];

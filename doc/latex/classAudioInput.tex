@@ -13,171 +13,170 @@ Inheritance diagram for Audio\+Input\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classAudioInput_a51903411fbfb29b77f30a0ee3fbaa50e}{Audio\+Input} ()
+\mbox{\hyperlink{classAudioInput_a51903411fbfb29b77f30a0ee3fbaa50e}{Audio\+Input}} ()
 \item 
-virtual \hyperlink{classAudioInput_aaf278510da0fee4ccfd44c679067d96c}{$\sim$\+Audio\+Input} ()=0
+\mbox{\Hypertarget{classAudioInput_a8a86507eb41c9db581def690f1f96669}\label{classAudioInput_a8a86507eb41c9db581def690f1f96669}} 
+{\bfseries Audio\+Input} (const \mbox{\hyperlink{classAudioInput}{Audio\+Input}} \&)
 \item 
-void \hyperlink{classAudioInput_ad4485ea7937dd99442119dce52f7408d}{setup\+Window\+Func} (float $\ast$window, int window\+Size, unsigned int window\+Type)
+\mbox{\Hypertarget{classAudioInput_a104f135fc060ebd133166516650304e0}\label{classAudioInput_a104f135fc060ebd133166516650304e0}} 
+\mbox{\hyperlink{classAudioInput}{Audio\+Input}} \& {\bfseries operator=} (const \mbox{\hyperlink{classAudioInput}{Audio\+Input}} \&)
 \item 
-virtual void \hyperlink{classAudioInput_a4fce5476455b1df813f1cb6eebb08311}{quit\+Now} ()=0
+virtual \mbox{\hyperlink{classAudioInput_aaf278510da0fee4ccfd44c679067d96c}{$\sim$\+Audio\+Input}} ()=0
 \item 
-\hypertarget{classAudioInput_ae877bcc482868235b38fc7bb099d7a43}{}\label{classAudioInput_ae877bcc482868235b38fc7bb099d7a43} 
+void \mbox{\hyperlink{classAudioInput_abe6c5796db5f1f0d4944a3c9e8b3962e}{initialize\+Window}} (float $\ast$window, int window\+Size, unsigned int window\+Type)
+\item 
+virtual void \mbox{\hyperlink{classAudioInput_a4fce5476455b1df813f1cb6eebb08311}{quit\+Now}} ()=0
+\item 
+virtual int \mbox{\hyperlink{classAudioInput_afa753742035f7069f5ef0c2ece6a62fe}{start\+Capture}} ()=0
+\item 
+\mbox{\Hypertarget{classAudioInput_ae877bcc482868235b38fc7bb099d7a43}\label{classAudioInput_ae877bcc482868235b38fc7bb099d7a43}} 
 unsigned long {\bfseries get\+Buffer\+Size\+Frames} () const
 \item 
-\hypertarget{classAudioInput_a30068a991c436282680a320c043d021f}{}\label{classAudioInput_a30068a991c436282680a320c043d021f} 
-void {\bfseries set\+Buffer\+Size\+Frames} (unsigned long \hyperlink{classAudioInput_adb734d274b7ce2967b74e2280ff6d487}{buffer\+Size\+Frames})
+\mbox{\Hypertarget{classAudioInput_a30068a991c436282680a320c043d021f}\label{classAudioInput_a30068a991c436282680a320c043d021f}} 
+void {\bfseries set\+Buffer\+Size\+Frames} (unsigned long \mbox{\hyperlink{classAudioInput_adb734d274b7ce2967b74e2280ff6d487}{buffer\+Size\+Frames}})
 \item 
-\hypertarget{classAudioInput_a9a6e1385e3bc495fca357ab684301daa}{}\label{classAudioInput_a9a6e1385e3bc495fca357ab684301daa} 
+\mbox{\Hypertarget{classAudioInput_a9a6e1385e3bc495fca357ab684301daa}\label{classAudioInput_a9a6e1385e3bc495fca357ab684301daa}} 
 int {\bfseries get\+Buffer\+Size\+Samples} () const
 \item 
-\hypertarget{classAudioInput_a23e782296cc43ff127d9f95f77902b94}{}\label{classAudioInput_a23e782296cc43ff127d9f95f77902b94} 
-void {\bfseries set\+Buffer\+Size\+Samples} (int \hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{buffer\+Size\+Samples})
+\mbox{\Hypertarget{classAudioInput_a23e782296cc43ff127d9f95f77902b94}\label{classAudioInput_a23e782296cc43ff127d9f95f77902b94}} 
+void {\bfseries set\+Buffer\+Size\+Samples} (int \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{buffer\+Size\+Samples}})
 \item 
-\hypertarget{classAudioInput_ac56e6ce779b652bd8fc343828a40fe76}{}\label{classAudioInput_ac56e6ce779b652bd8fc343828a40fe76} 
+\mbox{\Hypertarget{classAudioInput_ac56e6ce779b652bd8fc343828a40fe76}\label{classAudioInput_ac56e6ce779b652bd8fc343828a40fe76}} 
 float $\ast$ {\bfseries get\+Audio\+Buffer} () const
 \item 
-\hypertarget{classAudioInput_a33e4d0a312cc8f3c26f0f06c9bee9fd8}{}\label{classAudioInput_a33e4d0a312cc8f3c26f0f06c9bee9fd8} 
-void {\bfseries set\+Audio\+Buffer} (float $\ast$\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audio\+Buffer})
+\mbox{\Hypertarget{classAudioInput_a33e4d0a312cc8f3c26f0f06c9bee9fd8}\label{classAudioInput_a33e4d0a312cc8f3c26f0f06c9bee9fd8}} 
+void {\bfseries set\+Audio\+Buffer} (float $\ast$\mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audio\+Buffer}})
 \item 
-\hypertarget{classAudioInput_a407e9626c0ab056dd0d4401ce5056d00}{}\label{classAudioInput_a407e9626c0ab056dd0d4401ce5056d00} 
+\mbox{\Hypertarget{classAudioInput_a407e9626c0ab056dd0d4401ce5056d00}\label{classAudioInput_a407e9626c0ab056dd0d4401ce5056d00}} 
 float $\ast$ {\bfseries get\+Spectrogram\+Slice} () const
 \item 
-\hypertarget{classAudioInput_a55f5b0061a542195af4161c5ef931d2b}{}\label{classAudioInput_a55f5b0061a542195af4161c5ef931d2b} 
-void {\bfseries set\+Spectrogram\+Slice} (float $\ast$\hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogram\+Slice})
+\mbox{\Hypertarget{classAudioInput_a55f5b0061a542195af4161c5ef931d2b}\label{classAudioInput_a55f5b0061a542195af4161c5ef931d2b}} 
+void {\bfseries set\+Spectrogram\+Slice} (float $\ast$\mbox{\hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogram\+Slice}})
 \item 
-\hypertarget{classAudioInput_ac7a550e7e3d4312b576978df832d70ec}{}\label{classAudioInput_ac7a550e7e3d4312b576978df832d70ec} 
+\mbox{\Hypertarget{classAudioInput_ac7a550e7e3d4312b576978df832d70ec}\label{classAudioInput_ac7a550e7e3d4312b576978df832d70ec}} 
 float $\ast$ {\bfseries get\+Windowing\+Function} () const
 \item 
-\hypertarget{classAudioInput_a4c11f1a37408349ee4d7354e1c2fdd11}{}\label{classAudioInput_a4c11f1a37408349ee4d7354e1c2fdd11} 
-void {\bfseries set\+Windowing\+Function} (float $\ast$\hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowing\+Function})
+\mbox{\Hypertarget{classAudioInput_a4c11f1a37408349ee4d7354e1c2fdd11}\label{classAudioInput_a4c11f1a37408349ee4d7354e1c2fdd11}} 
+void {\bfseries set\+Windowing\+Function} (float $\ast$\mbox{\hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowing\+Function}})
 \item 
-\hypertarget{classAudioInput_afa340ece9b45d8d4bb85972edfe9712b}{}\label{classAudioInput_afa340ece9b45d8d4bb85972edfe9712b} 
+\mbox{\Hypertarget{classAudioInput_afa340ece9b45d8d4bb85972edfe9712b}\label{classAudioInput_afa340ece9b45d8d4bb85972edfe9712b}} 
 unsigned int {\bfseries get\+Spectrogram\+Size} () const
 \item 
-\hypertarget{classAudioInput_a900f80fe37d48bc77d99cc0971f01ea7}{}\label{classAudioInput_a900f80fe37d48bc77d99cc0971f01ea7} 
-void {\bfseries set\+Spectrogram\+Size} (unsigned int \hyperlink{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}{spectrogram\+Size})
+\mbox{\Hypertarget{classAudioInput_a900f80fe37d48bc77d99cc0971f01ea7}\label{classAudioInput_a900f80fe37d48bc77d99cc0971f01ea7}} 
+void {\bfseries set\+Spectrogram\+Size} (unsigned int \mbox{\hyperlink{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}{spectrogram\+Size}})
 \item 
-\hypertarget{classAudioInput_a069f76d3553328428959325c1be3ee3e}{}\label{classAudioInput_a069f76d3553328428959325c1be3ee3e} 
+\mbox{\Hypertarget{classAudioInput_a069f76d3553328428959325c1be3ee3e}\label{classAudioInput_a069f76d3553328428959325c1be3ee3e}} 
 unsigned int {\bfseries get\+Fft\+Length} () const
 \item 
-\hypertarget{classAudioInput_a71e1759bc4267b436bd9b4b8937dcabd}{}\label{classAudioInput_a71e1759bc4267b436bd9b4b8937dcabd} 
-void {\bfseries set\+Fft\+Length} (unsigned int \hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fft\+Length})
+\mbox{\Hypertarget{classAudioInput_a71e1759bc4267b436bd9b4b8937dcabd}\label{classAudioInput_a71e1759bc4267b436bd9b4b8937dcabd}} 
+void {\bfseries set\+Fft\+Length} (unsigned int \mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fft\+Length}})
 \item 
-\hypertarget{classAudioInput_a547f6144fe074436c678776f647dcf02}{}\label{classAudioInput_a547f6144fe074436c678776f647dcf02} 
+\mbox{\Hypertarget{classAudioInput_a547f6144fe074436c678776f647dcf02}\label{classAudioInput_a547f6144fe074436c678776f647dcf02}} 
 float {\bfseries get\+Buffer\+Memory\+Seconds} () const
 \item 
-\hypertarget{classAudioInput_a2ac6cfeb9f0d289cb5170d03a07472ef}{}\label{classAudioInput_a2ac6cfeb9f0d289cb5170d03a07472ef} 
-void {\bfseries set\+Buffer\+Memory\+Seconds} (float \hyperlink{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}{buffer\+Memory\+Seconds})
+\mbox{\Hypertarget{classAudioInput_a2ac6cfeb9f0d289cb5170d03a07472ef}\label{classAudioInput_a2ac6cfeb9f0d289cb5170d03a07472ef}} 
+void {\bfseries set\+Buffer\+Memory\+Seconds} (float \mbox{\hyperlink{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}{buffer\+Memory\+Seconds}})
 \item 
-\hypertarget{classAudioInput_a2b531eed74caeceff65deed019976804}{}\label{classAudioInput_a2b531eed74caeceff65deed019976804} 
+\mbox{\Hypertarget{classAudioInput_a2b531eed74caeceff65deed019976804}\label{classAudioInput_a2b531eed74caeceff65deed019976804}} 
 unsigned int {\bfseries get\+N\+Channels} () const
 \item 
-\hypertarget{classAudioInput_a3f4482ac752d8028e433e9543a53a83a}{}\label{classAudioInput_a3f4482ac752d8028e433e9543a53a83a} 
-void {\bfseries set\+N\+Channels} (unsigned int \hyperlink{classAudioInput_a364801e7fa59b6c8ed881262b2085d42}{n\+Channels})
+\mbox{\Hypertarget{classAudioInput_a3f4482ac752d8028e433e9543a53a83a}\label{classAudioInput_a3f4482ac752d8028e433e9543a53a83a}} 
+void {\bfseries set\+N\+Channels} (unsigned int \mbox{\hyperlink{classAudioInput_a364801e7fa59b6c8ed881262b2085d42}{n\+Channels}})
 \item 
-\hypertarget{classAudioInput_a261c017ca0b89a14ff0e0119bea6d8bd}{}\label{classAudioInput_a261c017ca0b89a14ff0e0119bea6d8bd} 
+\mbox{\Hypertarget{classAudioInput_a261c017ca0b89a14ff0e0119bea6d8bd}\label{classAudioInput_a261c017ca0b89a14ff0e0119bea6d8bd}} 
 float {\bfseries get\+Sampling\+Period} () const
 \item 
-\hypertarget{classAudioInput_afbac34c42a21c102cb0c9f8db9083da5}{}\label{classAudioInput_afbac34c42a21c102cb0c9f8db9083da5} 
-void {\bfseries set\+Sampling\+Period} (float \hyperlink{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}{sampling\+Period})
+\mbox{\Hypertarget{classAudioInput_afbac34c42a21c102cb0c9f8db9083da5}\label{classAudioInput_afbac34c42a21c102cb0c9f8db9083da5}} 
+void {\bfseries set\+Sampling\+Period} (float \mbox{\hyperlink{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}{sampling\+Period}})
 \item 
-\hypertarget{classAudioInput_afeef426fc67f34a73132955f72068266}{}\label{classAudioInput_afeef426fc67f34a73132955f72068266} 
+\mbox{\Hypertarget{classAudioInput_afeef426fc67f34a73132955f72068266}\label{classAudioInput_afeef426fc67f34a73132955f72068266}} 
 bool {\bfseries is\+Quit} () const
 \item 
-\hypertarget{classAudioInput_af5c79f83c5e014bdf12d3ad623e65be5}{}\label{classAudioInput_af5c79f83c5e014bdf12d3ad623e65be5} 
-void {\bfseries set\+Quit} (bool \hyperlink{classAudioInput_aceef1c12e4f78624ed695371adf495df}{quit})
+\mbox{\Hypertarget{classAudioInput_af5c79f83c5e014bdf12d3ad623e65be5}\label{classAudioInput_af5c79f83c5e014bdf12d3ad623e65be5}} 
+void {\bfseries set\+Quit} (bool \mbox{\hyperlink{classAudioInput_aceef1c12e4f78624ed695371adf495df}{quit}})
 \item 
-\hypertarget{classAudioInput_a59df92ca184977f5a400fe6d5cea33fc}{}\label{classAudioInput_a59df92ca184977f5a400fe6d5cea33fc} 
+\mbox{\Hypertarget{classAudioInput_a59df92ca184977f5a400fe6d5cea33fc}\label{classAudioInput_a59df92ca184977f5a400fe6d5cea33fc}} 
 bool {\bfseries is\+Pause} () const
 \item 
-\hypertarget{classAudioInput_abc3f83d5ce04a9628bcf658cc857d786}{}\label{classAudioInput_abc3f83d5ce04a9628bcf658cc857d786} 
-void {\bfseries set\+Pause} (bool \hyperlink{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}{pause})
+\mbox{\Hypertarget{classAudioInput_abc3f83d5ce04a9628bcf658cc857d786}\label{classAudioInput_abc3f83d5ce04a9628bcf658cc857d786}} 
+void {\bfseries set\+Pause} (bool \mbox{\hyperlink{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}{pause}})
 \item 
-\hypertarget{classAudioInput_a19c4e0c35b8360b0dca9cf5cad3d2e64}{}\label{classAudioInput_a19c4e0c35b8360b0dca9cf5cad3d2e64} 
+\mbox{\Hypertarget{classAudioInput_a19c4e0c35b8360b0dca9cf5cad3d2e64}\label{classAudioInput_a19c4e0c35b8360b0dca9cf5cad3d2e64}} 
 unsigned int {\bfseries get\+Sampling\+Rate} () const
 \item 
-\hypertarget{classAudioInput_a621a6d87ca463668289f2cb7fa97c75c}{}\label{classAudioInput_a621a6d87ca463668289f2cb7fa97c75c} 
-void {\bfseries set\+Sampling\+Rate} (unsigned int \hyperlink{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{sampling\+Rate})
+\mbox{\Hypertarget{classAudioInput_a621a6d87ca463668289f2cb7fa97c75c}\label{classAudioInput_a621a6d87ca463668289f2cb7fa97c75c}} 
+void {\bfseries set\+Sampling\+Rate} (unsigned int \mbox{\hyperlink{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{sampling\+Rate}})
 \item 
-\hypertarget{classAudioInput_a31cf622d7ce0ccb7094ab42579baada1}{}\label{classAudioInput_a31cf622d7ce0ccb7094ab42579baada1} 
-char $\ast$ {\bfseries get\+Audio\+Buffer\+Chunk} () const
-\item 
-\hypertarget{classAudioInput_a2534ecbcf1513408cabf8d85c8c8dc46}{}\label{classAudioInput_a2534ecbcf1513408cabf8d85c8c8dc46} 
-void {\bfseries set\+Audio\+Buffer\+Chunk} (char $\ast$\hyperlink{classAudioInput_ab1f2b0fc5ee061ab92c045d2325c8ab7}{audio\+Buffer\+Chunk})
-\item 
-\hypertarget{classAudioInput_a78df439ada22ba00be19c4c8a82bbe3d}{}\label{classAudioInput_a78df439ada22ba00be19c4c8a82bbe3d} 
+\mbox{\Hypertarget{classAudioInput_a78df439ada22ba00be19c4c8a82bbe3d}\label{classAudioInput_a78df439ada22ba00be19c4c8a82bbe3d}} 
 int {\bfseries get\+Buffer\+Index} () const
 \item 
-\hypertarget{classAudioInput_a506d7f5eec641d0232286ea145270038}{}\label{classAudioInput_a506d7f5eec641d0232286ea145270038} 
-void {\bfseries set\+Buffer\+Index} (int \hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{buffer\+Index})
+\mbox{\Hypertarget{classAudioInput_a506d7f5eec641d0232286ea145270038}\label{classAudioInput_a506d7f5eec641d0232286ea145270038}} 
+void {\bfseries set\+Buffer\+Index} (int \mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{buffer\+Index}})
 \item 
-\hypertarget{classAudioInput_a4de4a846fe48603932495acaafc54449}{}\label{classAudioInput_a4de4a846fe48603932495acaafc54449} 
+\mbox{\Hypertarget{classAudioInput_a4de4a846fe48603932495acaafc54449}\label{classAudioInput_a4de4a846fe48603932495acaafc54449}} 
 float $\ast$ {\bfseries get\+Windowed\+Audio\+Frame} () const
 \item 
-\hypertarget{classAudioInput_a8e7dd67ab635c3935bd54f72a5282dce}{}\label{classAudioInput_a8e7dd67ab635c3935bd54f72a5282dce} 
-void {\bfseries set\+Windowed\+Audio\+Frame} (float $\ast$\hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowed\+Audio\+Frame})
+\mbox{\Hypertarget{classAudioInput_a8e7dd67ab635c3935bd54f72a5282dce}\label{classAudioInput_a8e7dd67ab635c3935bd54f72a5282dce}} 
+void {\bfseries set\+Windowed\+Audio\+Frame} (float $\ast$\mbox{\hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowed\+Audio\+Frame}})
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \hyperlink{classAudioInput_a77614769e39be88bbf5d78adf84d9260}{compute\+Spectrogram\+Slice} (\hyperlink{classAudioInput}{Audio\+Input} $\ast$audio\+Input)
+static void \mbox{\hyperlink{classAudioInput_a77614769e39be88bbf5d78adf84d9260}{compute\+Spectrogram\+Slice}} (\mbox{\hyperlink{classAudioInput}{Audio\+Input}} $\ast$audio\+Input)
 \item 
-\hypertarget{classAudioInput_a76a26e018987d0a303a32852ebf85254}{}\label{classAudioInput_a76a26e018987d0a303a32852ebf85254} 
-static const unsigned int {\bfseries get\+V\+E\+R\+B\+O\+S\+I\+TY} ()
+static const unsigned int \mbox{\hyperlink{classAudioInput_a76a26e018987d0a303a32852ebf85254}{get\+V\+E\+R\+B\+O\+S\+I\+TY}} ()
 \item 
-\hypertarget{classAudioInput_ae73b1fc55b3247b431d27bb673318dde}{}\label{classAudioInput_ae73b1fc55b3247b431d27bb673318dde} 
+\mbox{\Hypertarget{classAudioInput_ae73b1fc55b3247b431d27bb673318dde}\label{classAudioInput_ae73b1fc55b3247b431d27bb673318dde}} 
 static const unsigned int {\bfseries get\+N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES} ()
 \item 
-\hypertarget{classAudioInput_a6e33130e47360bad95cfeb094f079334}{}\label{classAudioInput_a6e33130e47360bad95cfeb094f079334} 
+\mbox{\Hypertarget{classAudioInput_a6e33130e47360bad95cfeb094f079334}\label{classAudioInput_a6e33130e47360bad95cfeb094f079334}} 
 static const unsigned int {\bfseries get\+N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned int \hyperlink{classAudioInput_aff0f7df20d558ba13f85b3d49b7f42b2}{V\+E\+R\+B\+O\+S\+I\+TY} = 2
+static const unsigned int \mbox{\hyperlink{classAudioInput_aff0f7df20d558ba13f85b3d49b7f42b2}{V\+E\+R\+B\+O\+S\+I\+TY}} = 2
 \item 
-static const unsigned int \hyperlink{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}{N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES} = 560
+static const unsigned int \mbox{\hyperlink{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}{N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES}} = 2048
 \item 
-static const unsigned int \hyperlink{classAudioInput_a8b6b39b0558d7db54234f1e39a38a775}{N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS} = 940
+static const unsigned int \mbox{\hyperlink{classAudioInput_a8b6b39b0558d7db54234f1e39a38a775}{N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS}} = 940
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-unsigned long \hyperlink{classAudioInput_adb734d274b7ce2967b74e2280ff6d487}{buffer\+Size\+Frames}
+unsigned long \mbox{\hyperlink{classAudioInput_adb734d274b7ce2967b74e2280ff6d487}{buffer\+Size\+Frames}}
 \item 
-int \hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{buffer\+Size\+Samples}
+int \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{buffer\+Size\+Samples}}
 \item 
-char $\ast$ \hyperlink{classAudioInput_ab1f2b0fc5ee061ab92c045d2325c8ab7}{audio\+Buffer\+Chunk}
+float $\ast$ \mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audio\+Buffer}}
 \item 
-float $\ast$ \hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audio\+Buffer}
+int \mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{buffer\+Index}}
 \item 
-int \hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{buffer\+Index}
+float $\ast$ \mbox{\hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogram\+Slice}}
 \item 
-float $\ast$ \hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogram\+Slice}
+float $\ast$ \mbox{\hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowing\+Function}}
 \item 
-float $\ast$ \hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowing\+Function}
+float $\ast$ \mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fft\+Frame}}
 \item 
-float $\ast$ \hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowed\+Audio\+Frame}
+float $\ast$ \mbox{\hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowed\+Audio\+Frame}}
 \item 
-unsigned int \hyperlink{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}{spectrogram\+Size}
+unsigned int \mbox{\hyperlink{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}{spectrogram\+Size}}
 \item 
-unsigned int \hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fft\+Length}
+unsigned int \mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fft\+Length}}
 \item 
-float \hyperlink{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}{buffer\+Memory\+Seconds}
+float \mbox{\hyperlink{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}{buffer\+Memory\+Seconds}}
 \item 
-unsigned int \hyperlink{classAudioInput_a364801e7fa59b6c8ed881262b2085d42}{n\+Channels}
+unsigned int \mbox{\hyperlink{classAudioInput_a364801e7fa59b6c8ed881262b2085d42}{n\+Channels}}
 \item 
-unsigned int \hyperlink{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{sampling\+Rate}
+unsigned int \mbox{\hyperlink{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{sampling\+Rate}}
 \item 
-float \hyperlink{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}{sampling\+Period}
+float \mbox{\hyperlink{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}{sampling\+Period}}
 \item 
-bool \hyperlink{classAudioInput_aceef1c12e4f78624ed695371adf495df}{quit}
+bool \mbox{\hyperlink{classAudioInput_aceef1c12e4f78624ed695371adf495df}{quit}}
 \item 
-bool \hyperlink{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}{pause}
+bool \mbox{\hyperlink{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}{pause}}
 \item 
-fftwf\+\_\+plan \hyperlink{classAudioInput_a9797094e75625173beae7e89497248b2}{fft\+Plan}
-\item 
-std\+::unique\+\_\+ptr$<$ std\+::thread $>$ \hyperlink{classAudioInput_ab113eec222bed512656f17a970082c62}{capture\+Thread}
+fftwf\+\_\+plan \mbox{\hyperlink{classAudioInput_a9797094e75625173beae7e89497248b2}{fft\+Plan}}
 \end{DoxyCompactItemize}
 
 
@@ -187,48 +186,143 @@ Anthony Agnone, Aug 2016
 \end{DoxyAuthor}
 T\+O\+DO generalize to audio input or output. T\+O\+DO obtain shared verbosity indicator. T\+O\+DO obtain parameters from command-\/line. 
 
+Definition at line 22 of file Audio\+Input.\+hpp.
+
+
+
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classAudioInput_a51903411fbfb29b77f30a0ee3fbaa50e}{}\label{classAudioInput_a51903411fbfb29b77f30a0ee3fbaa50e} 
+\mbox{\Hypertarget{classAudioInput_a51903411fbfb29b77f30a0ee3fbaa50e}\label{classAudioInput_a51903411fbfb29b77f30a0ee3fbaa50e}} 
 \index{Audio\+Input@{Audio\+Input}!Audio\+Input@{Audio\+Input}}
 \index{Audio\+Input@{Audio\+Input}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{Audio\+Input()}{AudioInput()}}
-{\ttfamily Audio\+Input\+::\+Audio\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Audio\+Input\+::\+Audio\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Overloaded constructor to initialize various member parameters. \hypertarget{classAudioInput_aaf278510da0fee4ccfd44c679067d96c}{}\label{classAudioInput_aaf278510da0fee4ccfd44c679067d96c} 
+Overloaded constructor to initialize various member parameters. 
+
+Definition at line 9 of file Audio\+Input.\+cpp.
+
+
+\begin{DoxyCode}
+9                        \{
+10     \mbox{\hyperlink{classAudioInput_aceef1c12e4f78624ed695371adf495df}{quit}} = \textcolor{keyword}{false};
+11     \mbox{\hyperlink{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}{pause}} = \textcolor{keyword}{false};
+12 
+13     \mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{bufferIndex}} = -2;
+14 
+15     \textcolor{comment}{// TODO change how class receives value for windowSizeExponent}
+16     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} twowinsize = 12;
+17     \mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}} = (\textcolor{keywordtype}{unsigned} int) 1 << twowinsize;
+18     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"FFT Length: "} << 
+      \mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}} << std::endl;
+19     \mbox{\hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowedAudioFrame}} = \textcolor{keyword}{new} \textcolor{keywordtype}{float}[\mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}}];
+20     \mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}} = \textcolor{keyword}{new} \textcolor{keywordtype}{float}[\mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}}];
+21     \mbox{\hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowingFunction}} = \textcolor{keyword}{new} \textcolor{keywordtype}{float}[\mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}}];
+22     \mbox{\hyperlink{classAudioInput_abe6c5796db5f1f0d4944a3c9e8b3962e}{initializeWindow}}(\mbox{\hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowingFunction}}, 
+      \mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}}, 2);
+23 
+24     \textcolor{comment}{/* set up in-place single-precision real-to-half-complex FFT */}
+25     \mbox{\hyperlink{classAudioInput_a9797094e75625173beae7e89497248b2}{fftPlan}} = fftwf\_plan\_r2r\_1d(\mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}}, \mbox{\hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowedAudioFrame}}, 
+      \mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}}, FFTW\_R2HC, FFTW\_MEASURE);
+26     \mbox{\hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogramSlice}} = \textcolor{keyword}{new} \textcolor{keywordtype}{float}[\mbox{\hyperlink{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}{N\_FREQUENCIES}}];
+27     \mbox{\hyperlink{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}{spectrogramSize}} = \mbox{\hyperlink{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}{N\_FREQUENCIES}} * \mbox{\hyperlink{classAudioInput_a8b6b39b0558d7db54234f1e39a38a775}{N\_TIME\_WINDOWS}};
+28     \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{Log::getInstance}}()->\mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}}() << \textcolor{stringliteral}{"Finished creating AudioInput"} << std::endl;
+29 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classAudioInput_aaf278510da0fee4ccfd44c679067d96c}\label{classAudioInput_aaf278510da0fee4ccfd44c679067d96c}} 
 \index{Audio\+Input@{Audio\+Input}!````~Audio\+Input@{$\sim$\+Audio\+Input}}
 \index{````~Audio\+Input@{$\sim$\+Audio\+Input}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{$\sim$\+Audio\+Input()}{~AudioInput()}}
-{\ttfamily Audio\+Input\+::$\sim$\+Audio\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily Audio\+Input\+::$\sim$\+Audio\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 Destructor de-\/allocates all dynamic memory and joins the audio retrieval thread. 
 
+Definition at line 91 of file Audio\+Input.\+cpp.
+
+
+\begin{DoxyCode}
+91                         \{
+92     fftwf\_destroy\_plan(\mbox{\hyperlink{classAudioInput_a9797094e75625173beae7e89497248b2}{fftPlan}});
+93     \textcolor{keyword}{delete}[] \mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audioBuffer}};
+94     \textcolor{keyword}{delete}[] \mbox{\hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogramSlice}};
+95     \textcolor{keyword}{delete}[] \mbox{\hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowedAudioFrame}};
+96     \textcolor{keyword}{delete}[] \mbox{\hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowingFunction}};
+97 \}
+\end{DoxyCode}
+
+
 \subsection{Member Function Documentation}
-\hypertarget{classAudioInput_a77614769e39be88bbf5d78adf84d9260}{}\label{classAudioInput_a77614769e39be88bbf5d78adf84d9260} 
+\mbox{\Hypertarget{classAudioInput_a77614769e39be88bbf5d78adf84d9260}\label{classAudioInput_a77614769e39be88bbf5d78adf84d9260}} 
 \index{Audio\+Input@{Audio\+Input}!compute\+Spectrogram\+Slice@{compute\+Spectrogram\+Slice}}
 \index{compute\+Spectrogram\+Slice@{compute\+Spectrogram\+Slice}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{compute\+Spectrogram\+Slice()}{computeSpectrogramSlice()}}
-{\ttfamily void Audio\+Input\+::compute\+Spectrogram\+Slice (\begin{DoxyParamCaption}\item[{\hyperlink{classAudioInput}{Audio\+Input} $\ast$}]{audio\+Input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Audio\+Input\+::compute\+Spectrogram\+Slice (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAudioInput}{Audio\+Input}} $\ast$}]{audio\+Input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Obtains a windowed spectrogram of the audio stream. T\+O\+DO this does not belong in this class. 
 \begin{DoxyParams}{Parameters}
-{\em audio\+Input} & \hyperlink{classAudioInput}{Audio\+Input} handle which contains the audio data to window. \\
+{\em audio\+Input} & \mbox{\hyperlink{classAudioInput}{Audio\+Input}} handle which contains the audio data to window. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classAudioInput_a4fce5476455b1df813f1cb6eebb08311}{}\label{classAudioInput_a4fce5476455b1df813f1cb6eebb08311} 
-\index{Audio\+Input@{Audio\+Input}!quit\+Now@{quit\+Now}}
-\index{quit\+Now@{quit\+Now}!Audio\+Input@{Audio\+Input}}
-\subsubsection{\texorpdfstring{quit\+Now()}{quitNow()}}
-{\ttfamily virtual void Audio\+Input\+::quit\+Now (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
-Defines how the instance stops the audio stream. 
 
-Implemented in \hyperlink{classALSA_a69dea83cc1785dd4c88bd1a9a02ac4b3}{A\+L\+SA}.
+Definition at line 128 of file Audio\+Input.\+cpp.
 
-\hypertarget{classAudioInput_ad4485ea7937dd99442119dce52f7408d}{}\label{classAudioInput_ad4485ea7937dd99442119dce52f7408d} 
-\index{Audio\+Input@{Audio\+Input}!setup\+Window\+Func@{setup\+Window\+Func}}
-\index{setup\+Window\+Func@{setup\+Window\+Func}!Audio\+Input@{Audio\+Input}}
-\subsubsection{\texorpdfstring{setup\+Window\+Func()}{setupWindowFunc()}}
-{\ttfamily void Audio\+Input\+::setup\+Window\+Func (\begin{DoxyParamCaption}\item[{float $\ast$}]{window,  }\item[{int}]{window\+Size,  }\item[{unsigned int}]{window\+Type }\end{DoxyParamCaption})}
+
+\begin{DoxyCode}
+128                                                                \{
+129     \textcolor{keywordtype}{int} nfft = audioInput->\mbox{\hyperlink{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{fftLength}};             \textcolor{comment}{// transform length}
+130     \textcolor{keywordtype}{int} nf = audioInput->\mbox{\hyperlink{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}{N\_FREQUENCIES}};              \textcolor{comment}{// # freqs to fill in powerspec}
+131     \textcolor{keywordtype}{int} ind;
+132 
+133     \textcolor{comment}{/* copy the nfft most recent samples & multiply by the window */}
+134     \textcolor{comment}{//Log::getInstance()->logger() << "BufferSizeSamples: " << audioInput->bufferSizeSamples << std::endl;}
+135     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < nfft; ++i) \{
+136         ind = mod(audioInput->\mbox{\hyperlink{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{bufferIndex}} - nfft + i, audioInput->
+      \mbox{\hyperlink{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{bufferSizeSamples}});
+137         audioInput->\mbox{\hyperlink{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{windowedAudioFrame}}[i] = audioInput->
+      \mbox{\hyperlink{classAudioInput_a72417120c208d81359f5b1205fc06664}{windowingFunction}}[i] * audioInput->\mbox{\hyperlink{classAudioInput_a797943485896a381ea80947c8b6a8488}{audioBuffer}}[ind];
+138     \}
+139 
+140     \textcolor{comment}{/* execute the configured FFT */}
+141     fftwf\_execute(audioInput->\mbox{\hyperlink{classAudioInput_a9797094e75625173beae7e89497248b2}{fftPlan}});
+142 
+143     \textcolor{keywordflow}{if} (nf > nfft / 2) \{
+144         fprintf(stderr, \textcolor{stringliteral}{"window too short cf n\_f!\(\backslash\)n"});
+145         \textcolor{keywordflow}{return};
+146     \}
+147 
+148     \textcolor{comment}{/* zero-frequency has no imaginary part */}
+149     audioInput->\mbox{\hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogramSlice}}[0] = audioInput->\mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}}[0] * audioInput->
+      \mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}}[0];
+150 
+151     \textcolor{comment}{/* compute power spectrum from hc dft */}
+152     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < nf; ++i) \{
+153         audioInput->\mbox{\hyperlink{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{spectrogramSlice}}[i] =
+154                 audioInput->\mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}}[i] * audioInput->\mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}}[i] +
+155                 audioInput->\mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}}[nfft - i] * audioInput->\mbox{\hyperlink{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}{fftFrame}}[nfft - i];
+156     \}
+157 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classAudioInput_a76a26e018987d0a303a32852ebf85254}\label{classAudioInput_a76a26e018987d0a303a32852ebf85254}} 
+\index{Audio\+Input@{Audio\+Input}!get\+V\+E\+R\+B\+O\+S\+I\+TY@{get\+V\+E\+R\+B\+O\+S\+I\+TY}}
+\index{get\+V\+E\+R\+B\+O\+S\+I\+TY@{get\+V\+E\+R\+B\+O\+S\+I\+TY}!Audio\+Input@{Audio\+Input}}
+\subsubsection{\texorpdfstring{get\+V\+E\+R\+B\+O\+S\+I\+T\+Y()}{getVERBOSITY()}}
+{\footnotesize\ttfamily const unsigned int Audio\+Input\+::get\+V\+E\+R\+B\+O\+S\+I\+TY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Thread used to asynchronously capture audio data into audio\+Buffer. 
+
+Definition at line 159 of file Audio\+Input.\+cpp.
+
+
+\begin{DoxyCode}
+159                                             \{
+160     \textcolor{keywordflow}{return} \mbox{\hyperlink{classAudioInput_aff0f7df20d558ba13f85b3d49b7f42b2}{VERBOSITY}};
+161 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classAudioInput_abe6c5796db5f1f0d4944a3c9e8b3962e}\label{classAudioInput_abe6c5796db5f1f0d4944a3c9e8b3962e}} 
+\index{Audio\+Input@{Audio\+Input}!initialize\+Window@{initialize\+Window}}
+\index{initialize\+Window@{initialize\+Window}!Audio\+Input@{Audio\+Input}}
+\subsubsection{\texorpdfstring{initialize\+Window()}{initializeWindow()}}
+{\footnotesize\ttfamily void Audio\+Input\+::initialize\+Window (\begin{DoxyParamCaption}\item[{float $\ast$}]{window,  }\item[{int}]{window\+Size,  }\item[{unsigned int}]{window\+Type }\end{DoxyParamCaption})}
 
 Sets up the windowing function to avoid the harmful spectral effects of a rectangular window. Note\+: window\+Size is intentionally auto-\/casted to a signed integer to avoid inf result on exponential calculation. T\+O\+DO this does not belong in this class. 
 \begin{DoxyParams}{Parameters}
@@ -241,136 +335,265 @@ Sets up the windowing function to avoid the harmful spectral effects of a rectan
 \end{DoxyParams}
 
 
+Definition at line 99 of file Audio\+Input.\+cpp.
+
+
+\begin{DoxyCode}
+99                                                                                         \{
+100     \textcolor{keywordtype}{float} W;
+101     \textcolor{keywordtype}{int} i;
+102 
+103     \textcolor{keywordflow}{switch} (windowType) \{
+104         \textcolor{keywordflow}{case} 0:
+105             \textcolor{comment}{/* no window (crappy frequency spillover) */}
+106             \textcolor{keywordflow}{for} (i = 0; i < windowSize; ++i)
+107                 window[i] = 1.0F;
+108             \textcolor{keywordflow}{break};
+109         \textcolor{keywordflow}{case} 1:
+110             \textcolor{comment}{/* Hann window (C^1 cont, so third-order tails) */}
+111             W = windowSize / 2.0F;
+112             \textcolor{keywordflow}{for} (i = 0; i < windowSize; ++i)
+113                 window[i] = (\textcolor{keywordtype}{float}) (1.0f + cos(M\_PI * (i - W) / W)) / 2;
+114             \textcolor{keywordflow}{break};
+115         \textcolor{keywordflow}{case} 2:
+116             \textcolor{comment}{/* truncated Gaussian window (Gaussian tails + exp small error) */}
+117             \textcolor{comment}{/* width: keep small truncation but wide to not waste FFT */}
+118             W = windowSize / 5.0F;
+119             \textcolor{keywordflow}{for} (i = 0; i < windowSize; ++i) \{
+120                 window[i] = (float) exp(-(i - windowSize / 2) * (i - windowSize / 2) / (2 * W * W));
+121             \}
+122             \textcolor{keywordflow}{break};
+123         \textcolor{keywordflow}{default}:
+124             fprintf(stderr, \textcolor{stringliteral}{"unknown windowType!\(\backslash\)n"});
+125     \}
+126 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classAudioInput_a4fce5476455b1df813f1cb6eebb08311}\label{classAudioInput_a4fce5476455b1df813f1cb6eebb08311}} 
+\index{Audio\+Input@{Audio\+Input}!quit\+Now@{quit\+Now}}
+\index{quit\+Now@{quit\+Now}!Audio\+Input@{Audio\+Input}}
+\subsubsection{\texorpdfstring{quit\+Now()}{quitNow()}}
+{\footnotesize\ttfamily virtual void Audio\+Input\+::quit\+Now (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Defines how the instance stops capturing the audio stream. 
+
+Implemented in \mbox{\hyperlink{classPortAudio_a88fc85aad0b14014b0775ec0a769ea0a}{Port\+Audio}}.
+
+\mbox{\Hypertarget{classAudioInput_afa753742035f7069f5ef0c2ece6a62fe}\label{classAudioInput_afa753742035f7069f5ef0c2ece6a62fe}} 
+\index{Audio\+Input@{Audio\+Input}!start\+Capture@{start\+Capture}}
+\index{start\+Capture@{start\+Capture}!Audio\+Input@{Audio\+Input}}
+\subsubsection{\texorpdfstring{start\+Capture()}{startCapture()}}
+{\footnotesize\ttfamily virtual int Audio\+Input\+::start\+Capture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Defines how the instance starts capturing the audio stream. 
+
+Implemented in \mbox{\hyperlink{classPortAudio_a2685650c8e1568f8089babd3af5f6bc1}{Port\+Audio}}.
+
+
+
 \subsection{Member Data Documentation}
-\hypertarget{classAudioInput_a797943485896a381ea80947c8b6a8488}{}\label{classAudioInput_a797943485896a381ea80947c8b6a8488} 
+\mbox{\Hypertarget{classAudioInput_a797943485896a381ea80947c8b6a8488}\label{classAudioInput_a797943485896a381ea80947c8b6a8488}} 
 \index{Audio\+Input@{Audio\+Input}!audio\+Buffer@{audio\+Buffer}}
 \index{audio\+Buffer@{audio\+Buffer}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{audio\+Buffer}{audioBuffer}}
-{\ttfamily float$\ast$ Audio\+Input\+::audio\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily float$\ast$ Audio\+Input\+::audio\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
 
-Float representation of raw data from the audio buffer for a P\+CM read of 1 period. \hypertarget{classAudioInput_ab1f2b0fc5ee061ab92c045d2325c8ab7}{}\label{classAudioInput_ab1f2b0fc5ee061ab92c045d2325c8ab7} 
-\index{Audio\+Input@{Audio\+Input}!audio\+Buffer\+Chunk@{audio\+Buffer\+Chunk}}
-\index{audio\+Buffer\+Chunk@{audio\+Buffer\+Chunk}!Audio\+Input@{Audio\+Input}}
-\subsubsection{\texorpdfstring{audio\+Buffer\+Chunk}{audioBufferChunk}}
-{\ttfamily char$\ast$ Audio\+Input\+::audio\+Buffer\+Chunk\hspace{0.3cm}{\ttfamily [protected]}}
+Float representation of raw data from the audio buffer for a P\+CM read of 1 period. 
 
-Raw data from the audio buffer for a P\+CM read of 1 period. \hypertarget{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}{}\label{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e} 
+Definition at line 96 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}\label{classAudioInput_a3c9888a90ca8bc6b42257f3f11ee9a6e}} 
 \index{Audio\+Input@{Audio\+Input}!buffer\+Index@{buffer\+Index}}
 \index{buffer\+Index@{buffer\+Index}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{buffer\+Index}{bufferIndex}}
-{\ttfamily int Audio\+Input\+::buffer\+Index\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily int Audio\+Input\+::buffer\+Index\hspace{0.3cm}{\ttfamily [protected]}}
 
-Index into audio\+Buffer; \hypertarget{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}{}\label{classAudioInput_aea3145ccca0f7cebf36a78278ca44031} 
+Index into audio\+Buffer; 
+
+Definition at line 101 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}\label{classAudioInput_aea3145ccca0f7cebf36a78278ca44031}} 
 \index{Audio\+Input@{Audio\+Input}!buffer\+Memory\+Seconds@{buffer\+Memory\+Seconds}}
 \index{buffer\+Memory\+Seconds@{buffer\+Memory\+Seconds}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{buffer\+Memory\+Seconds}{bufferMemorySeconds}}
-{\ttfamily float Audio\+Input\+::buffer\+Memory\+Seconds\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily float Audio\+Input\+::buffer\+Memory\+Seconds\hspace{0.3cm}{\ttfamily [protected]}}
 
-Number of seconds accounted for by the audio buffer. \hypertarget{classAudioInput_adb734d274b7ce2967b74e2280ff6d487}{}\label{classAudioInput_adb734d274b7ce2967b74e2280ff6d487} 
+Number of seconds accounted for by the audio buffer. 
+
+Definition at line 136 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_adb734d274b7ce2967b74e2280ff6d487}\label{classAudioInput_adb734d274b7ce2967b74e2280ff6d487}} 
 \index{Audio\+Input@{Audio\+Input}!buffer\+Size\+Frames@{buffer\+Size\+Frames}}
 \index{buffer\+Size\+Frames@{buffer\+Size\+Frames}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{buffer\+Size\+Frames}{bufferSizeFrames}}
-{\ttfamily unsigned long Audio\+Input\+::buffer\+Size\+Frames\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily unsigned long Audio\+Input\+::buffer\+Size\+Frames\hspace{0.3cm}{\ttfamily [protected]}}
 
-Size of the audio buffer that \hyperlink{classALSA}{A\+L\+SA} reports during device intiialization, in number of frames. \hypertarget{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}{}\label{classAudioInput_a4e213a9a22a62dccc3a54369101559c7} 
+Size of the audio buffer that A\+L\+SA reports during device intiialization, in number of frames. 
+
+Definition at line 86 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}\label{classAudioInput_a4e213a9a22a62dccc3a54369101559c7}} 
 \index{Audio\+Input@{Audio\+Input}!buffer\+Size\+Samples@{buffer\+Size\+Samples}}
 \index{buffer\+Size\+Samples@{buffer\+Size\+Samples}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{buffer\+Size\+Samples}{bufferSizeSamples}}
-{\ttfamily int Audio\+Input\+::buffer\+Size\+Samples\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily int Audio\+Input\+::buffer\+Size\+Samples\hspace{0.3cm}{\ttfamily [protected]}}
 
-Size of the audio buffer that \hyperlink{classALSA}{A\+L\+SA} reports during device intiialization, in number of samples. \hypertarget{classAudioInput_ab113eec222bed512656f17a970082c62}{}\label{classAudioInput_ab113eec222bed512656f17a970082c62} 
-\index{Audio\+Input@{Audio\+Input}!capture\+Thread@{capture\+Thread}}
-\index{capture\+Thread@{capture\+Thread}!Audio\+Input@{Audio\+Input}}
-\subsubsection{\texorpdfstring{capture\+Thread}{captureThread}}
-{\ttfamily std\+::unique\+\_\+ptr$<$std\+::thread$>$ Audio\+Input\+::capture\+Thread\hspace{0.3cm}{\ttfamily [protected]}}
+Size of the audio buffer that A\+L\+SA reports during device intiialization, in number of samples. 
 
-Thread used to asynchronously capture audio data into audio\+Buffer. \hypertarget{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}{}\label{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20} 
+Definition at line 91 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}\label{classAudioInput_a0c0e5c44a1547a97564e0733aaac2dc0}} 
+\index{Audio\+Input@{Audio\+Input}!fft\+Frame@{fft\+Frame}}
+\index{fft\+Frame@{fft\+Frame}!Audio\+Input@{Audio\+Input}}
+\subsubsection{\texorpdfstring{fft\+Frame}{fftFrame}}
+{\footnotesize\ttfamily float$\ast$ Audio\+Input\+::fft\+Frame\hspace{0.3cm}{\ttfamily [protected]}}
+
+T\+O\+DO 
+
+Definition at line 116 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}\label{classAudioInput_a5b31598e9106da62d86d11d69a9dbd20}} 
 \index{Audio\+Input@{Audio\+Input}!fft\+Length@{fft\+Length}}
 \index{fft\+Length@{fft\+Length}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{fft\+Length}{fftLength}}
-{\ttfamily unsigned int Audio\+Input\+::fft\+Length\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily unsigned int Audio\+Input\+::fft\+Length\hspace{0.3cm}{\ttfamily [protected]}}
 
-Number of samples in each F\+FT. \hypertarget{classAudioInput_a9797094e75625173beae7e89497248b2}{}\label{classAudioInput_a9797094e75625173beae7e89497248b2} 
+Number of samples in each F\+FT. 
+
+Definition at line 131 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a9797094e75625173beae7e89497248b2}\label{classAudioInput_a9797094e75625173beae7e89497248b2}} 
 \index{Audio\+Input@{Audio\+Input}!fft\+Plan@{fft\+Plan}}
 \index{fft\+Plan@{fft\+Plan}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{fft\+Plan}{fftPlan}}
-{\ttfamily fftwf\+\_\+plan Audio\+Input\+::fft\+Plan\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily fftwf\+\_\+plan Audio\+Input\+::fft\+Plan\hspace{0.3cm}{\ttfamily [protected]}}
 
-Plan of F\+FT execution. \hypertarget{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}{}\label{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8} 
+Plan of F\+FT execution. 
+
+Definition at line 168 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}\label{classAudioInput_a4be6c19fca6626b2ccee1eeca458f7c8}} 
 \index{Audio\+Input@{Audio\+Input}!N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES@{N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES}}
 \index{N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES@{N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES}{N\_FREQUENCIES}}
-{\ttfamily const unsigned int Audio\+Input\+::\+N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES = 560\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily const unsigned int Audio\+Input\+::\+N\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+I\+ES = 2048\hspace{0.3cm}{\ttfamily [static]}}
 
-Number of spectrogram frequencies. \hypertarget{classAudioInput_a8b6b39b0558d7db54234f1e39a38a775}{}\label{classAudioInput_a8b6b39b0558d7db54234f1e39a38a775} 
+Number of spectrogram frequencies. 
+
+Definition at line 32 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a8b6b39b0558d7db54234f1e39a38a775}\label{classAudioInput_a8b6b39b0558d7db54234f1e39a38a775}} 
 \index{Audio\+Input@{Audio\+Input}!N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS@{N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS}}
 \index{N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS@{N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS}{N\_TIME\_WINDOWS}}
-{\ttfamily const unsigned int Audio\+Input\+::\+N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS = 940\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily const unsigned int Audio\+Input\+::\+N\+\_\+\+T\+I\+M\+E\+\_\+\+W\+I\+N\+D\+O\+WS = 940\hspace{0.3cm}{\ttfamily [static]}}
 
-Number of time windows. This should be multiple of 4 for gl\+Draw\+Pixels. \hypertarget{classAudioInput_a364801e7fa59b6c8ed881262b2085d42}{}\label{classAudioInput_a364801e7fa59b6c8ed881262b2085d42} 
+Number of time windows. This should be multiple of 4 for gl\+Draw\+Pixels. 
+
+Definition at line 37 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a364801e7fa59b6c8ed881262b2085d42}\label{classAudioInput_a364801e7fa59b6c8ed881262b2085d42}} 
 \index{Audio\+Input@{Audio\+Input}!n\+Channels@{n\+Channels}}
 \index{n\+Channels@{n\+Channels}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{n\+Channels}{nChannels}}
-{\ttfamily unsigned int Audio\+Input\+::n\+Channels\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily unsigned int Audio\+Input\+::n\+Channels\hspace{0.3cm}{\ttfamily [protected]}}
 
-Number of channels in the audio stream. 1 -\/$>$ mono 2 -\/$>$ stereo \hypertarget{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}{}\label{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a} 
+Number of channels in the audio stream. 1 -\/$>$ mono 2 -\/$>$ stereo 
+
+Definition at line 143 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}\label{classAudioInput_a3ff41f73529f77872f6ab585d7cf706a}} 
 \index{Audio\+Input@{Audio\+Input}!pause@{pause}}
 \index{pause@{pause}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{pause}{pause}}
-{\ttfamily bool Audio\+Input\+::pause\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool Audio\+Input\+::pause\hspace{0.3cm}{\ttfamily [protected]}}
 
-Flag to pause sampling the audio stream. \hypertarget{classAudioInput_aceef1c12e4f78624ed695371adf495df}{}\label{classAudioInput_aceef1c12e4f78624ed695371adf495df} 
+Flag to pause sampling the audio stream. 
+
+Definition at line 163 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_aceef1c12e4f78624ed695371adf495df}\label{classAudioInput_aceef1c12e4f78624ed695371adf495df}} 
 \index{Audio\+Input@{Audio\+Input}!quit@{quit}}
 \index{quit@{quit}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{quit}{quit}}
-{\ttfamily bool Audio\+Input\+::quit\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool Audio\+Input\+::quit\hspace{0.3cm}{\ttfamily [protected]}}
 
-Flag to to stop sampling the audio stream. \hypertarget{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}{}\label{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e} 
+Flag to to stop sampling the audio stream. 
+
+Definition at line 158 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}\label{classAudioInput_a8b6ea4cd6b88e5cd9d051b298efbb65e}} 
 \index{Audio\+Input@{Audio\+Input}!sampling\+Period@{sampling\+Period}}
 \index{sampling\+Period@{sampling\+Period}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{sampling\+Period}{samplingPeriod}}
-{\ttfamily float Audio\+Input\+::sampling\+Period\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily float Audio\+Input\+::sampling\+Period\hspace{0.3cm}{\ttfamily [protected]}}
 
-Inverse of sampling\+Rate. \hypertarget{classAudioInput_acfe371c4f5790bd67d282bc83225728e}{}\label{classAudioInput_acfe371c4f5790bd67d282bc83225728e} 
+Inverse of sampling\+Rate. 
+
+Definition at line 153 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_acfe371c4f5790bd67d282bc83225728e}\label{classAudioInput_acfe371c4f5790bd67d282bc83225728e}} 
 \index{Audio\+Input@{Audio\+Input}!sampling\+Rate@{sampling\+Rate}}
 \index{sampling\+Rate@{sampling\+Rate}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{sampling\+Rate}{samplingRate}}
-{\ttfamily unsigned int Audio\+Input\+::sampling\+Rate\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily unsigned int Audio\+Input\+::sampling\+Rate\hspace{0.3cm}{\ttfamily [protected]}}
 
-Frequency of sampling of the audio stream, in units of samples/second. \hypertarget{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}{}\label{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e} 
+Frequency of sampling of the audio stream, in units of samples/second. 
+
+Definition at line 148 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}\label{classAudioInput_a1d4982a84d2e2e3d8a6b0f0fcdd4820e}} 
 \index{Audio\+Input@{Audio\+Input}!spectrogram\+Size@{spectrogram\+Size}}
 \index{spectrogram\+Size@{spectrogram\+Size}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{spectrogram\+Size}{spectrogramSize}}
-{\ttfamily unsigned int Audio\+Input\+::spectrogram\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily unsigned int Audio\+Input\+::spectrogram\+Size\hspace{0.3cm}{\ttfamily [protected]}}
 
-Number of samples in each spectrogram frame. \hypertarget{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}{}\label{classAudioInput_aa277accc3be5054fe8439ac7086deaf5} 
+Number of samples in each spectrogram frame. 
+
+Definition at line 126 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}\label{classAudioInput_aa277accc3be5054fe8439ac7086deaf5}} 
 \index{Audio\+Input@{Audio\+Input}!spectrogram\+Slice@{spectrogram\+Slice}}
 \index{spectrogram\+Slice@{spectrogram\+Slice}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{spectrogram\+Slice}{spectrogramSlice}}
-{\ttfamily float$\ast$ Audio\+Input\+::spectrogram\+Slice\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily float$\ast$ Audio\+Input\+::spectrogram\+Slice\hspace{0.3cm}{\ttfamily [protected]}}
 
-Spectrogram data computed from the raw audio buffer data in audio\+Buffer. \hypertarget{classAudioInput_aff0f7df20d558ba13f85b3d49b7f42b2}{}\label{classAudioInput_aff0f7df20d558ba13f85b3d49b7f42b2} 
+Spectrogram data computed from the raw audio buffer data in audio\+Buffer. 
+
+Definition at line 106 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_aff0f7df20d558ba13f85b3d49b7f42b2}\label{classAudioInput_aff0f7df20d558ba13f85b3d49b7f42b2}} 
 \index{Audio\+Input@{Audio\+Input}!V\+E\+R\+B\+O\+S\+I\+TY@{V\+E\+R\+B\+O\+S\+I\+TY}}
 \index{V\+E\+R\+B\+O\+S\+I\+TY@{V\+E\+R\+B\+O\+S\+I\+TY}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{V\+E\+R\+B\+O\+S\+I\+TY}{VERBOSITY}}
-{\ttfamily const unsigned int Audio\+Input\+::\+V\+E\+R\+B\+O\+S\+I\+TY = 2\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily const unsigned int Audio\+Input\+::\+V\+E\+R\+B\+O\+S\+I\+TY = 2\hspace{0.3cm}{\ttfamily [static]}}
 
-Level of verbosity for logging. \hypertarget{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}{}\label{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432} 
+Level of verbosity for logging. 
+
+Definition at line 27 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}\label{classAudioInput_ae5a196a9ba111b7aa1ef64db6f092432}} 
 \index{Audio\+Input@{Audio\+Input}!windowed\+Audio\+Frame@{windowed\+Audio\+Frame}}
 \index{windowed\+Audio\+Frame@{windowed\+Audio\+Frame}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{windowed\+Audio\+Frame}{windowedAudioFrame}}
-{\ttfamily float$\ast$ Audio\+Input\+::windowed\+Audio\+Frame\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily float$\ast$ Audio\+Input\+::windowed\+Audio\+Frame\hspace{0.3cm}{\ttfamily [protected]}}
 
-Resulting frame of audio data after applying the window coefficients in windowing\+Function. \hypertarget{classAudioInput_a72417120c208d81359f5b1205fc06664}{}\label{classAudioInput_a72417120c208d81359f5b1205fc06664} 
+Resulting frame of audio data after applying the window coefficients in windowing\+Function. 
+
+Definition at line 121 of file Audio\+Input.\+hpp.
+
+\mbox{\Hypertarget{classAudioInput_a72417120c208d81359f5b1205fc06664}\label{classAudioInput_a72417120c208d81359f5b1205fc06664}} 
 \index{Audio\+Input@{Audio\+Input}!windowing\+Function@{windowing\+Function}}
 \index{windowing\+Function@{windowing\+Function}!Audio\+Input@{Audio\+Input}}
 \subsubsection{\texorpdfstring{windowing\+Function}{windowingFunction}}
-{\ttfamily float$\ast$ Audio\+Input\+::windowing\+Function\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily float$\ast$ Audio\+Input\+::windowing\+Function\hspace{0.3cm}{\ttfamily [protected]}}
 
 Window coefficients to be applied to each audio buffer frame. 
 
+Definition at line 111 of file Audio\+Input.\+hpp.
+
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Audio\+Input.\+hpp\item 
-Audio\+Input.\+cpp\end{DoxyCompactItemize}
+src/Audio\+Input.\+hpp\item 
+src/Audio\+Input.\+cpp\end{DoxyCompactItemize}

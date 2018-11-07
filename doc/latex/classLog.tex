@@ -7,77 +7,201 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classLog_a0fbfda88fbee5027c89f6eb121059360}{$\sim$\+Log} ()
+\mbox{\hyperlink{classLog_a0fbfda88fbee5027c89f6eb121059360}{$\sim$\+Log}} ()
 \item 
-void \hyperlink{classLog_ac4365b77dc0b64c77e577888dfab5099}{log} (std\+::string \&message)
+void \mbox{\hyperlink{classLog_ac4365b77dc0b64c77e577888dfab5099}{log}} (std\+::string \&message)
 \item 
-void \hyperlink{classLog_a60929e600b7759e97ea623ea5b05971e}{log} (const char $\ast$const message)
+void \mbox{\hyperlink{classLog_a60929e600b7759e97ea623ea5b05971e}{log}} (const char $\ast$const message)
 \item 
-std\+::ostream \& \hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger} ()
+std\+::ostream \& \mbox{\hyperlink{classLog_a32d048a4924c7851c4b7b16758675af6}{logger}} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{classLog}{Log} $\ast$ \hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{get\+Instance} ()
+static \mbox{\hyperlink{classLog}{Log}} $\ast$ \mbox{\hyperlink{classLog_a987f3ff401eea783d0e80daaea1d7aca}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \mbox{\hyperlink{classLog_a8928d01e0edbf98838c642e04e12458e}{O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Singleton class to handle logging to standard output or a file. 
 
+Definition at line 13 of file Log.\+hpp.
+
+
+
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classLog_a0fbfda88fbee5027c89f6eb121059360}{}\label{classLog_a0fbfda88fbee5027c89f6eb121059360} 
+\mbox{\Hypertarget{classLog_a0fbfda88fbee5027c89f6eb121059360}\label{classLog_a0fbfda88fbee5027c89f6eb121059360}} 
 \index{Log@{Log}!````~Log@{$\sim$\+Log}}
 \index{````~Log@{$\sim$\+Log}!Log@{Log}}
 \subsubsection{\texorpdfstring{$\sim$\+Log()}{~Log()}}
-{\ttfamily Log\+::$\sim$\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Log\+::$\sim$\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 De-\/allocates all dynamic memory. 
 
+Definition at line 8 of file Log.\+cpp.
+
+
+\begin{DoxyCode}
+9 \{
+10   file.close();
+11   \textcolor{keyword}{delete} instance;
+12 \}
+\end{DoxyCode}
+
+
 \subsection{Member Function Documentation}
-\hypertarget{classLog_a987f3ff401eea783d0e80daaea1d7aca}{}\label{classLog_a987f3ff401eea783d0e80daaea1d7aca} 
+\mbox{\Hypertarget{classLog_a987f3ff401eea783d0e80daaea1d7aca}\label{classLog_a987f3ff401eea783d0e80daaea1d7aca}} 
 \index{Log@{Log}!get\+Instance@{get\+Instance}}
 \index{get\+Instance@{get\+Instance}!Log@{Log}}
 \subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
-{\ttfamily \hyperlink{classLog}{Log} $\ast$ Log\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLog}{Log}} $\ast$ Log\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Accessor method for the singleton instance of the class. If the instance does not exist, then (and only then) a new instance is created. \begin{DoxyReturn}{Returns}
 
 \end{DoxyReturn}
-\hypertarget{classLog_ac4365b77dc0b64c77e577888dfab5099}{}\label{classLog_ac4365b77dc0b64c77e577888dfab5099} 
+
+
+Definition at line 76 of file Log.\+cpp.
+
+
+\begin{DoxyCode}
+77 \{
+78   \textcolor{keywordflow}{if} (!instance) \{
+79     Log::instance = \textcolor{keyword}{new} \mbox{\hyperlink{classLog}{Log}}();
+80   \}
+81   \textcolor{keywordflow}{return} Log::instance;
+82 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classLog_ac4365b77dc0b64c77e577888dfab5099}\label{classLog_ac4365b77dc0b64c77e577888dfab5099}} 
 \index{Log@{Log}!log@{log}}
 \index{log@{log}!Log@{Log}}
 \subsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\ttfamily void Log\+::log (\begin{DoxyParamCaption}\item[{std\+::string \&}]{message }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Log\+::log (\begin{DoxyParamCaption}\item[{std\+::string \&}]{message }\end{DoxyParamCaption})}
 
 Logging method for a string input. 
 \begin{DoxyParams}{Parameters}
 {\em message} & the message to log. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLog_a60929e600b7759e97ea623ea5b05971e}{}\label{classLog_a60929e600b7759e97ea623ea5b05971e} 
+
+
+Definition at line 14 of file Log.\+cpp.
+
+
+\begin{DoxyCode}
+15 \{
+16   \textcolor{keywordflow}{switch} (\mbox{\hyperlink{classLog_a8928d01e0edbf98838c642e04e12458e}{OUTPUT\_DIRECTION}}) \{
+17   \textcolor{keywordflow}{case} 0:
+18     std::cout << message << std::endl;
+19     \textcolor{keywordflow}{break};
+20   \textcolor{keywordflow}{case} 1:
+21     \textcolor{keywordflow}{if} (!file) \{
+22       \textcolor{keywordflow}{throw} \textcolor{stringliteral}{"Log file not initialized!"};
+23     \}
+24     file << message << std::endl;
+25     \textcolor{keywordflow}{break};
+26   \textcolor{keywordflow}{case} 2:
+27     std::cout << message << std::endl;
+28     \textcolor{keywordflow}{if} (!file) \{
+29       \textcolor{keywordflow}{throw} \textcolor{stringliteral}{"Log file not initialized!"};
+30     \}
+31     file << message << std::endl;
+32     \textcolor{keywordflow}{break};
+33   \textcolor{keywordflow}{default}:
+34     \textcolor{keywordflow}{break};
+35   \}
+36 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classLog_a60929e600b7759e97ea623ea5b05971e}\label{classLog_a60929e600b7759e97ea623ea5b05971e}} 
 \index{Log@{Log}!log@{log}}
 \index{log@{log}!Log@{Log}}
 \subsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\ttfamily void Log\+::log (\begin{DoxyParamCaption}\item[{const char $\ast$const}]{message }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Log\+::log (\begin{DoxyParamCaption}\item[{const char $\ast$const}]{message }\end{DoxyParamCaption})}
 
 Logging method for a const char$\ast$ const input. 
 \begin{DoxyParams}{Parameters}
 {\em message} & the message to log. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classLog_a32d048a4924c7851c4b7b16758675af6}{}\label{classLog_a32d048a4924c7851c4b7b16758675af6} 
+
+
+Definition at line 38 of file Log.\+cpp.
+
+
+\begin{DoxyCode}
+39 \{
+40   \textcolor{keywordflow}{switch} (\mbox{\hyperlink{classLog_a8928d01e0edbf98838c642e04e12458e}{OUTPUT\_DIRECTION}}) \{
+41   \textcolor{keywordflow}{case} 0:
+42     std::cout << message << std::endl;
+43     \textcolor{keywordflow}{break};
+44   \textcolor{keywordflow}{case} 1:
+45     \textcolor{keywordflow}{if} (!file) \{
+46       \textcolor{keywordflow}{throw} \textcolor{stringliteral}{"Log file not initialized!"};
+47     \}
+48     file << message << std::endl;
+49     \textcolor{keywordflow}{break};
+50   \textcolor{keywordflow}{case} 2:
+51     std::cout << message << std::endl;
+52     \textcolor{keywordflow}{if} (!file) \{
+53       \textcolor{keywordflow}{throw} \textcolor{stringliteral}{"Log file not initialized!"};
+54     \}
+55     file << message << std::endl;
+56     \textcolor{keywordflow}{break};
+57   \textcolor{keywordflow}{default}:
+58     \textcolor{keywordflow}{break};
+59   \}
+60 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classLog_a32d048a4924c7851c4b7b16758675af6}\label{classLog_a32d048a4924c7851c4b7b16758675af6}} 
 \index{Log@{Log}!logger@{logger}}
 \index{logger@{logger}!Log@{Log}}
 \subsubsection{\texorpdfstring{logger()}{logger()}}
-{\ttfamily std\+::ostream \& Log\+::logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::ostream \& Log\+::logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Returns the appropriate logger, according to Log\+::\+O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON. This is useful with the stream operator. \begin{DoxyReturn}{Returns}
-appropriate logger, according to Log\+::\+O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON. See its documentation for more details. 
+Returns the appropriate logger, according to \mbox{\hyperlink{classLog_a8928d01e0edbf98838c642e04e12458e}{Log\+::\+O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}}. This is useful with the stream operator. \begin{DoxyReturn}{Returns}
+appropriate logger, according to \mbox{\hyperlink{classLog_a8928d01e0edbf98838c642e04e12458e}{Log\+::\+O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}}. See its documentation for more details. 
 \end{DoxyReturn}
+
+
+Definition at line 62 of file Log.\+cpp.
+
+
+\begin{DoxyCode}
+62                         \{
+63   \textcolor{keywordflow}{switch} (\mbox{\hyperlink{classLog_a8928d01e0edbf98838c642e04e12458e}{OUTPUT\_DIRECTION}}) \{
+64   \textcolor{keywordflow}{case} 0:
+65     \textcolor{keywordflow}{return} std::cout;
+66   \textcolor{keywordflow}{case} 1:
+67     \textcolor{keywordflow}{if} (!file) \{
+68       \textcolor{keywordflow}{throw} \textcolor{stringliteral}{"Log file not initialized!"};
+69     \}
+70     \textcolor{keywordflow}{return} file;
+71   \textcolor{keywordflow}{default}:
+72     \textcolor{keywordflow}{return} std::cout;
+73   \}
+74 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classLog_a8928d01e0edbf98838c642e04e12458e}\label{classLog_a8928d01e0edbf98838c642e04e12458e}} 
+\index{Log@{Log}!O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON@{O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}}
+\index{O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON@{O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}!Log@{Log}}
+\subsubsection{\texorpdfstring{O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON}{OUTPUT\_DIRECTION}}
+{\footnotesize\ttfamily unsigned int Log\+::\+O\+U\+T\+P\+U\+T\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON\hspace{0.3cm}{\ttfamily [static]}}
+
+Direction of output for logging/debugging. 0 -\/$>$ std\+::cout 1 -\/$>$ file with low verbosity 2 -\/$>$ file with high verbosity 
+
+Definition at line 21 of file Log.\+hpp.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Log.\+hpp\item 
-Log.\+cpp\end{DoxyCompactItemize}
+src/Log.\+hpp\item 
+src/Log.\+cpp\end{DoxyCompactItemize}
