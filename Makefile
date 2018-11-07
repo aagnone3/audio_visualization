@@ -17,7 +17,11 @@ dist: build
 
 .PHONY: build_src
 dist_src: build
-	@cd build; cpack --config CPackSourceConfig.cmake -B ${DIST_DIR}
+	@cd ${BUILD_DIR}; cpack --config CPackSourceConfig.cmake -B ${DIST_DIR}
 	
 .PHONY: build_bin
 dist_bin: dist
+
+.PHONY: docs
+docs:
+	doxygen Doxyfile
