@@ -8,9 +8,19 @@ Original project: [Real-time OpenGL spectrogram by Alex Barnett](https://math.da
 - \*nix operating system with
 - libraries
   - portaudio
-  - fftw2
-  - opengl
-  - glut
+  - fftw
+  - opengl etc
+
+```bash
+sudo apt install -y
+    cmake \
+    libasound2-dev \
+    portaudio19-dev \
+    libfftw3-dev \
+    libglu1-mesa-dev \
+    freeglut3-dev \
+    mesa-common-dev
+```
 
 # Building
 
