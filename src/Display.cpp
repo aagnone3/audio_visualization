@@ -5,7 +5,7 @@
 #include "Display.hpp"
 
 /* static member initializations */
-const char* const Display::TITLE = "OpenGL Spectrum Visualization by Anthony Agnone, Aug 2016";
+const char* const Display::TITLE = "OpenGL Spectrum Visualization";
 std::vector<GraphicsItem*> Display::graphicsItems;
 
 Display::Display(int argc, char** argv, int screenMode)

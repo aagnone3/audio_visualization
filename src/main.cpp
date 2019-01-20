@@ -13,7 +13,7 @@ int scrollFactor;
 
 const char* const helptext[] = {
     "Real Time Audio Visualization\n",
-    "Author: Anthony Agnone\n\n",
+    "Author: Anthony Agnone, Alex Barnett\n\n",
     "Usage: audio_visualization [-f] [-v] [-V] [-sf <scroll_factor>] [-w <windowType>]\n\n",
     "\t[-f] enables full-screen-mode\n",
     "\t[-v] print version and exit\n",
@@ -37,7 +37,7 @@ int getInputDeviceId(const char *fn)
 {
     //YAML::Node config = YAML::LoadFile(fn);
     //return config["device_id"].as<int>();
-    return 2;
+    return 7;
 } 
 
 int main(int argc, char** argv)
@@ -80,11 +80,12 @@ int main(int argc, char** argv)
   try {
       SpectrogramVisualizer spectrogramVisualizer(scrollFactor, getInputDeviceId("cfg.yaml"));
       display.addGraphicsItem(&spectrogramVisualizer);
+
+      display.loop();  /* main loop */
   } catch (int e) {
       std::cout << "Error starting the visualization. Exiting." << std::endl;
       exit(1);
   }
 
-  display.loop();  /* main loop */
   return 0;
 }

@@ -130,6 +130,7 @@ int PortAudio::startCapture()
     inputParams.suggestedLatency = deviceInfo->defaultLowInputLatency;
     inputParams.hostApiSpecificStreamInfo = NULL;
 
+    /* try to open the requested stream */
     err = Pa_OpenStream(
             &stream,
             &inputParams,
@@ -140,19 +141,36 @@ int PortAudio::startCapture()
             audioIn,
             (void*)this
     );
-    
-    /* TODO if opening the default stream fails, give the user device info */
+
+    /* if an error occurs, try to open the default stream instead */
     if (err != paNoError) {
-        Log::getInstance()->logger() << "PortAudio error opening default stream: " << Pa_GetErrorText(err) << std::endl;
+        Log::getInstance()->logger() << std::endl << "PortAudio error opening requested stream: " << Pa_GetErrorText(err) << "."
+            << std::endl << std::endl
+            << "Attempting to open the default stream." << std::endl;
 
-        /* TODO */
-        return 1;
+        err = Pa_OpenDefaultStream(
+                &stream,
+                1,  // # input channels
+                0,  // # output channels
+                paFloat32,
+                44100,  // sampling rate
+                paFramesPerBufferUnspecified,
+                audioIn,
+                (void*)this
+        );
+        if (err != paNoError) {
+            Log::getInstance()->logger() << "PortAudio error opening default stream: " << Pa_GetErrorText(err) << "." << std::endl;
+
+            /* TODO if opening the default stream fails, give the user device info */
+            return 1;
+        }
+
     }
-
+    
     /* start the audio stream */
     err = Pa_StartStream(stream);
     if (err != paNoError) {
-        Log::getInstance()->logger() << "PortAudio starting stream: " << Pa_GetErrorText(err) << std::endl;
+        Log::getInstance()->logger() << "PortAudio error starting stream: " << Pa_GetErrorText(err) << std::endl;
         return 1;
     }
     

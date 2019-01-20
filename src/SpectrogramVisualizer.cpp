@@ -25,11 +25,13 @@ SpectrogramVisualizer::SpectrogramVisualizer(int scrollFactor, int requestedInpu
     audioInput = new PortAudio(requestedInputDeviceId);
     unsigned int spectrogramSize = audioInput->getSpectrogramSize();
 
+    OUT("Spectrogram size: " << spectrogramSize);
     spectrogramBytes = new char[spectrogramSize];
     zeros(spectrogramBytes, spectrogramSize);
 
     spectrogramFloat = new float[spectrogramSize];
     zeros(spectrogramFloat, spectrogramSize);
+    recomputeSpectrogramBytes();
 
     highestFrequency = audioInput->getSamplingRate() / 2.0f;
     hzPerPixelY = (float) highestFrequency / viewportSize[1];
