@@ -26,12 +26,16 @@ sudo apt install -y
 
 ```bash
 make build
+
+# run with the following
 build/opengl_spectrogram
 ```
 
 # Installing
 ```bash
 make install
+
+# run with the following
 opengl_spectrogram
 ```
 
